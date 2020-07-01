@@ -1,4 +1,22 @@
-# elasticsearch is used to enable indexes and reduce search query time
+# techstack
+
+- JHipster
+- Sprint Boot
+- Angular
+- ElasticSearch
+- Docker
+-
+
+# run the application
+
+- install java
+- install nodejs > 12
+- install and docker
+- run elasticSearch (docker container)
+- run postgres DB (docker container)
+- run the app `java -jar target/sfo-gate-assignment-problem-0.0.1-SNAPSHOT.jar`
+
+## elasticsearch is used to enable indexes and reduce search query time
 
     docker-compose -f src/main/docker/elasticsearch.yml up
 
