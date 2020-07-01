@@ -24,10 +24,8 @@ public class GateAssignmentsDTO implements Serializable {
     @NotNull
     private Transaction transaction;
 
-    @NotNull
     private String terminal;
 
-    @NotNull
     private String gate;
 
     private String remark;

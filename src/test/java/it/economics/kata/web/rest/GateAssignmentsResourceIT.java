@@ -264,46 +264,6 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void checkTerminalIsRequired() throws Exception {
-        int databaseSizeBeforeTest = gateAssignmentsRepository.findAll().size();
-        // set the field null
-        gateAssignments.setTerminal(null);
-
-        // Create the GateAssignments, which fails.
-        GateAssignmentsDTO gateAssignmentsDTO = gateAssignmentsMapper.toDto(gateAssignments);
-
-
-        restGateAssignmentsMockMvc.perform(post("/api/gate-assignments")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(gateAssignmentsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<GateAssignments> gateAssignmentsList = gateAssignmentsRepository.findAll();
-        assertThat(gateAssignmentsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkGateIsRequired() throws Exception {
-        int databaseSizeBeforeTest = gateAssignmentsRepository.findAll().size();
-        // set the field null
-        gateAssignments.setGate(null);
-
-        // Create the GateAssignments, which fails.
-        GateAssignmentsDTO gateAssignmentsDTO = gateAssignmentsMapper.toDto(gateAssignments);
-
-
-        restGateAssignmentsMockMvc.perform(post("/api/gate-assignments")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(gateAssignmentsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<GateAssignments> gateAssignmentsList = gateAssignmentsRepository.findAll();
-        assertThat(gateAssignmentsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllGateAssignments() throws Exception {
         // Initialize the database
         gateAssignmentsRepository.saveAndFlush(gateAssignments);

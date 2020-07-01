@@ -70,24 +70,12 @@
                     <label class="form-control-label" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.terminal" for="field_terminal">Terminal</label>
                     <input type="text" class="form-control" name="terminal" id="field_terminal"
                            formControlName="terminal"/>
-                    <div *ngIf="editForm.get('terminal')!.invalid && (editForm.get('terminal')!.dirty || editForm.get('terminal')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('terminal')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.gate" for="field_gate">Gate</label>
                     <input type="text" class="form-control" name="gate" id="field_gate"
                            formControlName="gate"/>
-                    <div *ngIf="editForm.get('gate')!.invalid && (editForm.get('gate')!.dirty || editForm.get('gate')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('gate')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
                 </div>
 
                 <div class="form-group">

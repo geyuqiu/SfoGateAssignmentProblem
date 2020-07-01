@@ -45,12 +45,10 @@ public class GateAssignments implements Serializable {
     @Column(name = "transaction", nullable = false)
     private Transaction transaction;
 
-    @NotNull
-    @Column(name = "terminal", nullable = false)
+    @Column(name = "terminal")
     private String terminal;
 
-    @NotNull
-    @Column(name = "gate", nullable = false)
+    @Column(name = "gate")
     private String gate;
 
     @Column(name = "remark")

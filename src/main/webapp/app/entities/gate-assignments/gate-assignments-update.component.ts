@@ -23,8 +23,8 @@ export class GateAssignmentsUpdateComponent implements OnInit {
     airline: [null, [Validators.required]],
     flightNumber: [null, [Validators.required]],
     transaction: [null, [Validators.required]],
-    terminal: [null, [Validators.required]],
-    gate: [null, [Validators.required]],
+    terminal: [],
+    gate: [],
     remark: [],
   });
 
