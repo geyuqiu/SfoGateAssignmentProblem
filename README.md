@@ -1,3 +1,7 @@
+# elasticsearch is used to enable indexes and reduce search query time
+
+    docker-compose -f src/main/docker/elasticsearch.yml up
+
 # SfoGateAssignmentProblem
 
 This application was generated using JHipster 6.10.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.0](https://www.jhipster.tech/documentation-archive/v6.10.0).
