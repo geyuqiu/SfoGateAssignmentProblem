@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -54,7 +55,7 @@ public class GateAssignmentsResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/gate-assignments")
-    public ResponseEntity<GateAssignmentsDTO> createGateAssignments(@RequestBody GateAssignmentsDTO gateAssignmentsDTO) throws URISyntaxException {
+    public ResponseEntity<GateAssignmentsDTO> createGateAssignments(@Valid @RequestBody GateAssignmentsDTO gateAssignmentsDTO) throws URISyntaxException {
         log.debug("REST request to save GateAssignments : {}", gateAssignmentsDTO);
         if (gateAssignmentsDTO.getId() != null) {
             throw new BadRequestAlertException("A new gateAssignments cannot already have an ID", ENTITY_NAME, "idexists");
@@ -75,7 +76,7 @@ public class GateAssignmentsResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/gate-assignments")
-    public ResponseEntity<GateAssignmentsDTO> updateGateAssignments(@RequestBody GateAssignmentsDTO gateAssignmentsDTO) throws URISyntaxException {
+    public ResponseEntity<GateAssignmentsDTO> updateGateAssignments(@Valid @RequestBody GateAssignmentsDTO gateAssignmentsDTO) throws URISyntaxException {
         log.debug("REST request to update GateAssignments : {}", gateAssignmentsDTO);
         if (gateAssignmentsDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

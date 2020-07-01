@@ -1,11 +1,11 @@
 entity GateAssignments {
-    time Instant,
-    airline String,
-    flightNumber String,
-    transaction Transaction,
-    terminal String,
-    Gate String,
-    Remark String,
+    time Instant required,
+    airline String required,
+    flightNumber String required,
+    transaction Transaction required,
+    terminal String required,
+    Gate String required,
+    Remark String
 }
 
 enum Transaction {

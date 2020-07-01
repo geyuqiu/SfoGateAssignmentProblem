@@ -3,28 +3,46 @@
   "fields": [
     {
       "fieldName": "time",
-      "fieldType": "Instant"
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "airline",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "flightNumber",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "transaction",
       "fieldType": "Transaction",
-      "fieldValues": "DEP,ARR"
+      "fieldValues": "DEP,ARR",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "terminal",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "gate",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "remark",

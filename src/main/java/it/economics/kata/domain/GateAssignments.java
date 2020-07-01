@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
@@ -27,23 +28,29 @@ public class GateAssignments implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "time")
+    @NotNull
+    @Column(name = "time", nullable = false)
     private Instant time;
 
-    @Column(name = "airline")
+    @NotNull
+    @Column(name = "airline", nullable = false)
     private String airline;
 
-    @Column(name = "flight_number")
+    @NotNull
+    @Column(name = "flight_number", nullable = false)
     private String flightNumber;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "transaction")
+    @Column(name = "transaction", nullable = false)
     private Transaction transaction;
 
-    @Column(name = "terminal")
+    @NotNull
+    @Column(name = "terminal", nullable = false)
     private String terminal;
 
-    @Column(name = "gate")
+    @NotNull
+    @Column(name = "gate", nullable = false)
     private String gate;
 
     @Column(name = "remark")

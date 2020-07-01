@@ -1,6 +1,7 @@
 package it.economics.kata.service.dto;
 
 import java.time.Instant;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import it.economics.kata.domain.enumeration.Transaction;
 
@@ -11,16 +12,22 @@ public class GateAssignmentsDTO implements Serializable {
     
     private Long id;
 
+    @NotNull
     private Instant time;
 
+    @NotNull
     private String airline;
 
+    @NotNull
     private String flightNumber;
 
+    @NotNull
     private Transaction transaction;
 
+    @NotNull
     private String terminal;
 
+    @NotNull
     private String gate;
 
     private String remark;

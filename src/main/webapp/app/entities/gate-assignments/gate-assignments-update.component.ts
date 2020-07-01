@@ -19,12 +19,12 @@ export class GateAssignmentsUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    time: [],
-    airline: [],
-    flightNumber: [],
-    transaction: [],
-    terminal: [],
-    gate: [],
+    time: [null, [Validators.required]],
+    airline: [null, [Validators.required]],
+    flightNumber: [null, [Validators.required]],
+    transaction: [null, [Validators.required]],
+    terminal: [null, [Validators.required]],
+    gate: [null, [Validators.required]],
     remark: [],
   });
 
