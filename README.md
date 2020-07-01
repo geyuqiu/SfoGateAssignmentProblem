@@ -185,6 +185,10 @@ If you need to re-run the Sonar phase, please be sure to specify at least the `i
 ./mvnw initialize sonar:sonar
 ```
 
+sonar result:
+
+![](arc42/sonarResult.png)
+
 For more information, refer to the [Code quality page][].
 
 ## Using Docker to simplify development (optional)
