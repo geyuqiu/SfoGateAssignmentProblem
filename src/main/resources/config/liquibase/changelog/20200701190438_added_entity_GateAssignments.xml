@@ -56,7 +56,7 @@
     -->
     <changeSet id="20200701190438-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/gate_assignments.txt"
+                  file="config/liquibase/fake-data/gate_assignments.csv"
                   separator=";"
                   tableName="gate_assignments">
             <column name="time" type="datetime"/>
