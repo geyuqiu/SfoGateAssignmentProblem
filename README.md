@@ -5,7 +5,7 @@
 - Angular
 - ElasticSearch
 - Docker
--
+- Postgres
 
 # run the application
 

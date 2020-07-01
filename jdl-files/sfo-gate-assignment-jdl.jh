@@ -3,8 +3,8 @@ entity GateAssignments {
     airline String required,
     flightNumber String required,
     transaction Transaction required,
-    terminal String required,
-    Gate String required,
+    terminal String,
+    Gate String,
     Remark String
 }
 

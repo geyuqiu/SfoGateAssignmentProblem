@@ -3,18 +3,19 @@
 ## Insights got while exploring the data with excel:
 
 - In general:
-  _ United Airlines flights makes up about 50% of all the flights overall, followed by other american based airlines
-  _ most flights do not have remark \* number of ingoing vs outgoing flights is about 1:1
+  - United Airlines flights makes up about 50% of all the flights overall, followed by other american based airlines
+  - most flights do not have remark \* number of ingoing vs outgoing flights is about 1:1
+  - remark is optional, but gate and terminal can be null
 - Terminal:
-  ** All international (not USA based) airlines are always departing / arriving in terminal I (i18n)
-  ** terminal 1 mostly consists of gates that begin with a number
-  ** Inside Terminal 1, only Flights of USA based airlines depart / arrive
-  ** Terminal 3 is the most busiest terminal with the largest number of flights
+  - All international (not USA based) airlines are always departing / arriving in terminal I (i18n)
+  - terminal 1 mostly consists of gates that begin with a number
+  - Inside Terminal 1, only Flights of USA based airlines depart / arrive
+  - Terminal 3 is the most busiest terminal with the largest number of flights
 - Layover \* for certain airlines that flies to a far away destination, e.g. Air China there is certain routine
-  ** there is a flight to a chinese and from a chinese destination every day
-  ** CA985 is e.g. always the departing flight
-  ** CA986 is e.g. always the arriving flight
-  ** the layover time between CA986 and CA986 is around 2 hours for maintenance and refuelling (the layover time is different e.g. around 15 hours for Japan Airlines JL1 and JL2)
+  - there is a flight to a chinese and from a chinese destination every day
+  - CA985 is e.g. always the departing flight
+  - CA986 is e.g. always the arriving flight
+  - the layover time between CA986 and CA986 is around 2 hours for maintenance and refuelling (the layover time is different e.g. around 15 hours for Japan Airlines JL1 and JL2)
 - Remarks and transaction
   _ Only a departing flight can have following remarks: Returning, See agent, Returned, Last Call, Departed, Closed, Boarding
   _ Only a arriving flight can have following remarks: In range, Arrived

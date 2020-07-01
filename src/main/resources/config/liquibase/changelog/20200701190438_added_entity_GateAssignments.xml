@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    
+
     <!--
         Added the entity GateAssignments.
     -->
@@ -56,10 +56,9 @@
     -->
     <changeSet id="20200701190438-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/gate_assignments.csv"
+                  file="config/liquibase/fake-data/gate_assignments.txt"
                   separator=";"
                   tableName="gate_assignments">
-            <!--<column name="id" type="numeric"/>-->
             <column name="time" type="datetime"/>
             <column name="airline" type="string"/>
             <column name="flight_number" type="string"/>
