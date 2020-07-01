@@ -35,7 +35,7 @@
   "changelogDate": "20200701190438",
   "entityTableName": "gate_assignments",
   "dto": "mapstruct",
-  "pagination": "infinite-scroll",
+  "pagination": "pagination",
   "service": "serviceClass",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

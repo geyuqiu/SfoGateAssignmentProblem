@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
+import { Subscription, combineLatest } from 'rxjs';
+import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IGateAssignments } from 'app/shared/model/gate-assignments.model';
@@ -16,89 +16,82 @@ import { GateAssignmentsDeleteDialogComponent } from './gate-assignments-delete-
   templateUrl: './gate-assignments.component.html',
 })
 export class GateAssignmentsComponent implements OnInit, OnDestroy {
-  gateAssignments: IGateAssignments[];
+  gateAssignments?: IGateAssignments[];
   eventSubscriber?: Subscription;
-  itemsPerPage: number;
-  links: any;
-  page: number;
-  predicate: string;
-  ascending: boolean;
   currentSearch: string;
+  totalItems = 0;
+  itemsPerPage = ITEMS_PER_PAGE;
+  page!: number;
+  predicate!: string;
+  ascending!: boolean;
+  ngbPaginationPage = 1;
 
   constructor(
     protected gateAssignmentsService: GateAssignmentsService,
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal,
-    protected parseLinks: JhiParseLinks,
-    protected activatedRoute: ActivatedRoute
+    protected modalService: NgbModal
   ) {
-    this.gateAssignments = [];
-    this.itemsPerPage = ITEMS_PER_PAGE;
-    this.page = 0;
-    this.links = {
-      last: 0,
-    };
-    this.predicate = 'id';
-    this.ascending = true;
     this.currentSearch =
       this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
         ? this.activatedRoute.snapshot.queryParams['search']
         : '';
   }
 
-  loadAll(): void {
+  loadPage(page?: number, dontNavigate?: boolean): void {
+    const pageToLoad: number = page || this.page || 1;
+
     if (this.currentSearch) {
       this.gateAssignmentsService
         .search({
+          page: pageToLoad - 1,
           query: this.currentSearch,
-          page: this.page,
           size: this.itemsPerPage,
           sort: this.sort(),
         })
-        .subscribe((res: HttpResponse<IGateAssignments[]>) => this.paginateGateAssignments(res.body, res.headers));
+        .subscribe(
+          (res: HttpResponse<IGateAssignments[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+          () => this.onError()
+        );
       return;
     }
 
     this.gateAssignmentsService
       .query({
-        page: this.page,
+        page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
       })
-      .subscribe((res: HttpResponse<IGateAssignments[]>) => this.paginateGateAssignments(res.body, res.headers));
-  }
-
-  reset(): void {
-    this.page = 0;
-    this.gateAssignments = [];
-    this.loadAll();
-  }
-
-  loadPage(page: number): void {
-    this.page = page;
-    this.loadAll();
+      .subscribe(
+        (res: HttpResponse<IGateAssignments[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+        () => this.onError()
+      );
   }
 
   search(query: string): void {
-    this.gateAssignments = [];
-    this.links = {
-      last: 0,
-    };
-    this.page = 0;
-    if (query) {
-      this.predicate = '_score';
-      this.ascending = false;
-    } else {
-      this.predicate = 'id';
-      this.ascending = true;
-    }
     this.currentSearch = query;
-    this.loadAll();
+    this.loadPage(1);
   }
 
   ngOnInit(): void {
-    this.loadAll();
+    this.handleNavigation();
     this.registerChangeInGateAssignments();
+  }
+
+  protected handleNavigation(): void {
+    combineLatest(this.activatedRoute.data, this.activatedRoute.queryParamMap, (data: Data, params: ParamMap) => {
+      const page = params.get('page');
+      const pageNumber = page !== null ? +page : 1;
+      const sort = (params.get('sort') ?? data['defaultSort']).split(',');
+      const predicate = sort[0];
+      const ascending = sort[1] === 'asc';
+      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
+        this.predicate = predicate;
+        this.ascending = ascending;
+        this.loadPage(pageNumber, true);
+      }
+    }).subscribe();
   }
 
   ngOnDestroy(): void {
@@ -113,7 +106,7 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInGateAssignments(): void {
-    this.eventSubscriber = this.eventManager.subscribe('gateAssignmentsListModification', () => this.reset());
+    this.eventSubscriber = this.eventManager.subscribe('gateAssignmentsListModification', () => this.loadPage());
   }
 
   delete(gateAssignments: IGateAssignments): void {
@@ -129,13 +122,25 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  protected paginateGateAssignments(data: IGateAssignments[] | null, headers: HttpHeaders): void {
-    const headersLink = headers.get('link');
-    this.links = this.parseLinks.parse(headersLink ? headersLink : '');
-    if (data) {
-      for (let i = 0; i < data.length; i++) {
-        this.gateAssignments.push(data[i]);
-      }
+  protected onSuccess(data: IGateAssignments[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+    this.totalItems = Number(headers.get('X-Total-Count'));
+    this.page = page;
+    this.ngbPaginationPage = this.page;
+    if (navigate) {
+      this.router.navigate(['/gate-assignments'], {
+        queryParams: {
+          page: this.page,
+          size: this.itemsPerPage,
+          search: this.currentSearch,
+          sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc'),
+        },
+      });
     }
+    this.gateAssignments = data || [];
+    this.ngbPaginationPage = this.page;
+  }
+
+  protected onError(): void {
+    this.ngbPaginationPage = this.page ?? 1;
   }
 }

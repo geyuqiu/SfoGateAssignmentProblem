@@ -40,6 +40,7 @@ export const gateAssignmentsRoute: Routes = [
     component: GateAssignmentsComponent,
     data: {
       authorities: [Authority.USER],
+      defaultSort: 'id,asc',
       pageTitle: 'sfoGateAssignmentProblemApp.gateAssignments.home.title',
     },
     canActivate: [UserRouteAccessService],

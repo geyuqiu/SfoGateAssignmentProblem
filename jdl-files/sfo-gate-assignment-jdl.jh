@@ -13,5 +13,5 @@ enum Transaction {
     ARR
 }
 
-paginate GateAssignments with infinite-scroll
+paginate GateAssignments with pagination
 dto * with mapstruct
