@@ -48,6 +48,7 @@ public class CacheConfiguration {
             createCache(cm, it.economics.kata.domain.User.class.getName());
             createCache(cm, it.economics.kata.domain.Authority.class.getName());
             createCache(cm, it.economics.kata.domain.User.class.getName() + ".authorities");
+            createCache(cm, it.economics.kata.domain.GateAssignments.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

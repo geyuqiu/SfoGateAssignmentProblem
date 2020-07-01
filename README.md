@@ -8,6 +8,10 @@ This application was generated using JHipster 6.10.0, you can find documentation
 
 ## Development
 
+- if you encounter this error `org.elasticsearch.index.IndexNotFoundException: no such index` followed by this error `java.lang.ArrayStoreException: sun.reflect.annotation.TypeNotPresentExceptionProxy` or this liquibase error `... liquibase.exception.ChangeLogParseException: Error parsing classpath:/db/changelog/db.changelog-master.yaml`
+  it is normal: https://github.com/jhipster/generator-jhipster/issues/9875
+  just stop the mvn command and run it again
+
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
 1. [Node.js][]: We use Node to run a development web server and build the project.

@@ -1,0 +1,91 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.title">Gate Assignments</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-gate-assignments" [routerLink]="['/gate-assignments/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.createLabel">
+            Create a new Gate Assignments
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'sfoGateAssignmentProblemApp.gateAssignments.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="gateAssignments?.length === 0">
+        <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.notFound">No gateAssignments found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="gateAssignments && gateAssignments.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="time"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.time">Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="airline"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.airline">Airline</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="flightNumber"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.flightNumber">Flight Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="transaction"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.transaction">Transaction</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="terminal"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.terminal">Terminal</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gate"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.gate">Gate</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="remark"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.remark">Remark</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let gateAssignments of gateAssignments ;trackBy: trackId">
+                    <td><a [routerLink]="['/gate-assignments', gateAssignments.id, 'view']">{{ gateAssignments.id }}</a></td>
+                    <td>{{ gateAssignments.time | date:'medium' }}</td>
+                    <td>{{ gateAssignments.airline }}</td>
+                    <td>{{ gateAssignments.flightNumber }}</td>
+                    <td jhiTranslate="{{ 'sfoGateAssignmentProblemApp.Transaction.' + gateAssignments.transaction }}">{{ gateAssignments.transaction }}</td>
+                    <td>{{ gateAssignments.terminal }}</td>
+                    <td>{{ gateAssignments.gate }}</td>
+                    <td>{{ gateAssignments.remark }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/gate-assignments', gateAssignments.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/gate-assignments', gateAssignments.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(gateAssignments)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

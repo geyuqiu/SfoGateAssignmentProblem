@@ -1,0 +1,29 @@
+{
+  "sfoGateAssignmentProblemApp": {
+    "gateAssignments": {
+      "home": {
+        "title": "Gate Assignments",
+        "createLabel": "Create a new Gate Assignments",
+        "createOrEditLabel": "Create or edit a Gate Assignments",
+        "search": "Search for Gate Assignments",
+        "notFound": "No Gate Assignments found"
+      },
+      "created": "A new Gate Assignments is created with identifier {{ param }}",
+      "updated": "A Gate Assignments is updated with identifier {{ param }}",
+      "deleted": "A Gate Assignments is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Gate Assignments {{ id }}?"
+      },
+      "detail": {
+        "title": "Gate Assignments"
+      },
+      "time": "Time",
+      "airline": "Airline",
+      "flightNumber": "Flight Number",
+      "transaction": "Transaction",
+      "terminal": "Terminal",
+      "gate": "Gate",
+      "remark": "Remark"
+    }
+  }
+}
