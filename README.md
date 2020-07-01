@@ -9,7 +9,7 @@
 
 # run the application
 
-- install java
+- install java > 8
 - install nodejs > 12
 - install and docker
 - run elasticSearch (docker container)
