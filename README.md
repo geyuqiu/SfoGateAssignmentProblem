@@ -9,12 +9,23 @@
 
 # run the application
 
-- install java > 8
-- install nodejs > 12
-- install and docker
-- run elasticSearch (docker container)
-- run postgres DB (docker container)
-- run the app `java -jar target/sfo-gate-assignment-problem-0.0.1-SNAPSHOT.jar`
+    # install java > 8
+    # install nodejs > 12
+    # install and docker
+
+    # run elasticSearch (docker container) in background
+    docker-compose -f src/main/docker/elasticsearch.yml up -d
+
+    # run postgres DB (docker container) in background
+    docker-compose -f src/main/docker/postgresql.yml up -d
+
+    # fill postgres with data via `\copy` (`insert` commands too slow for 1.7 million records)
+    docker cp src/main/docker/sql/init.sql docker_sfogateassignmentproblem-postgresql_1://tmp/init.sql
+    docker cp src/main/docker/sql/gate_assignments_init.csv docker_sfogateassignmentproblem-postgresql_1://tmp/gate_assignments_init.csv
+    docker exec docker_sfogateassignmentproblem-postgresql_1 psql SfoGateAssignmentProblem SfoGateAssignmentProblem -f /tmp/init.sql
+
+    # run the app
+    java -jar target/sfo-gate-assignment-problem-0.0.1-SNAPSHOT.jar
 
 # commands
 
