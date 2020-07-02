@@ -16,6 +16,17 @@
 - run postgres DB (docker container)
 - run the app `java -jar target/sfo-gate-assignment-problem-0.0.1-SNAPSHOT.jar`
 
+# commands
+
+| Commands                  | Description                                                               |
+| ------------------------- | ------------------------------------------------------------------------- |
+| `npm run start-tls`       | Run Frontend (hot-reloading) on`https://localhost:9000/`                  |
+| `mvn -Pdev,tls`           | Run Backend in https and dev mode `https://localhost:8080/`               |
+| `npm test`                | Run unit tests via Jest                                                   |
+| `npm run test:watch`      | Run unit tests via Jest in watch mode (does not work properly on windows) |
+| `npm run lint`            | Lint code                                                                 |
+| `mvn liquibase:updateSQL` | generated sql script under `target/liquibase/migrate.sql`                 |
+
 ## elasticsearch is used to enable indexes and reduce search query time
 
     docker-compose -f src/main/docker/elasticsearch.yml up
