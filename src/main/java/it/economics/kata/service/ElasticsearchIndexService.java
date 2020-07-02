@@ -1,8 +1,11 @@
 package it.economics.kata.service;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.vanroy.springdata.jest.JestElasticsearchTemplate;
+import it.economics.kata.domain.GateAssignments;
 import it.economics.kata.domain.User;
+import it.economics.kata.repository.GateAssignmentsRepository;
 import it.economics.kata.repository.UserRepository;
+import it.economics.kata.repository.search.GateAssignmentsSearchRepository;
 import it.economics.kata.repository.search.UserSearchRepository;
 import org.elasticsearch.ResourceAlreadyExistsException;
 import org.slf4j.Logger;
@@ -37,15 +40,15 @@ public class ElasticsearchIndexService {
 
     private final Logger log = LoggerFactory.getLogger(ElasticsearchIndexService.class);
 
-    private final UserRepository userRepository;
+    private final GateAssignmentsRepository gateAssignmentsRepository;
 
-    private final UserSearchRepository userSearchRepository;
+    private final GateAssignmentsSearchRepository gateAssignmentsSearchRepository;
 
     private final JestElasticsearchTemplate jestElasticsearchTemplate;
 
-    public ElasticsearchIndexService(UserRepository userRepository, UserSearchRepository userSearchRepository, JestElasticsearchTemplate jestElasticsearchTemplate) {
-        this.userRepository = userRepository;
-        this.userSearchRepository = userSearchRepository;
+    public ElasticsearchIndexService(GateAssignmentsRepository gateAssignmentsRepository, GateAssignmentsSearchRepository gateAssignmentsSearchRepository, JestElasticsearchTemplate jestElasticsearchTemplate) {
+        this.gateAssignmentsRepository = gateAssignmentsRepository;
+        this.gateAssignmentsSearchRepository = gateAssignmentsSearchRepository;
         this.jestElasticsearchTemplate = jestElasticsearchTemplate;
     }
 
@@ -53,7 +56,7 @@ public class ElasticsearchIndexService {
     public void reindexAll() {
         if (reindexLock.tryLock()) {
             try {
-                reindexForClass(User.class, userRepository, userSearchRepository);
+                reindexForClass(GateAssignments.class, gateAssignmentsRepository, gateAssignmentsSearchRepository);
                 log.info("Elasticsearch: Successfully performed reindexing");
             } finally {
                 reindexLock.unlock();
@@ -91,7 +94,7 @@ public class ElasticsearchIndexService {
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
 
-            int size = 100;
+            int size = 10000;
             for (int i = 0; i <= jpaRepository.count() / size; i++) {
                 Pageable page = PageRequest.of(i, size);
                 log.info("Indexing page {} of {}, size {}", i, jpaRepository.count() / size, size);

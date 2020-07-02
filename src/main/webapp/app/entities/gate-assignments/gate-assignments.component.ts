@@ -42,20 +42,20 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;
 
-    if (this.currentSearch) {
-      this.gateAssignmentsService
-        .search({
-          page: pageToLoad - 1,
-          query: this.currentSearch,
-          size: this.itemsPerPage,
-          sort: this.sort(),
-        })
-        .subscribe(
-          (res: HttpResponse<IGateAssignments[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
-          () => this.onError()
-        );
-      return;
-    }
+    // if (this.currentSearch) {
+    //   this.gateAssignmentsService
+    //     .search({
+    //       page: pageToLoad - 1,
+    //       query: this.currentSearch,
+    //       size: this.itemsPerPage,
+    //       sort: this.sort(),
+    //     })
+    //     .subscribe(
+    //       (res: HttpResponse<IGateAssignments[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+    //       () => this.onError()
+    //     );
+    //   return;
+    // }
 
     this.gateAssignmentsService
       .query({
