@@ -147,7 +147,7 @@ To build the final jar and optimize the SfoGateAssignmentProblem application for
 
 ```
 
-./mvnw -Pprod clean verify
+./mvnw -Pprod -Dcheckstyle.skip -DskipTests verify
 
 
 ```
