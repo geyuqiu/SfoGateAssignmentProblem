@@ -7,11 +7,11 @@
 - Docker
 - Postgres
 
-# run the application
+# run the application locally (tested on MacOS Catalina MacBook 2016 15')
 
     # install java > 8
     # install nodejs > 12
-    # install and docker
+    # install docker
 
     # run elasticSearch (docker container) in background
     docker-compose -f src/main/docker/elasticsearch.yml up -d
