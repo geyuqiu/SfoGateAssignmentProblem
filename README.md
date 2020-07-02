@@ -24,6 +24,7 @@
     docker cp src/main/docker/sql/gate_assignments_init.csv docker_sfogateassignmentproblem-postgresql_1://tmp/gate_assignments_init.csv
     docker exec docker_sfogateassignmentproblem-postgresql_1 psql SfoGateAssignmentProblem SfoGateAssignmentProblem -f /tmp/init.sql
 
+    # waits about half a minute
     # run the app
     java -jar target/sfo-gate-assignment-problem-0.0.1-SNAPSHOT.jar
 
