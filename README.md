@@ -7,14 +7,37 @@
 - Docker
 - Postgres
 
-# run the application
+# run the application locally (tested on MacOS Catalina MacBook 2016 15')
 
-- install java > 8
-- install nodejs > 12
-- install and docker
-- run elasticSearch (docker container)
-- run postgres DB (docker container)
-- run the app `java -jar target/sfo-gate-assignment-problem-0.0.1-SNAPSHOT.jar`
+    # install java > 8
+    # install nodejs > 12
+    # install docker
+
+    # run elasticSearch (docker container) in background
+    docker-compose -f src/main/docker/elasticsearch.yml up -d
+
+    # run postgres DB (docker container) in background
+    docker-compose -f src/main/docker/postgresql.yml up -d
+
+    # fill postgres with data via `\copy` (`insert` commands too slow for 1.7 million records)
+    docker cp src/main/docker/sql/init.sql docker_sfogateassignmentproblem-postgresql_1://tmp/init.sql
+    docker cp src/main/docker/sql/gate_assignments_init.csv docker_sfogateassignmentproblem-postgresql_1://tmp/gate_assignments_init.csv
+    docker exec docker_sfogateassignmentproblem-postgresql_1 psql SfoGateAssignmentProblem SfoGateAssignmentProblem -f /tmp/init.sql
+
+    # waits about half a minute
+    # run the app
+    java -jar target/sfo-gate-assignment-problem-0.0.1-SNAPSHOT.jar
+
+# commands
+
+| Commands                  | Description                                                               |
+| ------------------------- | ------------------------------------------------------------------------- |
+| `npm run start-tls`       | Run Frontend (hot-reloading) on`https://localhost:9000/`                  |
+| `mvn -Pdev,tls`           | Run Backend in https and dev mode `https://localhost:8080/`               |
+| `npm test`                | Run unit tests via Jest                                                   |
+| `npm run test:watch`      | Run unit tests via Jest in watch mode (does not work properly on windows) |
+| `npm run lint`            | Lint code                                                                 |
+| `mvn liquibase:updateSQL` | generated sql script under `target/liquibase/migrate.sql`                 |
 
 ## elasticsearch is used to enable indexes and reduce search query time
 
@@ -136,7 +159,7 @@ To build the final jar and optimize the SfoGateAssignmentProblem application for
 
 ```
 
-./mvnw -Pprod clean verify
+./mvnw -Pprod -Dcheckstyle.skip -DskipTests verify
 
 
 ```
