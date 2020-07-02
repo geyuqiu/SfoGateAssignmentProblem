@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SfoGateAssignmentProblemElasticsearchReindexModule } from './elasticsearch-reindex/elasticsearch-reindex.module';
 /* jhipster-needle-add-admin-module-import - JHipster will add admin modules imports here */
 
 @NgModule({
   imports: [
+    SfoGateAssignmentProblemElasticsearchReindexModule,
     /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
     RouterModule.forChild([
+      // {
+      //   path: 'elasticsearch-reindex',
+      //   loadChildren: () => import('./elasticsearch-reindex/elasticsearch-reindex.module').then(m => m.SfoGateAssignmentProblemElasticsearchReindexModule),
+      // },
       {
         path: 'user-management',
         loadChildren: () => import('./user-management/user-management.module').then(m => m.UserManagementModule),
