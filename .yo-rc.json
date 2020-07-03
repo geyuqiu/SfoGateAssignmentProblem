@@ -30,7 +30,7 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "creationTimestamp": 1593627554848,
-    "testFrameworks": ["protractor"],
+    "testFrameworks": [],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
