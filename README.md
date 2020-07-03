@@ -1,4 +1,4 @@
-# features
+# road map
 
 - filter in millions of records
 - crud
@@ -10,7 +10,9 @@
   - Y: #ARR + #DEP flights
 - unclear: As time progresses (in year), bases on arrival and departures keep on adding and removing number of flights in the terminals and also keep on ranking terminals based on descending order flights present there.
 - mobile responsiveness
-- last step: split frontend and backend code
+- add cypress ui test
+- split frontend and backend code
+- clean up jhipster code
 
 # techstack
 
