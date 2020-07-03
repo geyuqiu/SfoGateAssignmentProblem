@@ -38,7 +38,7 @@ public class ElasticsearchConfiguration {
 
     @Bean
     @Primary
-    public ElasticsearchOperations elasticsearchTemplate(JestClient jestClient,
+    public JestElasticsearchTemplate elasticsearchTemplate(JestClient jestClient,
                                                          ElasticsearchConverter elasticsearchConverter,
                                                          SimpleElasticsearchMappingContext mappingContext,
                                                          EntityMapper entityMapper) {
