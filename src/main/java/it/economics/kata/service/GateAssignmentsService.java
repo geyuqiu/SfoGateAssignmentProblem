@@ -5,6 +5,7 @@ import it.economics.kata.repository.GateAssignmentsRepository;
 import it.economics.kata.repository.search.GateAssignmentsSearchRepository;
 import it.economics.kata.service.dto.GateAssignmentsDTO;
 import it.economics.kata.service.mapper.GateAssignmentsMapper;
+import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,7 +102,9 @@ public class GateAssignmentsService {
     @Transactional(readOnly = true)
     public Page<GateAssignmentsDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of GateAssignments for query {}", query);
-        return gateAssignmentsSearchRepository.search(queryStringQuery(query), pageable)
+        QueryStringQueryBuilder queryString = queryStringQuery(query);
+        log.debug("queryStringQuery {}", queryString);
+        return gateAssignmentsSearchRepository.search(queryString, pageable)
             .map(gateAssignmentsMapper::toDto);
     }
 }
