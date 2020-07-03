@@ -1,0 +1,17 @@
+entity GateAssignments {
+    time Instant required,
+    airline String required,
+    flightNumber String required,
+    transaction Transaction required,
+    terminal String,
+    Gate String,
+    Remark String
+}
+
+enum Transaction {
+    DEP,
+    ARR
+}
+
+paginate GateAssignments with pagination
+dto * with mapstruct

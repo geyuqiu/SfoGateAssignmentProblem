@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-gate-assignments-heading" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.createOrEditLabel">Create or edit a Gate Assignments</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.time" for="field_time">Time</label>
+                    <div class="d-flex">
+                        <input id="field_time" type="datetime-local" class="form-control" name="time" formControlName="time" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('time')!.invalid && (editForm.get('time')!.dirty || editForm.get('time')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('time')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('time')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.airline" for="field_airline">Airline</label>
+                    <input type="text" class="form-control" name="airline" id="field_airline"
+                           formControlName="airline"/>
+                    <div *ngIf="editForm.get('airline')!.invalid && (editForm.get('airline')!.dirty || editForm.get('airline')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('airline')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.flightNumber" for="field_flightNumber">Flight Number</label>
+                    <input type="text" class="form-control" name="flightNumber" id="field_flightNumber"
+                           formControlName="flightNumber"/>
+                    <div *ngIf="editForm.get('flightNumber')!.invalid && (editForm.get('flightNumber')!.dirty || editForm.get('flightNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('flightNumber')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.transaction" for="field_transaction">Transaction</label>
+                    <select class="form-control" name="transaction" formControlName="transaction" id="field_transaction">
+                        <option value="DEP">{{ 'sfoGateAssignmentProblemApp.Transaction.DEP' | translate }}</option>
+                        <option value="ARR">{{ 'sfoGateAssignmentProblemApp.Transaction.ARR' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('transaction')!.invalid && (editForm.get('transaction')!.dirty || editForm.get('transaction')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('transaction')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.terminal" for="field_terminal">Terminal</label>
+                    <input type="text" class="form-control" name="terminal" id="field_terminal"
+                           formControlName="terminal"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.gate" for="field_gate">Gate</label>
+                    <input type="text" class="form-control" name="gate" id="field_gate"
+                           formControlName="gate"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.remark" for="field_remark">Remark</label>
+                    <input type="text" class="form-control" name="remark" id="field_remark"
+                           formControlName="remark"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

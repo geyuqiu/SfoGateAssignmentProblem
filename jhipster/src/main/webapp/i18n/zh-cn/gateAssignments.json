@@ -1,0 +1,29 @@
+{
+  "sfoGateAssignmentProblemApp": {
+    "gateAssignments": {
+      "home": {
+        "title": "Gate Assignments",
+        "createLabel": "创建新 Gate Assignments",
+        "createOrEditLabel": "创建或编辑 Gate Assignments",
+        "search": "查找 Gate Assignments",
+        "notFound": "No Gate Assignments found"
+      },
+      "created": "Gate Assignments {{ param }} 创建成功",
+      "updated": "Gate Assignments {{ param }} 更新成功",
+      "deleted": "Gate Assignments {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Gate Assignments {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Gate Assignments"
+      },
+      "time": "Time",
+      "airline": "Airline",
+      "flightNumber": "Flight Number",
+      "transaction": "Transaction",
+      "terminal": "Terminal",
+      "gate": "Gate",
+      "remark": "Remark"
+    }
+  }
+}
