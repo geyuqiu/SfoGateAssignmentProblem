@@ -9,8 +9,8 @@
   - X: Terminal
   - Y: #ARR + #DEP flights
 - unclear: As time progresses (in year), bases on arrival and departures keep on adding and removing number of flights in the terminals and also keep on ranking terminals based on descending order flights present there.
-- split frontend and backend code
 - mobile responsiveness
+- last step: split frontend and backend code
 
 # techstack
 
