@@ -1,4 +1,4 @@
-# road map
+# Road Map
 
 - filter in millions of records
 - crud
@@ -13,38 +13,35 @@
 - add cypress ui test
 - split frontend and backend code
 - clean up jhipster code
-- upload reindexed elasticsearch docker image?
 - upload postgres image with dummy data
 
-# techstack
+# Tech Stack
 
 - JHipster
 - Sprint Boot
 - Angular
-- (ElasticSearch)
 - Docker
 - Postgres
 
-# run the application locally (tested on MacOS Catalina MacBook 2016 15')
+# Run the application locally (tested on MacOS Catalina MacBook 2016 15')
 
     # install java > 8
     # install nodejs > 12
     # install docker
 
-    # run elasticSearch (docker container) in background
-    docker-compose -f src/main/docker/elasticsearch.yml up -d
-
     # run postgres DB (docker container) in background
     docker-compose -f src/main/docker/postgresql.yml up -d
 
-    # fill postgres with data via `\copy` (`insert` commands too slow for 1.7 million records)
+    # fill postgres with sfo data via `\copy` (`insert` commands too slow for 1.7 million records)
     docker cp src/main/docker/sql/init.sql docker_sfogateassignmentproblem-postgresql_1://tmp/init.sql
     docker cp src/main/docker/sql/gate_assignments_init.csv docker_sfogateassignmentproblem-postgresql_1://tmp/gate_assignments_init.csv
     docker exec docker_sfogateassignmentproblem-postgresql_1 psql SfoGateAssignmentProblem SfoGateAssignmentProblem -f /tmp/init.sql
 
     # waits about half a minute
     # run the app
-    java -jar target/sfo-gate-assignment-problem-0.0.1-SNAPSHOT.jar
+    docker-compose -f src/main/docker/app.yml up -d
+   
+    # go to http://localhost:8080 and login with admin (user) admin (password)
 
 # push app to docker hub
     
@@ -61,19 +58,11 @@
 | `npm run lint`            | Lint code                                                                 |
 | `mvn liquibase:updateSQL` | generated sql script under `target/liquibase/migrate.sql`                 |
 
-## elasticsearch is used to enable indexes and reduce search query time
-
-    docker-compose -f src/main/docker/elasticsearch.yml up
-
 # SfoGateAssignmentProblem
 
 This application was generated using JHipster 6.10.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.0](https://www.jhipster.tech/documentation-archive/v6.10.0).
 
 ## Development
-
-- if you encounter this error `org.elasticsearch.index.IndexNotFoundException: no such index` followed by this error `java.lang.ArrayStoreException: sun.reflect.annotation.TypeNotPresentExceptionProxy` or this liquibase error `... liquibase.exception.ChangeLogParseException: Error parsing classpath:/db/changelog/db.changelog-master.yaml`
-  it is normal: https://github.com/jhipster/generator-jhipster/issues/9875
-  just stop the mvn command and run it again
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
