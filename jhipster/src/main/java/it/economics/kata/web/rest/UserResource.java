@@ -1,36 +1,19 @@
 package it.economics.kata.web.rest;
 
-import it.economics.kata.config.Constants;
 import it.economics.kata.domain.User;
 import it.economics.kata.repository.UserRepository;
 import it.economics.kata.security.AuthoritiesConstants;
 import it.economics.kata.service.MailService;
 import it.economics.kata.service.UserService;
-import it.economics.kata.service.dto.UserDTO;
-import it.economics.kata.web.rest.errors.BadRequestAlertException;
-import it.economics.kata.web.rest.errors.EmailAlreadyUsedException;
-import it.economics.kata.web.rest.errors.LoginAlreadyUsedException;
-
-import io.github.jhipster.web.util.HeaderUtil;
-import io.github.jhipster.web.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
+import java.util.List;
 
 /**
  * REST controller for managing users.

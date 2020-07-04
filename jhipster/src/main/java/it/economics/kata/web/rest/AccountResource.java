@@ -1,25 +1,16 @@
 package it.economics.kata.web.rest;
 
-import it.economics.kata.domain.User;
 import it.economics.kata.repository.UserRepository;
-import it.economics.kata.security.SecurityUtils;
 import it.economics.kata.service.MailService;
 import it.economics.kata.service.UserService;
-import it.economics.kata.service.dto.PasswordChangeDTO;
 import it.economics.kata.service.dto.UserDTO;
-import it.economics.kata.web.rest.errors.*;
-import it.economics.kata.web.rest.vm.KeyAndPasswordVM;
-import it.economics.kata.web.rest.vm.ManagedUserVM;
-
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.*;
 
 /**
  * REST controller for managing the current user's account.
