@@ -15,7 +15,6 @@ describe('Component Tests', () => {
         imports: [SfoGateAssignmentProblemTestModule],
         declarations: [],
       })
-        .overrideTemplate(AlertComponent, '')
         .compileComponents();
     }));
 
