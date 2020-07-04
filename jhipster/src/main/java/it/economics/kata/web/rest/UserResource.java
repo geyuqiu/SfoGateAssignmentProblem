@@ -3,7 +3,6 @@ package it.economics.kata.web.rest;
 import it.economics.kata.domain.User;
 import it.economics.kata.repository.UserRepository;
 import it.economics.kata.security.AuthoritiesConstants;
-import it.economics.kata.service.MailService;
 import it.economics.kata.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +49,7 @@ public class UserResource {
 
     private final UserService userService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    public UserResource(UserService userService, UserRepository userRepository) {
         this.userService = userService;
     }
 
