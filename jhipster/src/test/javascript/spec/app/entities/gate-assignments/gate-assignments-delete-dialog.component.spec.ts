@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { of } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import {ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {of} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { SfoGateAssignmentProblemTestModule } from '../../../test.module';
-import { MockEventManager } from '../../../helpers/mock-event-manager.service';
-import { MockActiveModal } from '../../../helpers/mock-active-modal.service';
-import { GateAssignmentsDeleteDialogComponent } from 'app/entities/gate-assignments/gate-assignments-delete-dialog.component';
-import { GateAssignmentsService } from 'app/entities/gate-assignments/gate-assignments.service';
+import {SfoGateAssignmentProblemTestModule} from '../../../test.module';
+import {MockEventManager} from '../../../helpers/mock-event-manager.service';
+import {MockActiveModal} from '../../../helpers/mock-active-modal.service';
+import {GateAssignmentsDeleteDialogComponent} from 'app/entities/gate-assignments/gate-assignments-delete-dialog.component';
+import {GateAssignmentsService} from 'app/entities/gate-assignments/gate-assignments.service';
 
 describe('Component Tests', () => {
   describe('GateAssignments Management Delete Component', () => {
@@ -22,7 +22,6 @@ describe('Component Tests', () => {
         imports: [SfoGateAssignmentProblemTestModule],
         declarations: [GateAssignmentsDeleteDialogComponent],
       })
-        .overrideTemplate(GateAssignmentsDeleteDialogComponent, '')
         .compileComponents();
       fixture = TestBed.createComponent(GateAssignmentsDeleteDialogComponent);
       comp = fixture.componentInstance;

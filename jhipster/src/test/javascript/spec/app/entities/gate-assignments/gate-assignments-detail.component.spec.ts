@@ -18,7 +18,6 @@ describe('Component Tests', () => {
         declarations: [GateAssignmentsDetailComponent],
         providers: [{ provide: ActivatedRoute, useValue: route }],
       })
-      // .overrideTemplate(GateAssignmentsDetailComponent, '')
         .compileComponents();
       fixture = TestBed.createComponent(GateAssignmentsDetailComponent);
       comp = fixture.componentInstance;

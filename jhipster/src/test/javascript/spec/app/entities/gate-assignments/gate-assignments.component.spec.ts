@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {of} from 'rxjs';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {ActivatedRoute, convertToParamMap} from '@angular/router';
 
-import { SfoGateAssignmentProblemTestModule } from '../../../test.module';
-import { GateAssignmentsComponent } from 'app/entities/gate-assignments/gate-assignments.component';
-import { GateAssignmentsService } from 'app/entities/gate-assignments/gate-assignments.service';
-import { GateAssignments } from 'app/shared/model/gate-assignments.model';
+import {SfoGateAssignmentProblemTestModule} from '../../../test.module';
+import {GateAssignmentsComponent} from 'app/entities/gate-assignments/gate-assignments.component';
+import {GateAssignmentsService} from 'app/entities/gate-assignments/gate-assignments.service';
+import {GateAssignments} from 'app/shared/model/gate-assignments.model';
 
 describe('Component Tests', () => {
   describe('GateAssignments Management Component', () => {
@@ -35,9 +35,7 @@ describe('Component Tests', () => {
             },
           },
         ],
-      })
-        .overrideTemplate(GateAssignmentsComponent, '')
-        .compileComponents();
+      }).compileComponents();
 
       fixture = TestBed.createComponent(GateAssignmentsComponent);
       comp = fixture.componentInstance;

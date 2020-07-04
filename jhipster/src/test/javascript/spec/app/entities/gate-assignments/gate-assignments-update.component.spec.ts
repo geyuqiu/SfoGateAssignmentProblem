@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { of } from 'rxjs';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {FormBuilder} from '@angular/forms';
+import {of} from 'rxjs';
 
-import { SfoGateAssignmentProblemTestModule } from '../../../test.module';
-import { GateAssignmentsUpdateComponent } from 'app/entities/gate-assignments/gate-assignments-update.component';
-import { GateAssignmentsService } from 'app/entities/gate-assignments/gate-assignments.service';
-import { GateAssignments } from 'app/shared/model/gate-assignments.model';
+import {SfoGateAssignmentProblemTestModule} from '../../../test.module';
+import {GateAssignmentsUpdateComponent} from 'app/entities/gate-assignments/gate-assignments-update.component';
+import {GateAssignmentsService} from 'app/entities/gate-assignments/gate-assignments.service';
+import {GateAssignments} from 'app/shared/model/gate-assignments.model';
 
 describe('Component Tests', () => {
   describe('GateAssignments Management Update Component', () => {
@@ -20,7 +20,6 @@ describe('Component Tests', () => {
         declarations: [GateAssignmentsUpdateComponent],
         providers: [FormBuilder],
       })
-        .overrideTemplate(GateAssignmentsUpdateComponent, '')
         .compileComponents();
 
       fixture = TestBed.createComponent(GateAssignmentsUpdateComponent);
