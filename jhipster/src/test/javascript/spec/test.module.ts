@@ -26,6 +26,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {SfoGateAssignmentProblemSharedModule} from 'app/shared/shared.module';
+import {RouterTestingModule} from '@angular/router/testing';
 
 @NgModule({
 	providers: [
@@ -83,6 +84,7 @@ import {SfoGateAssignmentProblemSharedModule} from 'app/shared/shared.module';
 		FormsModule,
 		ReactiveFormsModule,
 		SfoGateAssignmentProblemSharedModule,
+		RouterTestingModule,
 		TranslateModule.forRoot()
 	],
 	exports: [
@@ -90,6 +92,7 @@ import {SfoGateAssignmentProblemSharedModule} from 'app/shared/shared.module';
 		BrowserModule,
 		FormsModule,
 		ReactiveFormsModule,
+		RouterTestingModule,
 		SfoGateAssignmentProblemSharedModule
 	]
 })

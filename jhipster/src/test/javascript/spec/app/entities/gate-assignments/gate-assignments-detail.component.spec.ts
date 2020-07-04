@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ActivatedRoute} from '@angular/router';
+import {of} from 'rxjs';
 
-import { SfoGateAssignmentProblemTestModule } from '../../../test.module';
-import { GateAssignmentsDetailComponent } from 'app/entities/gate-assignments/gate-assignments-detail.component';
-import { GateAssignments } from 'app/shared/model/gate-assignments.model';
+import {SfoGateAssignmentProblemTestModule} from '../../../test.module';
+import {GateAssignmentsDetailComponent} from 'app/entities/gate-assignments/gate-assignments-detail.component';
+import {GateAssignments} from 'app/shared/model/gate-assignments.model';
 
 describe('Component Tests', () => {
   describe('GateAssignments Management Detail Component', () => {
@@ -18,7 +18,7 @@ describe('Component Tests', () => {
         declarations: [GateAssignmentsDetailComponent],
         providers: [{ provide: ActivatedRoute, useValue: route }],
       })
-        .overrideTemplate(GateAssignmentsDetailComponent, '')
+      // .overrideTemplate(GateAssignmentsDetailComponent, '')
         .compileComponents();
       fixture = TestBed.createComponent(GateAssignmentsDetailComponent);
       comp = fixture.componentInstance;
