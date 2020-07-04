@@ -17,7 +17,7 @@
     "databaseType": "sql",
     "devDatabaseType": "h2Memory",
     "prodDatabaseType": "postgresql",
-    "searchEngine": "elasticsearch",
+    "searchEngine": false,
     "messageBroker": false,
     "serviceDiscoveryType": false,
     "buildTool": "maven",
@@ -31,13 +31,13 @@
     "clientThemeVariant": "",
     "creationTimestamp": 1593627554848,
     "testFrameworks": [],
-    "jhiPrefix": "jhi",
+    "jhiPrefix": "app",
     "entitySuffix": "",
-    "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": true,
     "nativeLanguage": "en",
     "languages": ["en", "zh-cn"],
-    "blueprints": []
+    "blueprints": [],
+    "dtoSuffix": "DTO"
   }
 }

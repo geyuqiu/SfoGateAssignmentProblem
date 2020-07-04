@@ -14,4 +14,3 @@ enum Transaction {
 }
 
 paginate GateAssignments with pagination
-dto * with mapstruct
