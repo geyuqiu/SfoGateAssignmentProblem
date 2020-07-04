@@ -13,13 +13,15 @@
 - add cypress ui test
 - split frontend and backend code
 - clean up jhipster code
+- upload reindexed elasticsearch docker image?
+- upload postgres image with dummy data
 
 # techstack
 
 - JHipster
 - Sprint Boot
 - Angular
-- ElasticSearch
+- (ElasticSearch)
 - Docker
 - Postgres
 
@@ -43,6 +45,10 @@
     # waits about half a minute
     # run the app
     java -jar target/sfo-gate-assignment-problem-0.0.1-SNAPSHOT.jar
+
+# push app to docker hub
+    
+    mvn compile -Pprod -DskipTests com.google.cloud.tools:jib-maven-plugin:2.0.0:build
 
 # commands
 
@@ -246,9 +252,7 @@ If you need to re-run the Sonar phase, please be sure to specify at least the `i
 ./mvnw initialize sonar:sonar
 ```
 
-sonar result:
-
-![](arc42/sonarResult.png)
+sonar result: https://sonarcloud.io/dashboard?id=geyuqiu_SfoGateAssignmentProblem
 
 For more information, refer to the [Code quality page][].
 
