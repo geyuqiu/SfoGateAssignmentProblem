@@ -1,0 +1,14 @@
+{
+  "defaultCommandTimeout": 20000,
+  "env": {
+    "stage": "local",
+    "local": {
+      "baseUrl": "http://localhost:8080"
+    }
+  },
+  "numTestsKeptInMemory": 10,
+  "viewportHeight": 1024,
+  "viewportWidth": 1280,
+  "testFiles": "**/*.e2e.spec.ts",
+  "integrationFolder": "cypress/integration"
+}
