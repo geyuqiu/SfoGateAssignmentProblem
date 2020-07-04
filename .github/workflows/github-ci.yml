@@ -47,9 +47,9 @@ jobs:
         run: ./mvnw -ntp package -Pprod -DskipTests
         working-directory: ${{env.working-directory}}
       - name: Build and publish docker image
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/'))
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/working' || startsWith(github.ref, 'refs/tags/'))
         run: |
          GIT_TAG=:${GITHUB_REF#refs/tags/}
          DOCKER_TAG=${GIT_TAG#:refs/heads/master}
          ./mvnw -ntp jib:build -Djib.to.image=registry.hub.docker.com/yuqiuge/sfo-gate-assignment-problem${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}"
-
+        working-directory: ${{env.working-directory}}
