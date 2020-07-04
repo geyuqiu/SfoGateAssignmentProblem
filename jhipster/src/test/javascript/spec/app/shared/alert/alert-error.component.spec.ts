@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
-import { TranslateModule } from '@ngx-translate/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
+import {TranslateModule} from '@ngx-translate/core';
 
-import { SfoGateAssignmentProblemTestModule } from '../../../test.module';
-import { AlertErrorComponent } from 'app/shared/alert/alert-error.component';
-import { MockAlertService } from '../../../helpers/mock-alert.service';
+import {SfoGateAssignmentProblemTestModule} from '../../../test.module';
+import {AlertErrorComponent} from 'app/shared/alert/alert-error.component';
+import {MockAlertService} from '../../../helpers/mock-alert.service';
 
 describe('Component Tests', () => {
   describe('Alert Error Component', () => {
@@ -16,7 +16,7 @@ describe('Component Tests', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [SfoGateAssignmentProblemTestModule, TranslateModule.forRoot()],
-        declarations: [AlertErrorComponent],
+	      declarations: [],
         providers: [
           JhiEventManager,
           {

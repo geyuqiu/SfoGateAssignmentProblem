@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { JhiAlertService } from 'ng-jhipster';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {JhiAlertService} from 'ng-jhipster';
 
-import { SfoGateAssignmentProblemTestModule } from '../../../test.module';
-import { AlertComponent } from 'app/shared/alert/alert.component';
+import {SfoGateAssignmentProblemTestModule} from '../../../test.module';
+import {AlertComponent} from 'app/shared/alert/alert.component';
 
 describe('Component Tests', () => {
   describe('Alert Component', () => {
@@ -13,7 +13,7 @@ describe('Component Tests', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [SfoGateAssignmentProblemTestModule],
-        declarations: [AlertComponent],
+        declarations: [],
       })
         .overrideTemplate(AlertComponent, '')
         .compileComponents();

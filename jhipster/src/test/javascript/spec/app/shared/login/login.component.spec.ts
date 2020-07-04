@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {FormBuilder} from '@angular/forms';
+import {Router} from '@angular/router';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { LoginService } from 'app/core/login/login.service';
-import { LoginModalComponent } from 'app/shared/login/login.component';
-import { SfoGateAssignmentProblemTestModule } from '../../../test.module';
-import { MockLoginService } from '../../../helpers/mock-login.service';
-import { MockRouter } from '../../../helpers/mock-route.service';
-import { MockActiveModal } from '../../../helpers/mock-active-modal.service';
+import {LoginService} from 'app/core/login/login.service';
+import {LoginModalComponent} from 'app/shared/login/login.component';
+import {SfoGateAssignmentProblemTestModule} from '../../../test.module';
+import {MockLoginService} from '../../../helpers/mock-login.service';
+import {MockRouter} from '../../../helpers/mock-route.service';
+import {MockActiveModal} from '../../../helpers/mock-active-modal.service';
 
 describe('Component Tests', () => {
   describe('LoginComponent', () => {
@@ -21,7 +21,7 @@ describe('Component Tests', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [SfoGateAssignmentProblemTestModule],
-        declarations: [LoginModalComponent],
+        declarations: [],
         providers: [
           FormBuilder,
           {
