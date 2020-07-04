@@ -33,24 +33,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class GateAssignmentsResourceIT {
 
     private static final Instant DEFAULT_TIME = Instant.ofEpochMilli(0L);
+    private static final Instant SECOND_TIME = Instant.ofEpochMilli(1L);
     private static final Instant UPDATED_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_AIRLINE = "AAAAAAAAAA";
+    private static final String SECOND_AIRLINE = "United Airlines";
     private static final String UPDATED_AIRLINE = "BBBBBBBBBB";
 
     private static final String DEFAULT_FLIGHT_NUMBER = "AAAAAAAAAA";
+    private static final String SECOND_FLIGHT_NUMBER = "2";
     private static final String UPDATED_FLIGHT_NUMBER = "BBBBBBBBBB";
 
     private static final Transaction DEFAULT_TRANSACTION = Transaction.DEP;
+    private static final Transaction SECOND_TRANSACTION = Transaction.ARR;
     private static final Transaction UPDATED_TRANSACTION = Transaction.ARR;
 
     private static final String DEFAULT_TERMINAL = "AAAAAAAAAA";
+    private static final String SECOND_TERMINAL = "2";
     private static final String UPDATED_TERMINAL = "BBBBBBBBBB";
 
     private static final String DEFAULT_GATE = "AAAAAAAAAA";
+    private static final String SECOND_GATE = "2";
     private static final String UPDATED_GATE = "BBBBBBBBBB";
 
     private static final String DEFAULT_REMARK = "AAAAAAAAAA";
+    private static final String SECOND_REMARK = "Delayed";
     private static final String UPDATED_REMARK = "BBBBBBBBBB";
 
     @Autowired
@@ -66,6 +73,7 @@ class GateAssignmentsResourceIT {
     private MockMvc restGateAssignmentsMockMvc;
 
     private GateAssignments gateAssignments;
+    private GateAssignments secondGateAssignments;
 
     /**
      * Create an entity for this test.
@@ -73,7 +81,7 @@ class GateAssignmentsResourceIT {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    static GateAssignments createEntity(EntityManager em) {
+    static GateAssignments createEntity() {
         GateAssignments gateAssignments = new GateAssignments()
             .time(DEFAULT_TIME)
             .airline(DEFAULT_AIRLINE)
@@ -84,6 +92,19 @@ class GateAssignmentsResourceIT {
             .remark(DEFAULT_REMARK);
         return gateAssignments;
     }
+
+    static GateAssignments createSecondEntity() {
+        GateAssignments gateAssignments = new GateAssignments()
+          .time(SECOND_TIME)
+          .airline(SECOND_AIRLINE)
+          .flightNumber(SECOND_FLIGHT_NUMBER)
+          .transaction(SECOND_TRANSACTION)
+          .terminal(SECOND_TERMINAL)
+          .gate(SECOND_GATE)
+          .remark(SECOND_REMARK);
+        return gateAssignments;
+    }
+
     /**
      * Create an updated entity for this test.
      *
@@ -104,7 +125,29 @@ class GateAssignmentsResourceIT {
 
     @BeforeEach
     void initTest() {
-        gateAssignments = createEntity(em);
+        gateAssignments = createEntity();
+        secondGateAssignments = createSecondEntity();
+    }
+
+    @Test
+    @Transactional
+    void getAllGateAssignmentsByAirline() throws Exception {
+        // Initialize the database
+        gateAssignmentsRepository.saveAndFlush(gateAssignments);
+        gateAssignmentsRepository.saveAndFlush(secondGateAssignments);
+
+        // Get all the gateAssignmentsList
+        restGateAssignmentsMockMvc.perform(get("/api/gate-assignments/airline/" + SECOND_AIRLINE + "?sort=id,desc"))
+          .andExpect(status().isOk())
+          .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+          .andExpect(jsonPath("$.[*].id").value(hasItem(secondGateAssignments.getId().intValue())))
+          .andExpect(jsonPath("$.[*].time").value(hasItem(secondGateAssignments.getTime().toString())))
+          .andExpect(jsonPath("$.[*].airline").value(hasItem(secondGateAssignments.getAirline())))
+          .andExpect(jsonPath("$.[*].flightNumber").value(hasItem(secondGateAssignments.getFlightNumber())))
+          .andExpect(jsonPath("$.[*].transaction").value(hasItem(secondGateAssignments.getTransaction().name())))
+          .andExpect(jsonPath("$.[*].terminal").value(hasItem(secondGateAssignments.getTerminal())))
+          .andExpect(jsonPath("$.[*].gate").value(hasItem(secondGateAssignments.getGate())))
+          .andExpect(jsonPath("$.[*].remark").value(hasItem(secondGateAssignments.getRemark())));
     }
 
     @Test
@@ -277,7 +320,7 @@ class GateAssignmentsResourceIT {
     @Transactional
     void updateGateAssignments() throws Exception {
         // Initialize the database
-        gateAssignmentsService.save(gateAssignments);
+        gateAssignmentsRepository.save(gateAssignments);
 
         int databaseSizeBeforeUpdate = gateAssignmentsRepository.findAll().size();
 
@@ -332,7 +375,7 @@ class GateAssignmentsResourceIT {
     @Transactional
     void deleteGateAssignments() throws Exception {
         // Initialize the database
-        gateAssignmentsService.save(gateAssignments);
+        gateAssignmentsRepository.save(gateAssignments);
 
         int databaseSizeBeforeDelete = gateAssignmentsRepository.findAll().size();
 
