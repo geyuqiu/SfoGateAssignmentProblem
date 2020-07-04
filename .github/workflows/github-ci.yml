@@ -1,5 +1,5 @@
 name: Application CI
-on: [push]
+on: [push, pull_request]
 jobs:
   pipeline:
     name: SfoGateAssignmentProblem pipeline
@@ -31,6 +31,9 @@ jobs:
         working-directory: ${{env.working-directory}}
       - name: Run frontend test
         run: npm run test
+        working-directory: ${{env.working-directory}}
+      - name: Analyze code with SonarQube
+        run: ./mvnw initialize sonar:sonar
         working-directory: ${{env.working-directory}}
       - name: Package application
         run: ./mvnw -ntp package -Pprod -DskipTests
