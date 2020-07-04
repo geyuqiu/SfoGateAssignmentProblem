@@ -23,7 +23,6 @@ describe('Component Tests', () => {
 				declarations: [MainComponent],
 				providers: [Title],
 			})
-			// .overrideTemplate(MainComponent, '')
 				.compileComponents();
 		}));
 
