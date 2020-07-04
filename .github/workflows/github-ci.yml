@@ -38,8 +38,8 @@ jobs:
 #        working-directory: ${{env.working-directory}}
       - name: Run UI Test
         run: |
-          chmod +x tests-e2e.sh
-          ./tests-e2e.sh
+          chmod +x run-e2e.sh
+          ./run-e2e.sh
         working-directory: ${{env.ui-test-directory}}
 #      - name: Analyze code with SonarQube
 #        env:
