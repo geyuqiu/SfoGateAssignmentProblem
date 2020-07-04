@@ -14,49 +14,6 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-management:
-  endpoints:
-    web:
-      base-path: /management
-      exposure:
-        include: ['configprops', 'env', 'health', 'info', 'jhimetrics', 'logfile', 'loggers', 'prometheus', 'threaddump']
-  endpoint:
-    health:
-      show-details: when_authorized
-      roles: 'ROLE_ADMIN'
-    jhimetrics:
-      enabled: true
-  info:
-    git:
-      mode: full
-  health:
-    mail:
-      enabled: false # When using the MailService, configure an SMTP server and set this to true
-  metrics:
-    export:
-      # Prometheus is the default metrics backend
-      prometheus:
-        enabled: true
-        step: 60
-    enable:
-      http: true
-      jvm: true
-      logback: true
-      process: true
-      system: true
-    distribution:
-      percentiles-histogram:
-        all: true
-      percentiles:
-        all: 0, 0.5, 0.75, 0.95, 0.99, 1.0
-    tags:
-      application: ${spring.application.name}
-    web:
-      server:
-        request:
-          autotime:
-            enabled: true
-
 spring:
   application:
     name: SfoGateAssignmentProblem
@@ -106,8 +63,6 @@ spring:
       thread-name-prefix: sfo-gate-assignment-problem-scheduling-
       pool:
         size: 2
-  thymeleaf:
-    mode: HTML
   output:
     ansi:
       console-available: true
@@ -140,8 +95,6 @@ jhipster:
   #     exposed-headers: "Authorization,Link,X-Total-Count"
   #     allow-credentials: true
   #     max-age: 1800
-  mail:
-    from: SfoGateAssignmentProblem@localhost
   swagger:
     default-include-pattern: /api/.*
     title: SfoGateAssignmentProblem API
