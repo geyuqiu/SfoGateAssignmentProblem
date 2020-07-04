@@ -20,4 +20,9 @@ node_modules/
 ######################
 # cypress
 ######################
-**/*.mp4
+.idea
+.git
+.pidRunApp
+package-lock.json
+cypress/videos
+cypress/screenshots

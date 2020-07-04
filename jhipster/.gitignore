@@ -152,3 +152,4 @@ Desktop.ini
 # other files
 ######################
 .h2.server.properties
+.pidRunApp

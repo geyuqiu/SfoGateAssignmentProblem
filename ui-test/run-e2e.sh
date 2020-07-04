@@ -24,13 +24,12 @@ launchCurlOrCypress() {
     fi
 
     retryCount=0
-    maxRetry=5
+    maxRetry=1
     until [ "$retryCount" -ge "$maxRetry" ]
     do
         result=0
-        if [[ -f "tsconfig.json" ]]; then
-            npm run e2e
-        fi
+        # run ui test
+        npm run e2e
         result=$?
         [ $result -eq 0 ] && break
         retryCount=$((retryCount+1))
@@ -45,16 +44,13 @@ launchCurlOrCypress() {
 #-------------------------------------------------------------------------------
 
 cd ../jhipster
-mvnw -Pdev -DskipTests -Dcheckstyle.skip clean verify
-java \
-    -jar target/*.jar &
+./mvnw &
 echo $! > .pidRunApp
 cd ../ui-test
 sleep 30
 
 launchCurlOrCypress
 resultRunApp=$?
-kill $(cat .pidRunApp)
+kill $(cat ../jhipster/.pidRunApp)
 
-cat .pidRunApp
 exit $((resultRunApp))
