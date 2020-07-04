@@ -1,5 +1,7 @@
 # Road Map
 
+- integrate (dummy) table from primeng
+- integrate (dummy) bar chart from primeng
 - filter in millions of records
 - crud
 - server side filter and download filtered result (from Backend ?)
@@ -13,7 +15,8 @@
 - add cypress ui test
 - split frontend and backend code
 - clean up jhipster code
-- upload postgres image with dummy data
+- test commands in readme
+- show demo via screencast and upload video in youtube
 
 # Tech Stack
 
