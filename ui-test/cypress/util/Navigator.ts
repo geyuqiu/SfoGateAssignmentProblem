@@ -18,7 +18,7 @@ export class Navigator {
       .should('have.value', 'admin');
     cy.get('#cy-login')
       .click();
-    cy.get('#cy-page-heading-show-all-field-errors')
+    cy.get('#cy-page-heading')
       .should('be.visible');
     cy.get('#cy-logout')
       .should('be.visible');
