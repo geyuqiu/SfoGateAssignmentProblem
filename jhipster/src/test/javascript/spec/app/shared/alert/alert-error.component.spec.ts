@@ -1,7 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
-import {TranslateModule} from '@ngx-translate/core';
 
 import {SfoGateAssignmentProblemTestModule} from '../../../test.module';
 import {AlertErrorComponent} from 'app/shared/alert/alert-error.component';
@@ -15,7 +14,7 @@ describe('Component Tests', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [SfoGateAssignmentProblemTestModule, TranslateModule.forRoot()],
+        imports: [SfoGateAssignmentProblemTestModule],
 	      declarations: [],
         providers: [
           JhiEventManager,

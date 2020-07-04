@@ -1,12 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router, RouterEvent, NavigationEnd } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { Subject, of } from 'rxjs';
-import { TranslateModule, TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {NavigationEnd, Router, RouterEvent} from '@angular/router';
+import {Title} from '@angular/platform-browser';
+import {of, Subject} from 'rxjs';
+import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 
-import { MainComponent } from 'app/layouts/main/main.component';
-import { SfoGateAssignmentProblemTestModule } from '../../../test.module';
-import { MockRouter } from '../../../helpers/mock-route.service';
+import {MainComponent} from 'app/layouts/main/main.component';
+import {SfoGateAssignmentProblemTestModule} from '../../../test.module';
+import {MockRouter} from '../../../helpers/mock-route.service';
 
 describe('Component Tests', () => {
   describe('MainComponent', () => {
@@ -19,7 +19,7 @@ describe('Component Tests', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [SfoGateAssignmentProblemTestModule, TranslateModule.forRoot()],
+	      imports: [SfoGateAssignmentProblemTestModule],
         declarations: [MainComponent],
         providers: [Title],
       })
