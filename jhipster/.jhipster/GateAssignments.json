@@ -46,7 +46,7 @@
   "relationships": [],
   "changelogDate": "20200701190438",
   "entityTableName": "gate_assignments",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "pagination",
   "service": "serviceClass",
   "jpaMetamodelFiltering": false,

@@ -6,7 +6,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -18,7 +17,6 @@ import it.economics.kata.domain.enumeration.Transaction;
 @Entity
 @Table(name = "gate_assignments")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "gateassignments")
 public class GateAssignments implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -11,7 +11,7 @@ import { IGateAssignments, GateAssignments } from 'app/shared/model/gate-assignm
 import { GateAssignmentsService } from './gate-assignments.service';
 
 @Component({
-  selector: 'jhi-gate-assignments-update',
+  selector: 'app-gate-assignments-update',
   templateUrl: './gate-assignments-update.component.html',
 })
 export class GateAssignmentsUpdateComponent implements OnInit {

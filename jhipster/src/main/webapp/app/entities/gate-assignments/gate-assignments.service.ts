@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption, SearchWithPagination } from 'app/shared/util/request-util';
+import { createRequestOption } from 'app/shared/util/request-util';
 import { IGateAssignments } from 'app/shared/model/gate-assignments.model';
 
 type EntityResponseType = HttpResponse<IGateAssignments>;
@@ -14,7 +14,6 @@ type EntityArrayResponseType = HttpResponse<IGateAssignments[]>;
 @Injectable({ providedIn: 'root' })
 export class GateAssignmentsService {
   public resourceUrl = SERVER_API_URL + 'api/gate-assignments';
-  public resourceSearchUrl = SERVER_API_URL + 'api/_search/gate-assignments';
 
   constructor(protected http: HttpClient) {}
 
@@ -47,13 +46,6 @@ export class GateAssignmentsService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
-  }
-
-  search(req: SearchWithPagination): Observable<EntityArrayResponseType> {
-    const options = createRequestOption(req);
-    return this.http
-      .get<IGateAssignments[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
-      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   protected convertDateFromClient(gateAssignments: IGateAssignments): IGateAssignments {
