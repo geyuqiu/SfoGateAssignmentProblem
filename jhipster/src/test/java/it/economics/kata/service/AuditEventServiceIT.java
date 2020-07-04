@@ -1,14 +1,15 @@
 package it.economics.kata.service;
 
+import io.github.jhipster.config.JHipsterProperties;
+import it.economics.kata.SfoGateAssignmentProblemApp;
 import it.economics.kata.domain.PersistentAuditEvent;
 import it.economics.kata.repository.PersistenceAuditEventRepository;
-import it.economics.kata.SfoGateAssignmentProblemApp;
-import io.github.jhipster.config.JHipsterProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @SpringBootTest(classes = SfoGateAssignmentProblemApp.class)
 @Transactional
-public class AuditEventServiceIT {
+class AuditEventServiceIT {
     @Autowired
     private AuditEventService auditEventService;
 
@@ -36,7 +37,7 @@ public class AuditEventServiceIT {
     private PersistentAuditEvent auditEventNew;
 
     @BeforeEach
-    public void init() {
+    void init() {
         auditEventOld = new PersistentAuditEvent();
         auditEventOld.setAuditEventDate(Instant.now().minus(jHipsterProperties.getAuditEvents().getRetentionPeriod() + 1, ChronoUnit.DAYS));
         auditEventOld.setPrincipal("test-user-old");
@@ -55,7 +56,7 @@ public class AuditEventServiceIT {
 
     @Test
     @Transactional
-    public void verifyOldAuditEventsAreDeleted() {
+    void verifyOldAuditEventsAreDeleted() {
         persistenceAuditEventRepository.deleteAll();
         persistenceAuditEventRepository.save(auditEventOld);
         persistenceAuditEventRepository.save(auditEventWithinRetention);

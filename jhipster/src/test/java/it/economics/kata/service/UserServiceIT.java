@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
  */
 @SpringBootTest(classes = SfoGateAssignmentProblemApp.class)
 @Transactional
-public class UserServiceIT {
+class UserServiceIT {
 
     private static final String DEFAULT_LOGIN = "johndoe";
 
@@ -57,7 +57,7 @@ public class UserServiceIT {
     private User user;
 
     @BeforeEach
-    public void init() {
+    void init() {
         user = new User();
         user.setLogin(DEFAULT_LOGIN);
         user.setPassword(RandomStringUtils.random(60));
@@ -74,7 +74,7 @@ public class UserServiceIT {
 
     @Test
     @Transactional
-    public void assertThatAnonymousUserIsNotGet() {
+    void assertThatAnonymousUserIsNotGet() {
         user.setLogin(Constants.ANONYMOUS_USER);
         if (!userRepository.findOneByLogin(Constants.ANONYMOUS_USER).isPresent()) {
             userRepository.saveAndFlush(user);

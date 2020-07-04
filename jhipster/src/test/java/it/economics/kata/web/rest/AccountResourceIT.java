@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @WithMockUser(value = TEST_USER_LOGIN)
 @SpringBootTest(classes = SfoGateAssignmentProblemApp.class)
-public class AccountResourceIT {
+class AccountResourceIT {
     static final String TEST_USER_LOGIN = "test";
 
     @Autowired
@@ -28,7 +28,7 @@ public class AccountResourceIT {
 
     @Test
     @WithUnauthenticatedMockUser
-    public void testNonAuthenticatedUser() throws Exception {
+    void testNonAuthenticatedUser() throws Exception {
         restAccountMockMvc.perform(get("/api/authenticate")
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
@@ -36,7 +36,7 @@ public class AccountResourceIT {
     }
 
     @Test
-    public void testAuthenticatedUser() throws Exception {
+    void testAuthenticatedUser() throws Exception {
         restAccountMockMvc.perform(get("/api/authenticate")
             .with(request -> {
                 request.setRemoteUser(TEST_USER_LOGIN);
@@ -48,7 +48,7 @@ public class AccountResourceIT {
     }
 
     @Test
-    public void testGetUnknownAccount() throws Exception {
+    void testGetUnknownAccount() throws Exception {
         restAccountMockMvc.perform(get("/api/account")
             .accept(MediaType.APPLICATION_PROBLEM_JSON))
             .andExpect(status().isInternalServerError());

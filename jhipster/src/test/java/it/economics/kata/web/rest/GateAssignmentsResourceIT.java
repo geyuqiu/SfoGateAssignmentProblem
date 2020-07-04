@@ -2,9 +2,9 @@ package it.economics.kata.web.rest;
 
 import it.economics.kata.SfoGateAssignmentProblemApp;
 import it.economics.kata.domain.GateAssignments;
+import it.economics.kata.domain.enumeration.Transaction;
 import it.economics.kata.repository.GateAssignmentsRepository;
 import it.economics.kata.service.GateAssignmentsService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -23,15 +24,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import it.economics.kata.domain.enumeration.Transaction;
 /**
  * Integration tests for the {@link GateAssignmentsResource} REST controller.
  */
 @SpringBootTest(classes = SfoGateAssignmentProblemApp.class)
 @AutoConfigureMockMvc
 @WithMockUser
-public class GateAssignmentsResourceIT {
+class GateAssignmentsResourceIT {
 
     private static final Instant DEFAULT_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -74,7 +73,7 @@ public class GateAssignmentsResourceIT {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static GateAssignments createEntity(EntityManager em) {
+    static GateAssignments createEntity(EntityManager em) {
         GateAssignments gateAssignments = new GateAssignments()
             .time(DEFAULT_TIME)
             .airline(DEFAULT_AIRLINE)
@@ -91,7 +90,7 @@ public class GateAssignmentsResourceIT {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static GateAssignments createUpdatedEntity(EntityManager em) {
+    static GateAssignments createUpdatedEntity(EntityManager em) {
         GateAssignments gateAssignments = new GateAssignments()
             .time(UPDATED_TIME)
             .airline(UPDATED_AIRLINE)
@@ -104,13 +103,13 @@ public class GateAssignmentsResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         gateAssignments = createEntity(em);
     }
 
     @Test
     @Transactional
-    public void createGateAssignments() throws Exception {
+    void createGateAssignments() throws Exception {
         int databaseSizeBeforeCreate = gateAssignmentsRepository.findAll().size();
         // Create the GateAssignments
         restGateAssignmentsMockMvc.perform(post("/api/gate-assignments")
@@ -133,7 +132,7 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void createGateAssignmentsWithExistingId() throws Exception {
+    void createGateAssignmentsWithExistingId() throws Exception {
         int databaseSizeBeforeCreate = gateAssignmentsRepository.findAll().size();
 
         // Create the GateAssignments with an existing ID
@@ -153,7 +152,7 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void checkTimeIsRequired() throws Exception {
+    void checkTimeIsRequired() throws Exception {
         int databaseSizeBeforeTest = gateAssignmentsRepository.findAll().size();
         // set the field null
         gateAssignments.setTime(null);
@@ -172,7 +171,7 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void checkAirlineIsRequired() throws Exception {
+    void checkAirlineIsRequired() throws Exception {
         int databaseSizeBeforeTest = gateAssignmentsRepository.findAll().size();
         // set the field null
         gateAssignments.setAirline(null);
@@ -191,7 +190,7 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void checkFlightNumberIsRequired() throws Exception {
+    void checkFlightNumberIsRequired() throws Exception {
         int databaseSizeBeforeTest = gateAssignmentsRepository.findAll().size();
         // set the field null
         gateAssignments.setFlightNumber(null);
@@ -210,7 +209,7 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void checkTransactionIsRequired() throws Exception {
+    void checkTransactionIsRequired() throws Exception {
         int databaseSizeBeforeTest = gateAssignmentsRepository.findAll().size();
         // set the field null
         gateAssignments.setTransaction(null);
@@ -229,7 +228,7 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void getAllGateAssignments() throws Exception {
+    void getAllGateAssignments() throws Exception {
         // Initialize the database
         gateAssignmentsRepository.saveAndFlush(gateAssignments);
 
@@ -246,10 +245,10 @@ public class GateAssignmentsResourceIT {
             .andExpect(jsonPath("$.[*].gate").value(hasItem(DEFAULT_GATE)))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)));
     }
-    
+
     @Test
     @Transactional
-    public void getGateAssignments() throws Exception {
+    void getGateAssignments() throws Exception {
         // Initialize the database
         gateAssignmentsRepository.saveAndFlush(gateAssignments);
 
@@ -268,7 +267,7 @@ public class GateAssignmentsResourceIT {
     }
     @Test
     @Transactional
-    public void getNonExistingGateAssignments() throws Exception {
+    void getNonExistingGateAssignments() throws Exception {
         // Get the gateAssignments
         restGateAssignmentsMockMvc.perform(get("/api/gate-assignments/{id}", Long.MAX_VALUE))
             .andExpect(status().isNotFound());
@@ -276,7 +275,7 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void updateGateAssignments() throws Exception {
+    void updateGateAssignments() throws Exception {
         // Initialize the database
         gateAssignmentsService.save(gateAssignments);
 
@@ -315,7 +314,7 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void updateNonExistingGateAssignments() throws Exception {
+    void updateNonExistingGateAssignments() throws Exception {
         int databaseSizeBeforeUpdate = gateAssignmentsRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
@@ -331,7 +330,7 @@ public class GateAssignmentsResourceIT {
 
     @Test
     @Transactional
-    public void deleteGateAssignments() throws Exception {
+    void deleteGateAssignments() throws Exception {
         // Initialize the database
         gateAssignmentsService.save(gateAssignments);
 
