@@ -113,6 +113,6 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   }
 
   protected onError(): void {
-    this.ngbPaginationPage = this.page ?? 1;
+    this.ngbPaginationPage = this.page ?? 1; // https://medium.com/@rd1982rd/double-question-marks-over-typescript-3-7-nullish-coalescing-40cbe0404c45
   }
 }
