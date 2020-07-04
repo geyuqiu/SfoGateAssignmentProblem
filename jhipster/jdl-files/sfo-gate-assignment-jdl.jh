@@ -14,3 +14,4 @@ enum Transaction {
 }
 
 paginate GateAssignments with pagination
+service GateAssignments with serviceClass
