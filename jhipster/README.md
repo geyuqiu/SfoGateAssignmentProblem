@@ -1,23 +1,5 @@
-# Road Map
-
-- integrate (dummy) table from primeng
-- integrate (dummy) bar chart from primeng
-- filter in millions of records
-- crud
-- server side filter and download filtered result (from Backend ?)
-- server side sort by each column
-- partial text search by each column
-- live bar chart (chartJS ?)
-  - X: Terminal
-  - Y: #ARR + #DEP flights
-- unclear: As time progresses (in year), bases on arrival and departures keep on adding and removing number of flights in the terminals and also keep on ranking terminals based on descending order flights present there.
-- mobile responsiveness
-- add cypress ui test
-- get rid of .overrideTemplate
-- split frontend and backend code
-- clean up jhipster code
-- test commands in readme
-- show demo via screencast and upload video in youtube
+# current status of the project
+- https://github.com/geyuqiu/SfoGateAssignmentProblem/issues
 
 # Tech Stack
 
