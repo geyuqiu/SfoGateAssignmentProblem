@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SfoGateAssignmentProblemTestModule } from '../../test.module';
-import { HomeComponent } from 'app/home/home.component';
-import { AccountService } from 'app/core/auth/account.service';
-import { LoginModalService } from 'app/core/login/login-modal.service';
+import {SfoGateAssignmentProblemTestModule} from '../../test.module';
+import {HomeComponent} from 'app/home/home.component';
+import {AccountService} from 'app/core/auth/account.service';
+import {LoginModalService} from 'app/core/login/login-modal.service';
 
 describe('Component Tests', () => {
   describe('Home Component', () => {
@@ -17,7 +17,6 @@ describe('Component Tests', () => {
         imports: [SfoGateAssignmentProblemTestModule],
         declarations: [HomeComponent],
       })
-        .overrideTemplate(HomeComponent, '')
         .compileComponents();
     }));
 

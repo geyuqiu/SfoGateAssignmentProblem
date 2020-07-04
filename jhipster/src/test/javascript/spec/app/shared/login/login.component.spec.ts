@@ -30,7 +30,6 @@ describe('Component Tests', () => {
           },
         ],
       })
-        .overrideTemplate(LoginModalComponent, '')
         .compileComponents();
     }));
 

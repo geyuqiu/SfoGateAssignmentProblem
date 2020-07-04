@@ -1,12 +1,11 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpErrorResponse } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { JhiDateUtils } from 'ng-jhipster';
+import {TestBed} from '@angular/core/testing';
+import {HttpErrorResponse} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserService } from 'app/core/user/user.service';
-import { User } from 'app/core/user/user.model';
-import { SERVER_API_URL } from 'app/app.constants';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserService} from 'app/core/user/user.service';
+import {User} from 'app/core/user/user.model';
+import {SERVER_API_URL} from 'app/app.constants';
 
 describe('Service Tests', () => {
   describe('User Service', () => {
@@ -15,8 +14,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        providers: [JhiDateUtils],
+	      imports: [HttpClientTestingModule]
       });
 
       service = TestBed.get(UserService);

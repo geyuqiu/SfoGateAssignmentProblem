@@ -24,7 +24,6 @@ describe('Component Tests', () => {
           },
         ],
       })
-        .overrideTemplate(AlertErrorComponent, '')
         .compileComponents();
     }));
 
