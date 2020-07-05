@@ -142,7 +142,8 @@ class GateAssignmentsResourceIT {
             Arguments.of("flight-number/", SECOND_FLIGHT_NUMBER),
             Arguments.of("terminal/", SECOND_TERMINAL),
             Arguments.of("gate/", SECOND_GATE),
-            Arguments.of("remark/", SECOND_REMARK)
+            Arguments.of("remark/", SECOND_REMARK),
+            Arguments.of("transaction/", SECOND_TRANSACTION.name())
         );
     }
 

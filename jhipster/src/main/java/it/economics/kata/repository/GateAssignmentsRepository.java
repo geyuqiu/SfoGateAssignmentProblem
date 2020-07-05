@@ -1,6 +1,7 @@
 package it.economics.kata.repository;
 
 import it.economics.kata.domain.GateAssignments;
+import it.economics.kata.domain.enumeration.Transaction;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,6 +23,6 @@ public interface GateAssignmentsRepository extends JpaRepository<GateAssignments
 
     Page<GateAssignments> findByRemark(String remark, Pageable pageable);
 
-//    Page<GateAssignments> findByTransaction(String transaction, Pageable pageable);
+    Page<GateAssignments> findByTransaction(Transaction transaction, Pageable pageable);
 //    Page<GateAssignments> findByTime(Instant time, Pageable pageable);
 }

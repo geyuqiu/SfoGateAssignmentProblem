@@ -10,18 +10,15 @@ import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 
-import java.io.IOException;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import java.io.IOException;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 
 /**
  * Utility class for testing REST controllers.
@@ -104,25 +101,6 @@ public final class TestUtil {
      */
     public static ZonedDateTimeMatcher sameInstant(ZonedDateTime date) {
         return new ZonedDateTimeMatcher(date);
-    }
-
-    /**
-     * Verifies the equals/hashcode contract on the domain object.
-     */
-    public static <T> void equalsVerifier(Class<T> clazz) throws Exception {
-        T domainObject1 = clazz.getConstructor().newInstance();
-        assertThat(domainObject1.toString()).isNotNull();
-        assertThat(domainObject1).isEqualTo(domainObject1);
-        assertThat(domainObject1.hashCode()).isEqualTo(domainObject1.hashCode());
-        // Test with an instance of another class
-        Object testOtherObject = new Object();
-        assertThat(domainObject1).isNotEqualTo(testOtherObject);
-        assertThat(domainObject1).isNotEqualTo(null);
-        // Test with an instance of the same class
-        T domainObject2 = clazz.getConstructor().newInstance();
-        assertThat(domainObject1).isNotEqualTo(domainObject2);
-        // HashCodes are equals because the objects are not persisted yet
-        assertThat(domainObject1.hashCode()).isEqualTo(domainObject2.hashCode());
     }
 
     /**

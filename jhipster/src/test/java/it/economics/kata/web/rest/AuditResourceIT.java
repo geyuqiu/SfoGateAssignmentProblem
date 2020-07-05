@@ -117,7 +117,6 @@ class AuditResourceIT {
 
     @Test
     void testPersistentAuditEventEquals() throws Exception {
-        TestUtil.equalsVerifier(PersistentAuditEvent.class);
         PersistentAuditEvent auditEvent1 = new PersistentAuditEvent();
         auditEvent1.setId(1L);
         PersistentAuditEvent auditEvent2 = new PersistentAuditEvent();

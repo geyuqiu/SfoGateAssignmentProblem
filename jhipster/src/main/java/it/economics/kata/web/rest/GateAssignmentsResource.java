@@ -4,6 +4,7 @@ import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import it.economics.kata.domain.GateAssignments;
+import it.economics.kata.domain.enumeration.Transaction;
 import it.economics.kata.repository.GateAssignmentsRepository;
 import it.economics.kata.service.GateAssignmentsService;
 import it.economics.kata.web.rest.errors.BadRequestAlertException;
@@ -44,6 +45,14 @@ public class GateAssignmentsResource {
     public GateAssignmentsResource(GateAssignmentsService gateAssignmentsService, GateAssignmentsRepository gateAssignmentsRepository) {
         this.gateAssignmentsService = gateAssignmentsService;
         this.gateAssignmentsRepository = gateAssignmentsRepository;
+    }
+
+    @GetMapping("/gate-assignments/transaction/{transaction}")
+    public ResponseEntity<List<GateAssignments>> getGateAssignmentsByTransaction(@PathVariable Transaction transaction, Pageable pageable) {
+        log.debug("REST request to get a page of GateAssignments transaction: {}", transaction);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByTransaction(transaction, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     @GetMapping("/gate-assignments/remark/{remark}")
