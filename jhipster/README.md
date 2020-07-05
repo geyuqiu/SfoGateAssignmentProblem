@@ -1,5 +1,8 @@
 # current status of the project
-- https://github.com/geyuqiu/SfoGateAssignmentProblem/issues
+
+![](./arc42/issues.png)
+
+- more please watch: https://github.com/geyuqiu/SfoGateAssignmentProblem/issues
 
 # Tech Stack
 

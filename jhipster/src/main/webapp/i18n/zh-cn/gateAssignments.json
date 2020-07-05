@@ -2,28 +2,28 @@
   "sfoGateAssignmentProblemApp": {
     "gateAssignments": {
       "home": {
-        "title": "Gate Assignments",
-        "createLabel": "创建新 Gate Assignments",
-        "createOrEditLabel": "创建或编辑 Gate Assignments",
-        "search": "查找 Gate Assignments",
-        "notFound": "No Gate Assignments found"
+        "title": "登机口安排",
+        "createLabel": "创建",
+        "createOrEditLabel": "创建或编辑",
+        "search": "查找 登机口安排",
+        "notFound": "No 登机口安排 found"
       },
-      "created": "Gate Assignments {{ param }} 创建成功",
-      "updated": "Gate Assignments {{ param }} 更新成功",
-      "deleted": "Gate Assignments {{ param }} 删除成功",
+      "created": "登机口安排 {{ param }} 创建成功",
+      "updated": "登机口安排 {{ param }} 更新成功",
+      "deleted": "登机口安排 {{ param }} 删除成功",
       "delete": {
-        "question": "你确定要删除 Gate Assignments {{ id }} 吗？"
+        "question": "你确定要删除 登机口安排 {{ id }} 吗？"
       },
       "detail": {
-        "title": "Gate Assignments"
+        "title": "登机口安排"
       },
-      "time": "Time",
-      "airline": "Airline",
-      "flightNumber": "Flight Number",
-      "transaction": "Transaction",
-      "terminal": "Terminal",
-      "gate": "Gate",
-      "remark": "Remark"
+      "time": "时间",
+      "airline": "航班",
+      "flightNumber": "航班号",
+      "transaction": "起飞或降临",
+      "terminal": "候机楼",
+      "gate": "登机口",
+      "remark": "注释"
     }
   }
 }

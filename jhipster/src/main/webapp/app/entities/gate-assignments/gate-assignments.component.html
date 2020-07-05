@@ -22,7 +22,6 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="time"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.time">Time</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="airline"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.airline">Airline</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="flightNumber"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.flightNumber">Flight Number</span> <fa-icon icon="sort"></fa-icon></th>
@@ -35,8 +34,9 @@
             </thead>
             <tbody>
                 <tr *ngFor="let gateAssignments of gateAssignments ;trackBy: trackId">
-                    <td><a [routerLink]="['/gate-assignments', gateAssignments.id, 'view']">{{ gateAssignments.id }}</a></td>
-                    <td>{{ gateAssignments.time | date:'medium' }}</td>
+                    <td>
+                        <a [routerLink]="['/gate-assignments', gateAssignments.id, 'view']">{{ gateAssignments.time | date:'medium' }}</a>
+                    </td>
                     <td>{{ gateAssignments.airline }}</td>
                     <td>{{ gateAssignments.flightNumber }}</td>
                     <td jhiTranslate="{{ 'sfoGateAssignmentProblemApp.Transaction.' + gateAssignments.transaction }}">{{ gateAssignments.transaction }}</td>

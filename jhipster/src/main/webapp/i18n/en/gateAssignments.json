@@ -3,8 +3,8 @@
     "gateAssignments": {
       "home": {
         "title": "Gate Assignments",
-        "createLabel": "Create a new Gate Assignments",
-        "createOrEditLabel": "Create or edit a Gate Assignments",
+        "createLabel": "Create",
+        "createOrEditLabel": "Create/edit",
         "search": "Search for Gate Assignments",
         "notFound": "No Gate Assignments found"
       },
@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Gate Assignments {{ id }}?"
       },
       "detail": {
-        "title": "Gate Assignments"
+        "title": "Gate Assignment"
       },
       "time": "Time",
       "airline": "Airline",
