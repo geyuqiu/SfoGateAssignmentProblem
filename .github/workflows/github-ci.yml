@@ -39,7 +39,6 @@ jobs:
         with:
           record: true
           start: |
-            pwd
             ls -la
             chmod +x run-e2e.sh
             ./run-e2e.sh
