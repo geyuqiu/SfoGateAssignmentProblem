@@ -9,7 +9,9 @@
     <div class="modal-body">
         <app-alert-error></app-alert-error>
 
-        <p id="app-delete-gateAssignments-heading" jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.delete.question" [translateValues]="{ id: gateAssignments.id }">Are you sure you want to delete this Gate Assignments?</p>
+        <p id="app-delete-gateAssignments-heading"
+           jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.delete.question"
+           [translateValues]="{ time: gateAssignments.time }">Are you sure you want to delete this Gate Assignments?</p>
     </div>
 
     <div class="modal-footer">
