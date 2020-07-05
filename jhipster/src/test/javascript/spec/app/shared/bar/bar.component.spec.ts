@@ -12,7 +12,6 @@ describe('BarComponent', () => {
       imports: [SfoGateAssignmentProblemTestModule],
       declarations: []
     })
-      .overrideTemplate(BarComponent, '')
       .compileComponents();
   }));
 

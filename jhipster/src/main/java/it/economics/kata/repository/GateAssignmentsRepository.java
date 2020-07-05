@@ -5,7 +5,11 @@ import it.economics.kata.domain.enumeration.Transaction;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
 
 /**
  * Spring Data  repository for the GateAssignments entity.
@@ -25,4 +29,13 @@ public interface GateAssignmentsRepository extends JpaRepository<GateAssignments
 
     Page<GateAssignments> findByTransaction(Transaction transaction, Pageable pageable);
 //    Page<GateAssignments> findByTime(Instant time, Pageable pageable);
+
+    @Query(value =
+        "SELECT (SELECT count(*) FROM gate_assignments g WHERE g.terminal = :terminal AND g.time >= :firstDayOfThisYear AND g.time < :firstDayOfNextYear AND g.transaction = 'DEP') - (SELECT count(*) FROM gate_assignments g WHERE g.terminal = :terminal AND g.time >= :firstDayOfThisYear AND g.time < :firstDayOfNextYear AND g.transaction = 'ARR') depArrDiff",
+        nativeQuery = true
+    )
+    long getDepArrDiff(@Param("terminal") String terminal,
+                       @Param("firstDayOfThisYear") LocalDate firstDayOfThisYear,
+                       @Param("firstDayOfNextYear") LocalDate firstDayOfNextYear
+    );
 }
