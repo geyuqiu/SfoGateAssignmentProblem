@@ -36,7 +36,7 @@ jobs:
 #        working-directory: ${{env.working-directory}}
       - name: start backend
         run: |
-          ./mvnw &
+          ./mvnw -ntp &
           echo $! > .pidRunApp
         working-directory: ${{env.working-directory}}
       - name: Cypress run
@@ -44,8 +44,8 @@ jobs:
         with:
           record: true
           wait-on: http://localhost:8080
-          # wait for 2 minutes for the server to respond
-          wait-on-timeout: 120
+          # wait for x minutes for the server to respond
+          wait-on-timeout: 600
           working-directory: ${{env.ui-test-directory}}
         env:
           # pass the Dashboard record key as an environment variable
