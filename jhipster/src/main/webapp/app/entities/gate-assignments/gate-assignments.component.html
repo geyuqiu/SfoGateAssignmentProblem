@@ -1,8 +1,8 @@
 <div>
     <h2 id="cy-page-heading">
-        <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.title">Gate Assignments</span>
+        <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.title" id="cy-title">Gate Assignments</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-gate-assignments" [routerLink]="['/gate-assignments/new']">
+        <button id="cy-create" class="btn btn-primary float-right jh-create-entity create-gate-assignments" [routerLink]="['/gate-assignments/new']">
             <fa-icon icon="plus"></fa-icon>
         </button>
     </h2>
@@ -19,13 +19,13 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  jhiSortBy="time"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.time">Time</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="airline"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.airline">Airline</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="flightNumber"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.flightNumber">Flight Number</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="transaction"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.transaction">Transaction</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="terminal"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.terminal">Terminal</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="gate"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.gate">Gate</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="remark"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.remark">Remark</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="time"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.time">Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="airline"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.airline">Airline</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="flightNumber"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.flightNumber">Flight Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="transaction"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.transaction">Transaction</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="terminal"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.terminal">Terminal</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="gate"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.gate">Gate</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="remark"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.remark">Remark</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>

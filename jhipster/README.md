@@ -11,6 +11,8 @@
 - Angular
 - Docker
 - Postgres
+- Github actions
+- Sonar
 
 # Run the application locally (tested on MacOS Catalina MacBook 2016 15')
 
