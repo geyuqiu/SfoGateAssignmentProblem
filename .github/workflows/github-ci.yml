@@ -25,28 +25,34 @@ jobs:
       - name: Install node.js packages
         run: npm install
         working-directory: ${{env.working-directory}}
-      - name: Install node.js packages for ui test
-        run: npm install
-        working-directory: ${{env.ui-test-directory}}
 
-      - name: Run backend test
-        run: |
-          chmod +x mvnw
-          ./mvnw -ntp clean verify -P-webpack
-        working-directory: ${{env.working-directory}}
-      - name: Run frontend test
-        run: npm run test
-        working-directory: ${{env.working-directory}}
-      - name: Run UI Test
-        run: |
-          chmod +x run-e2e.sh
-          ./run-e2e.sh
+#      - name: Run backend test
+#        run: |
+#          chmod +x mvnw
+#          ./mvnw -ntp clean verify -P-webpack
+#        working-directory: ${{env.working-directory}}
+#      - name: Run frontend test
+#        run: npm run test
+#        working-directory: ${{env.working-directory}}
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          start: chmod +x run-e2e.sh && ./run-e2e.sh
+          wait-on: http://localhost:8080
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: ${{env.ui-test-directory}}
       - name: Analyze code with SonarQube
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
+          ls -la
+          kill $(cat .pidRunApp)
           if [ -n $SONAR_TOKEN ]; then
               ./mvnw -ntp initialize sonar:sonar
           else
@@ -54,13 +60,13 @@ jobs:
           fi
         working-directory: ${{env.working-directory}}
 
-      - name: Package application
-        run: ./mvnw -ntp package -Pprod -DskipTests
-        working-directory: ${{env.working-directory}}
-      - name: Build and publish docker image
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/working' || startsWith(github.ref, 'refs/tags/'))
-        run: |
-          GIT_TAG=:${GITHUB_REF#refs/tags/}
-          DOCKER_TAG=${GIT_TAG#:refs/heads/working}
-          ./mvnw -ntp jib:build -Djib.to.image=registry.hub.docker.com/yuqiuge/sfo-gate-assignment-problem${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}"
-        working-directory: ${{env.working-directory}}
+#      - name: Package application
+#        run: ./mvnw -ntp package -Pprod -DskipTests
+#        working-directory: ${{env.working-directory}}
+#      - name: Build and publish docker image
+#        if: github.event_name == 'push' && (github.ref == 'refs/heads/working' || startsWith(github.ref, 'refs/tags/'))
+#        run: |
+#          GIT_TAG=:${GITHUB_REF#refs/tags/}
+#          DOCKER_TAG=${GIT_TAG#:refs/heads/working}
+#          ./mvnw -ntp jib:build -Djib.to.image=registry.hub.docker.com/yuqiuge/sfo-gate-assignment-problem${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}"
+#        working-directory: ${{env.working-directory}}

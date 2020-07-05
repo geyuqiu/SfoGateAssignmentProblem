@@ -10,5 +10,6 @@
   "viewportHeight": 1024,
   "viewportWidth": 1280,
   "testFiles": "**/*.e2e.spec.ts",
-  "integrationFolder": "cypress/integration"
+  "integrationFolder": "cypress/integration",
+  "projectId": "kzyhqj"
 }
