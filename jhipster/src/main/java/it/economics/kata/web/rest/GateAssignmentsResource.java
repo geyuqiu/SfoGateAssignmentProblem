@@ -7,6 +7,7 @@ import it.economics.kata.domain.GateAssignments;
 import it.economics.kata.domain.enumeration.Transaction;
 import it.economics.kata.repository.GateAssignmentsRepository;
 import it.economics.kata.service.GateAssignmentsService;
+import it.economics.kata.service.dto.BarDto;
 import it.economics.kata.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -161,6 +162,14 @@ public class GateAssignmentsResource {
         Optional<GateAssignments> gateAssignments = gateAssignmentsRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(gateAssignments);
     }
+
+    @GetMapping("/gate-assignments/bar")
+    public ResponseEntity<BarDto> getGateAssignmentsBar() {
+        log.debug("REST request to get Bar");
+        BarDto barDto = gateAssignmentsService.calcBar();
+        return ResponseEntity.ok().body(barDto);
+    }
+
 
     /**
      * {@code DELETE  /gate-assignments/:id} : delete the "id" gateAssignments.

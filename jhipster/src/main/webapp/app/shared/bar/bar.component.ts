@@ -22,7 +22,7 @@ export class BarComponent {
 
 	constructor() {
 		this.data = {
-			labels: ['1', '2', '3', '4', '5', '6', '7'],
+			labels: ['1', '2', '3', 'I'], // static
 			datasets: [
 				{
 					label: '#DEP - #ARR',
