@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GateAssignmentsTest {
+class GateAssignmentsTest {
 
     @Test
-    public void equalsVerifier() throws Exception {
+    void equalsVerifier() throws Exception {
         GateAssignments gateAssignments1 = new GateAssignments();
         gateAssignments1.setId(1L);
         GateAssignments gateAssignments2 = new GateAssignments();

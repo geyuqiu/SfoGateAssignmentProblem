@@ -76,7 +76,7 @@ class CustomAuditEventRepositoryIT {
         assertThat(persistentAuditEvent.getPrincipal()).isEqualTo(event.getPrincipal());
         assertThat(persistentAuditEvent.getAuditEventType()).isEqualTo(event.getType());
         assertThat(persistentAuditEvent.getData()).containsKey("test-key");
-        assertThat(persistentAuditEvent.getData().get("test-key")).isEqualTo("test-value");
+        assertThat(persistentAuditEvent.getData()).containsEntry("test-key", "test-value");
         assertThat(persistentAuditEvent.getAuditEventDate().truncatedTo(ChronoUnit.MILLIS))
             .isEqualTo(event.getTimestamp().truncatedTo(ChronoUnit.MILLIS));
     }
@@ -118,8 +118,8 @@ class CustomAuditEventRepositoryIT {
         List<PersistentAuditEvent> persistentAuditEvents = persistenceAuditEventRepository.findAll();
         assertThat(persistentAuditEvents).hasSize(1);
         PersistentAuditEvent persistentAuditEvent = persistentAuditEvents.get(0);
-        assertThat(persistentAuditEvent.getData().get("remoteAddress")).isEqualTo("1.2.3.4");
-        assertThat(persistentAuditEvent.getData().get("sessionId")).isEqualTo("test-session-id");
+        assertThat(persistentAuditEvent.getData()).containsEntry("remoteAddress", "1.2.3.4");
+        assertThat(persistentAuditEvent.getData()).containsEntry("sessionId", "test-session-id");
     }
 
     @Test
@@ -131,7 +131,7 @@ class CustomAuditEventRepositoryIT {
         List<PersistentAuditEvent> persistentAuditEvents = persistenceAuditEventRepository.findAll();
         assertThat(persistentAuditEvents).hasSize(1);
         PersistentAuditEvent persistentAuditEvent = persistentAuditEvents.get(0);
-        assertThat(persistentAuditEvent.getData().get("test-key")).isEqualTo("null");
+        assertThat(persistentAuditEvent.getData()).containsEntry("test-key", "null");
     }
 
     @Test
@@ -141,7 +141,7 @@ class CustomAuditEventRepositoryIT {
         AuditEvent event = new AuditEvent(Constants.ANONYMOUS_USER, "test-type", data);
         customAuditEventRepository.add(event);
         List<PersistentAuditEvent> persistentAuditEvents = persistenceAuditEventRepository.findAll();
-        assertThat(persistentAuditEvents).hasSize(0);
+        assertThat(persistentAuditEvents).isEmpty();
     }
 
     @Test
@@ -151,7 +151,7 @@ class CustomAuditEventRepositoryIT {
         AuditEvent event = new AuditEvent("test-user", "AUTHORIZATION_FAILURE", data);
         customAuditEventRepository.add(event);
         List<PersistentAuditEvent> persistentAuditEvents = persistenceAuditEventRepository.findAll();
-        assertThat(persistentAuditEvents).hasSize(0);
+        assertThat(persistentAuditEvents).isEmpty();
     }
 
 }

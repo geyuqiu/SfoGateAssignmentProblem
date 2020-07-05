@@ -1,6 +1,5 @@
 package it.economics.kata.web.rest;
 
-import it.economics.kata.repository.UserRepository;
 import it.economics.kata.service.UserService;
 import it.economics.kata.service.dto.UserDTO;
 import org.slf4j.Logger;
@@ -28,7 +27,7 @@ public class AccountResource {
 
     private final UserService userService;
 
-  public AccountResource(UserRepository userRepository, UserService userService) {
+    public AccountResource(UserService userService) {
         this.userService = userService;
     }
 

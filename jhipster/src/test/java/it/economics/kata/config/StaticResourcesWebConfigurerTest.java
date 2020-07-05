@@ -12,13 +12,14 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 
 import java.util.concurrent.TimeUnit;
 
-import static it.economics.kata.config.StaticResourcesWebConfiguration.*;
+import static it.economics.kata.config.StaticResourcesWebConfiguration.RESOURCE_LOCATIONS;
+import static it.economics.kata.config.StaticResourcesWebConfiguration.RESOURCE_PATHS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-public class StaticResourcesWebConfigurerTest {
-    public static final int MAX_AGE_TEST = 5;
-    public StaticResourcesWebConfiguration staticResourcesWebConfiguration;
+class StaticResourcesWebConfigurerTest {
+    static final int MAX_AGE_TEST = 5;
+    StaticResourcesWebConfiguration staticResourcesWebConfiguration;
     private ResourceHandlerRegistry resourceHandlerRegistry;
     private MockServletContext servletContext;
     private WebApplicationContext applicationContext;
@@ -34,7 +35,7 @@ public class StaticResourcesWebConfigurerTest {
     }
 
     @Test
-    public void shouldAppendResourceHandlerAndInitiliazeIt() {
+    void shouldAppendResourceHandlerAndInitiliazeIt() {
 
         staticResourcesWebConfiguration.addResourceHandlers(resourceHandlerRegistry);
 
@@ -48,7 +49,7 @@ public class StaticResourcesWebConfigurerTest {
     }
 
     @Test
-    public void shouldInitializeResourceHandlerWithCacheControlAndLocations() {
+    void shouldInitializeResourceHandlerWithCacheControlAndLocations() {
         CacheControl ccExpected = CacheControl.maxAge(5, TimeUnit.DAYS).cachePublic();
         when(staticResourcesWebConfiguration.getCacheControl()).thenReturn(ccExpected);
         ResourceHandlerRegistration resourceHandlerRegistration = spy(new ResourceHandlerRegistration(RESOURCE_PATHS));
@@ -62,7 +63,7 @@ public class StaticResourcesWebConfigurerTest {
 
 
     @Test
-    public void shoudCreateCacheControlBasedOnJhipsterDefaultProperties() {
+    void shoudCreateCacheControlBasedOnJhipsterDefaultProperties() {
         CacheControl cacheExpected = CacheControl.maxAge(JHipsterDefaults.Http.Cache.timeToLiveInDays, TimeUnit.DAYS).cachePublic();
         assertThat(staticResourcesWebConfiguration.getCacheControl())
             .extracting(CacheControl::getHeaderValue)
@@ -70,7 +71,7 @@ public class StaticResourcesWebConfigurerTest {
     }
 
     @Test
-    public void shoudCreateCacheControlWithSpecificConfigurationInProperties() {
+    void shoudCreateCacheControlWithSpecificConfigurationInProperties() {
         props.getHttp().getCache().setTimeToLiveInDays(MAX_AGE_TEST);
         CacheControl cacheExpected = CacheControl.maxAge(MAX_AGE_TEST, TimeUnit.DAYS).cachePublic();
         assertThat(staticResourcesWebConfiguration.getCacheControl())

@@ -172,7 +172,14 @@ public class GateAssignmentsResource {
     public ResponseEntity<Void> deleteGateAssignments(@PathVariable Long id) {
         log.debug("REST request to delete GateAssignments : {}", id);
         Optional<GateAssignments> gateAssignments = gateAssignmentsRepository.findById(id);
-        gateAssignmentsRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, gateAssignments.get().getTime().toString())).build();
+        if (gateAssignments.isPresent() && gateAssignments.get().getTime() != null) {
+            gateAssignmentsRepository.deleteById(id);
+            return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName,
+                true, ENTITY_NAME,
+                gateAssignments.get().getTime().toString())).build();
+        } else {
+            return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createFailureAlert(applicationName, true, ENTITY_NAME, "", "cannot delete: id not available")).build();
+        }
     }
 }

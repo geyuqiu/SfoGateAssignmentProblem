@@ -28,7 +28,6 @@ public interface GateAssignmentsRepository extends JpaRepository<GateAssignments
     Page<GateAssignments> findByRemarkIgnoreCaseContaining(String remark, Pageable pageable);
 
     Page<GateAssignments> findByTransaction(Transaction transaction, Pageable pageable);
-//    Page<GateAssignments> findByTime(Instant time, Pageable pageable);
 
     @Query(value =
         "SELECT (SELECT count(*) FROM gate_assignments g WHERE g.terminal = :terminal AND g.time >= :firstDayOfThisYear AND g.time < :firstDayOfNextYear AND g.transaction = 'DEP') - (SELECT count(*) FROM gate_assignments g WHERE g.terminal = :terminal AND g.time >= :firstDayOfThisYear AND g.time < :firstDayOfNextYear AND g.transaction = 'ARR') depArrDiff",

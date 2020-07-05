@@ -20,7 +20,7 @@ class GateAssignmentsRepositoryTest {
     }
 
     @Test
-    public void shouldGetDepArrDiff() {
+    void shouldGetDepArrDiff() {
         // GIVEN
         long diff = gateAssignmentsRepository.getDepArrDiff(
             "1",
@@ -31,7 +31,7 @@ class GateAssignmentsRepositoryTest {
         // WHEN
 
         // THEN
-        assertThat(diff > 0);
-        assertThat(diff == 11);
+        assertThat(diff > 0).isTrue();
+        assertThat(diff == 11).isTrue();
     }
 }
