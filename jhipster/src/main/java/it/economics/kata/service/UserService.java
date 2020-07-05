@@ -7,7 +7,6 @@ import it.economics.kata.repository.AuthorityRepository;
 import it.economics.kata.repository.UserRepository;
 import it.economics.kata.security.SecurityUtils;
 import it.economics.kata.service.dto.UserDTO;
-import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,7 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
     }
