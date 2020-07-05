@@ -6,12 +6,11 @@ import {IBar} from 'app/shared/model/bar.model';
 
 @Component({
 	selector: 'app-bar',
-	templateUrl: './bar.component.html',
-	styleUrls: ['./bar.component.scss']
+	templateUrl: './bar.component.html'
 })
 export class BarComponent implements OnInit {
 
-	data: ChartData;
+	data: ChartData = {};
 	options: ChartOptions = {
 		scales: {
 			yAxes: [{
@@ -22,19 +21,20 @@ export class BarComponent implements OnInit {
 			}]
 		}
 	};
+	depMinusArrOfEveryYear: Map<number, number[]> = new Map();
+	chartDateTemplate: ChartData = {
+		labels: ['1', '2', '3', 'I'], // static
+		datasets: [
+			{
+				label: '#DEP - #ARR',
+				backgroundColor: '#42A5F5',
+				borderColor: '#1E88E5',
+				data: []
+			}
+		]
+	};
 
 	constructor(private barService: BarService) {
-		this.data = {
-			labels: ['1', '2', '3', 'I'], // static
-			datasets: [
-				{
-					label: '#DEP - #ARR',
-					backgroundColor: '#42A5F5',
-					borderColor: '#1E88E5',
-					data: []
-				}
-			]
-		}
 	}
 
 	ngOnInit(): void {
@@ -47,8 +47,14 @@ export class BarComponent implements OnInit {
 	}
 
 	private onSuccess(bar: HttpResponse<IBar>): void {
-		if (bar && bar.body && this.data && this.data.datasets) {
-			this.data.datasets[0].data = bar.body.depMinusArrOfEveryYear[2015];
+		if (bar && bar.body && bar.body.depMinusArrOfEveryYear
+			&& this.chartDateTemplate
+			&& this.chartDateTemplate.datasets && this.chartDateTemplate.datasets[0]
+		) {
+			this.depMinusArrOfEveryYear = bar.body.depMinusArrOfEveryYear;
+
+			this.chartDateTemplate.datasets[0].data = this.depMinusArrOfEveryYear[2015];
+			this.data = this.chartDateTemplate;
 		}
 	}
 

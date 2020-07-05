@@ -10,15 +10,20 @@
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="gate-assignments" (click)="collapseNavbar()">
                     <span>
-                        <fa-icon icon="home"></fa-icon>
                         <span jhiTranslate="global.menu.home">Home</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="gate-assignments/bar" (click)="collapseNavbar()">
+                    <span>
+                        <span jhiTranslate="global.menu.bar"></span>
                     </span>
                 </a>
             </li>
             <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
                     <span>
-                        <fa-icon icon="flag"></fa-icon>
                         <span jhiTranslate="global.menu.language">Language</span>
                     </span>
                 </a>
@@ -31,7 +36,6 @@
             <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" (click)="logout()" id="cy-logout">
-                    <fa-icon icon="sign-out-alt"></fa-icon>
                     <span jhiTranslate="global.menu.account.logout">Sign out</span>
                 </a>
             </li>

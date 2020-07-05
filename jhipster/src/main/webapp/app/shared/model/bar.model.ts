@@ -1,3 +1,3 @@
 export interface IBar {
-	depMinusArrOfEveryYear: Map<Number, Number[]>;
+	depMinusArrOfEveryYear: Map<number, number[]>;
 }
