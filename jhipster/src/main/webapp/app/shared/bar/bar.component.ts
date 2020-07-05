@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ChartData, ChartOptions} from "chart.js";
+import {ChartData} from "chart.js";
 import {BarService} from 'app/shared/bar/bar.service';
 import {HttpResponse} from '@angular/common/http';
 import {IBar} from 'app/shared/model/bar.model';
+import {chartDataTemplate, chartOptions} from 'app/shared/constants/bar.constants';
 
 @Component({
 	selector: 'app-bar',
@@ -11,28 +12,9 @@ import {IBar} from 'app/shared/model/bar.model';
 export class BarComponent implements OnInit {
 
 	data: ChartData = {};
-	options: ChartOptions = {
-		scales: {
-			yAxes: [{
-				scaleLabel: {
-					display: true,
-					labelString: 'Terminal'
-				},
-			}]
-		}
-	};
+	options = chartOptions;
 	depMinusArrOfEveryYear: Map<number, number[]> = new Map();
-	chartDateTemplate: ChartData = {
-		labels: ['1', '2', '3', 'I'], // static
-		datasets: [
-			{
-				label: '#DEP - #ARR',
-				backgroundColor: '#42A5F5',
-				borderColor: '#1E88E5',
-				data: []
-			}
-		]
-	};
+	template = chartDataTemplate;
 
 	constructor(private barService: BarService) {
 	}
@@ -48,13 +30,13 @@ export class BarComponent implements OnInit {
 
 	private onSuccess(bar: HttpResponse<IBar>): void {
 		if (bar && bar.body && bar.body.depMinusArrOfEveryYear
-			&& this.chartDateTemplate
-			&& this.chartDateTemplate.datasets && this.chartDateTemplate.datasets[0]
+			&& this.template
+			&& this.template.datasets && this.template.datasets[0]
 		) {
 			this.depMinusArrOfEveryYear = bar.body.depMinusArrOfEveryYear;
 
-			this.chartDateTemplate.datasets[0].data = this.depMinusArrOfEveryYear[2015];
-			this.data = this.chartDateTemplate;
+			this.template.datasets[0].data = this.depMinusArrOfEveryYear[2015];
+			this.data = this.template;
 		}
 	}
 
