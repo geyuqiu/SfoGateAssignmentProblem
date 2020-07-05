@@ -110,7 +110,7 @@ public class GateAssignmentsResource {
         }
         GateAssignments result = gateAssignmentsRepository.save(gateAssignments);
         return ResponseEntity.created(new URI("/api/gate-assignments/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getTime().toString()))
             .body(result);
     }
 
@@ -131,7 +131,7 @@ public class GateAssignmentsResource {
         }
         GateAssignments result = gateAssignmentsRepository.save(gateAssignments);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, gateAssignments.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, gateAssignments.getTime().toString()))
             .body(result);
     }
 
@@ -171,7 +171,8 @@ public class GateAssignmentsResource {
     @DeleteMapping("/gate-assignments/{id}")
     public ResponseEntity<Void> deleteGateAssignments(@PathVariable Long id) {
         log.debug("REST request to delete GateAssignments : {}", id);
+        Optional<GateAssignments> gateAssignments = gateAssignmentsRepository.findById(id);
         gateAssignmentsRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, gateAssignments.get().getTime().toString())).build();
     }
 }

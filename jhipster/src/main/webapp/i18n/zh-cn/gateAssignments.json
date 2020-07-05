@@ -6,7 +6,7 @@
         "createLabel": "创建",
         "createOrEditLabel": "创建或编辑",
         "search": "查找 登机口安排",
-        "notFound": "No 登机口安排 found"
+        "notFound": "没有找到登机口安排"
       },
       "created": "登机口安排 {{ param }} 创建成功",
       "updated": "登机口安排 {{ param }} 更新成功",
