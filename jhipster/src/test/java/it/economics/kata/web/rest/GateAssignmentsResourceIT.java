@@ -24,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 /**
  * Integration tests for the {@link GateAssignmentsResource} REST controller.
  */
@@ -95,13 +96,13 @@ class GateAssignmentsResourceIT {
 
     static GateAssignments createSecondEntity() {
         GateAssignments gateAssignments = new GateAssignments()
-          .time(SECOND_TIME)
-          .airline(SECOND_AIRLINE)
-          .flightNumber(SECOND_FLIGHT_NUMBER)
-          .transaction(SECOND_TRANSACTION)
-          .terminal(SECOND_TERMINAL)
-          .gate(SECOND_GATE)
-          .remark(SECOND_REMARK);
+            .time(SECOND_TIME)
+            .airline(SECOND_AIRLINE)
+            .flightNumber(SECOND_FLIGHT_NUMBER)
+            .transaction(SECOND_TRANSACTION)
+            .terminal(SECOND_TERMINAL)
+            .gate(SECOND_GATE)
+            .remark(SECOND_REMARK);
         return gateAssignments;
     }
 
@@ -138,16 +139,16 @@ class GateAssignmentsResourceIT {
 
         // Get all the gateAssignmentsList
         restGateAssignmentsMockMvc.perform(get("/api/gate-assignments/airline/" + SECOND_AIRLINE + "?sort=id,desc"))
-          .andExpect(status().isOk())
-          .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-          .andExpect(jsonPath("$.[*].id").value(hasItem(secondGateAssignments.getId().intValue())))
-          .andExpect(jsonPath("$.[*].time").value(hasItem(secondGateAssignments.getTime().toString())))
-          .andExpect(jsonPath("$.[*].airline").value(hasItem(secondGateAssignments.getAirline())))
-          .andExpect(jsonPath("$.[*].flightNumber").value(hasItem(secondGateAssignments.getFlightNumber())))
-          .andExpect(jsonPath("$.[*].transaction").value(hasItem(secondGateAssignments.getTransaction().name())))
-          .andExpect(jsonPath("$.[*].terminal").value(hasItem(secondGateAssignments.getTerminal())))
-          .andExpect(jsonPath("$.[*].gate").value(hasItem(secondGateAssignments.getGate())))
-          .andExpect(jsonPath("$.[*].remark").value(hasItem(secondGateAssignments.getRemark())));
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(secondGateAssignments.getId().intValue())))
+            .andExpect(jsonPath("$.[*].time").value(hasItem(secondGateAssignments.getTime().toString())))
+            .andExpect(jsonPath("$.[*].airline").value(hasItem(secondGateAssignments.getAirline())))
+            .andExpect(jsonPath("$.[*].flightNumber").value(hasItem(secondGateAssignments.getFlightNumber())))
+            .andExpect(jsonPath("$.[*].transaction").value(hasItem(secondGateAssignments.getTransaction().name())))
+            .andExpect(jsonPath("$.[*].terminal").value(hasItem(secondGateAssignments.getTerminal())))
+            .andExpect(jsonPath("$.[*].gate").value(hasItem(secondGateAssignments.getGate())))
+            .andExpect(jsonPath("$.[*].remark").value(hasItem(secondGateAssignments.getRemark())));
     }
 
     @Test
@@ -308,6 +309,7 @@ class GateAssignmentsResourceIT {
             .andExpect(jsonPath("$.gate").value(DEFAULT_GATE))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK));
     }
+
     @Test
     @Transactional
     void getNonExistingGateAssignments() throws Exception {

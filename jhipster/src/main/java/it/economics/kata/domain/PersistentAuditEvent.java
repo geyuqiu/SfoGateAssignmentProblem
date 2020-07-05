@@ -1,8 +1,6 @@
 package it.economics.kata.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,9 +16,7 @@ import java.util.Map;
  */
 @Entity
 @Table(name = "app_persistent_audit_event")
-@Getter
-@Setter
-@ToString
+@Data
 public class PersistentAuditEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,20 +42,4 @@ public class PersistentAuditEvent implements Serializable {
     @Column(name = "value")
     @CollectionTable(name = "app_persistent_audit_evt_data", joinColumns=@JoinColumn(name="event_id"))
     private Map<String, String> data = new HashMap<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof PersistentAuditEvent)) {
-            return false;
-        }
-        return id != null && id.equals(((PersistentAuditEvent) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31;
-    }
 }

@@ -1,8 +1,6 @@
 package it.economics.kata.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -13,15 +11,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * An authority (a security role) used by Spring Security.
  */
 @Entity
-@Getter
-@Setter
-@ToString
+@Data
 @Table(name = "app_authority")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Authority implements Serializable {
@@ -33,20 +28,4 @@ public class Authority implements Serializable {
     @Id
     @Column(length = 50)
     private String name;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Authority)) {
-            return false;
-        }
-        return Objects.equals(name, ((Authority) o).name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(name);
-    }
 }

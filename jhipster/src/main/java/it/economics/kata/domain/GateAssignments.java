@@ -1,9 +1,7 @@
 package it.economics.kata.domain;
 
 import it.economics.kata.domain.enumeration.Transaction;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -18,9 +16,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "gate_assignments")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Getter
-@Setter
-@ToString
+@Data
 public class GateAssignments implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -91,19 +87,4 @@ public class GateAssignments implements Serializable {
         return this;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof GateAssignments)) {
-            return false;
-        }
-        return id != null && id.equals(((GateAssignments) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31;
-    }
 }
