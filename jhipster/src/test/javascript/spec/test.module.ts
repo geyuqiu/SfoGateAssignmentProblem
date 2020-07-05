@@ -86,8 +86,8 @@ import {RouterTestingModule} from '@angular/router/testing';
 		BrowserModule,
 		FormsModule,
 		ReactiveFormsModule,
-		RouterTestingModule,
-		SfoGateAssignmentProblemSharedModule
+		SfoGateAssignmentProblemSharedModule,
+		RouterTestingModule
 	]
 })
 export class SfoGateAssignmentProblemTestModule {

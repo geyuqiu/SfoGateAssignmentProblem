@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IGateAssignments, GateAssignments } from 'app/shared/model/gate-assignments.model';
-import { GateAssignmentsService } from './gate-assignments.service';
-import { GateAssignmentsComponent } from './gate-assignments.component';
-import { GateAssignmentsDetailComponent } from './gate-assignments-detail.component';
-import { GateAssignmentsUpdateComponent } from './gate-assignments-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {GateAssignments, IGateAssignments} from 'app/shared/model/gate-assignments.model';
+import {GateAssignmentsService} from './gate-assignments.service';
+import {GateAssignmentsComponent} from './gate-assignments.component';
+import {GateAssignmentsDetailComponent} from './gate-assignments-detail.component';
+import {GateAssignmentsUpdateComponent} from './gate-assignments-update.component';
+import {BarComponent} from '../../shared/bar/bar.component';
 
 @Injectable({ providedIn: 'root' })
 export class GateAssignmentsResolve implements Resolve<IGateAssignments> {
@@ -81,4 +82,9 @@ export const gateAssignmentsRoute: Routes = [
     },
     canActivate: [UserRouteAccessService],
   },
+	{
+		path: 'bar',
+		component: BarComponent,
+		canActivate: [UserRouteAccessService]
+	}
 ];
