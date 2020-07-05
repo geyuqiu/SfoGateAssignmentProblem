@@ -7,6 +7,9 @@ import it.economics.kata.repository.GateAssignmentsRepository;
 import it.economics.kata.service.GateAssignmentsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +22,7 @@ import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -130,15 +134,27 @@ class GateAssignmentsResourceIT {
         secondGateAssignments = createSecondEntity();
     }
 
-    @Test
-    @Transactional
-    void getAllGateAssignmentsByAirline() throws Exception {
+    @SuppressWarnings("unused")
+    private static Stream<Arguments> getAllGateAssignmentsByString() {
+        return Stream.of(
+            Arguments.of("airline/", SECOND_AIRLINE),
+//            Arguments.of("airline/", "") // #29
+            Arguments.of("flight-number/", SECOND_FLIGHT_NUMBER),
+            Arguments.of("terminal/", SECOND_TERMINAL),
+            Arguments.of("gate/", SECOND_GATE),
+            Arguments.of("remark/", SECOND_REMARK)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void getAllGateAssignmentsByString(String path, String value) throws Exception {
         // Initialize the database
         gateAssignmentsRepository.saveAndFlush(gateAssignments);
         gateAssignmentsRepository.saveAndFlush(secondGateAssignments);
 
         // Get all the gateAssignmentsList
-        restGateAssignmentsMockMvc.perform(get("/api/gate-assignments/airline/" + SECOND_AIRLINE + "?sort=id,desc"))
+        restGateAssignmentsMockMvc.perform(get("/api/gate-assignments/" + path + value + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(secondGateAssignments.getId().intValue())))

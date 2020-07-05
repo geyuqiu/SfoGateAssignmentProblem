@@ -39,11 +39,51 @@ public class GateAssignmentsResource {
 
     private final GateAssignmentsService gateAssignmentsService;
 
-  private final GateAssignmentsRepository gateAssignmentsRepository;
+    private final GateAssignmentsRepository gateAssignmentsRepository;
 
-  public GateAssignmentsResource(GateAssignmentsService gateAssignmentsService, GateAssignmentsRepository gateAssignmentsRepository) {
+    public GateAssignmentsResource(GateAssignmentsService gateAssignmentsService, GateAssignmentsRepository gateAssignmentsRepository) {
         this.gateAssignmentsService = gateAssignmentsService;
-    this.gateAssignmentsRepository = gateAssignmentsRepository;
+        this.gateAssignmentsRepository = gateAssignmentsRepository;
+    }
+
+    @GetMapping("/gate-assignments/remark/{remark}")
+    public ResponseEntity<List<GateAssignments>> getGateAssignmentsByRemark(@PathVariable String remark, Pageable pageable) {
+        log.debug("REST request to get a page of GateAssignments remark: {}", remark);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByRemark(remark, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/gate-assignments/gate/{gate}")
+    public ResponseEntity<List<GateAssignments>> getGateAssignmentsByGate(@PathVariable String gate, Pageable pageable) {
+        log.debug("REST request to get a page of GateAssignments gate: {}", gate);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByGate(gate, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/gate-assignments/terminal/{terminal}")
+    public ResponseEntity<List<GateAssignments>> getGateAssignmentsByTerminal(@PathVariable String terminal, Pageable pageable) {
+        log.debug("REST request to get a page of GateAssignments terminal: {}", terminal);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByTerminal(terminal, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/gate-assignments/airline/{airline}")
+    public ResponseEntity<List<GateAssignments>> getGateAssignmentsByAirline(@PathVariable String airline, Pageable pageable) {
+        log.debug("REST request to get a page of GateAssignments airline: {}", airline);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByAirline(airline, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/gate-assignments/flight-number/{flightNumber}")
+    public ResponseEntity<List<GateAssignments>> getGateAssignmentsByFlightNumber(@PathVariable String flightNumber, Pageable pageable) {
+        log.debug("REST request to get a page of GateAssignments flightNumber: {}", flightNumber);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByFlightNumber(flightNumber, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
@@ -59,7 +99,7 @@ public class GateAssignmentsResource {
         if (gateAssignments.getId() != null) {
             throw new BadRequestAlertException("A new gateAssignments cannot already have an ID", ENTITY_NAME, "idexists");
         }
-      GateAssignments result = gateAssignmentsRepository.save(gateAssignments);
+        GateAssignments result = gateAssignmentsRepository.save(gateAssignments);
         return ResponseEntity.created(new URI("/api/gate-assignments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -80,7 +120,7 @@ public class GateAssignmentsResource {
         if (gateAssignments.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-      GateAssignments result = gateAssignmentsRepository.save(gateAssignments);
+        GateAssignments result = gateAssignmentsRepository.save(gateAssignments);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, gateAssignments.getId().toString()))
             .body(result);
@@ -95,26 +135,10 @@ public class GateAssignmentsResource {
     @GetMapping("/gate-assignments")
     public ResponseEntity<List<GateAssignments>> getAllGateAssignments(Pageable pageable) {
         log.debug("REST request to get a page of GateAssignments");
-      Page<GateAssignments> page = gateAssignmentsRepository.findAll(pageable);
-      HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-      return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-  /**
-   * {@code GET  /gate-assignments} : get all the gateAssignments with airline name:
-   *
-   * @param pageable the pagination information.
-   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of gateAssignments in body.
-   */
-  @GetMapping("/gate-assignments/airline/{airline}")
-  public ResponseEntity<List<GateAssignments>> getGateAssignmentsByAirline(@PathVariable String airline, Pageable pageable) {
-    log.debug("REST request to get a page of GateAssignments airline: {}", airline);
-    Page<GateAssignments> page = gateAssignmentsRepository.findByAirline(airline, pageable);
+        Page<GateAssignments> page = gateAssignmentsRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-
-
 
     /**
      * {@code GET  /gate-assignments/:id} : get the "id" gateAssignments.
@@ -126,7 +150,7 @@ public class GateAssignmentsResource {
     public ResponseEntity<GateAssignments> getGateAssignments(@PathVariable Long id) {
         log.debug("REST request to get GateAssignments : {}", id);
         Optional<GateAssignments> gateAssignments = gateAssignmentsRepository.findById(id);
-      return ResponseUtil.wrapOrNotFound(gateAssignments);
+        return ResponseUtil.wrapOrNotFound(gateAssignments);
     }
 
     /**
@@ -139,6 +163,6 @@ public class GateAssignmentsResource {
     public ResponseEntity<Void> deleteGateAssignments(@PathVariable Long id) {
         log.debug("REST request to delete GateAssignments : {}", id);
         gateAssignmentsRepository.deleteById(id);
-      return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }
