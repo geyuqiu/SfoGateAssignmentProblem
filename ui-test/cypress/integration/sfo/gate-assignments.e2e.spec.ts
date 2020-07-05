@@ -17,12 +17,7 @@ describe('GateAssignments e2e test', () => {
 
 	it('should load GateAssignments', () => {
 		gateAssignmentsComponentsPage = new GateAssignmentsComponentsPage();
-		// browser.wait(ec.visibilityOf(gateAssignmentsComponentsPage.title), 5000);
 		gateAssignmentsComponentsPage.getTitle().should('have.attr', 'jhiTranslate', 'sfoGateAssignmentProblemApp.gateAssignments.home.title');
-		// browser.wait(
-		// 	ec.or(ec.visibilityOf(gateAssignmentsComponentsPage.entities), ec.visibilityOf(gateAssignmentsComponentsPage.noResult)),
-		// 	1000
-		// );
 	});
 
 	it('should load create GateAssignments page', () => {
