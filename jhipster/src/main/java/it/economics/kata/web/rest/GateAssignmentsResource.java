@@ -58,7 +58,7 @@ public class GateAssignmentsResource {
     @GetMapping("/gate-assignments/remark/{remark}")
     public ResponseEntity<List<GateAssignments>> getGateAssignmentsByRemark(@PathVariable String remark, Pageable pageable) {
         log.debug("REST request to get a page of GateAssignments remark: {}", remark);
-        Page<GateAssignments> page = gateAssignmentsRepository.findByRemark(remark, pageable);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByRemarkIgnoreCaseContaining(remark, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -66,7 +66,7 @@ public class GateAssignmentsResource {
     @GetMapping("/gate-assignments/gate/{gate}")
     public ResponseEntity<List<GateAssignments>> getGateAssignmentsByGate(@PathVariable String gate, Pageable pageable) {
         log.debug("REST request to get a page of GateAssignments gate: {}", gate);
-        Page<GateAssignments> page = gateAssignmentsRepository.findByGate(gate, pageable);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByGateIgnoreCaseContaining(gate, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -74,7 +74,7 @@ public class GateAssignmentsResource {
     @GetMapping("/gate-assignments/terminal/{terminal}")
     public ResponseEntity<List<GateAssignments>> getGateAssignmentsByTerminal(@PathVariable String terminal, Pageable pageable) {
         log.debug("REST request to get a page of GateAssignments terminal: {}", terminal);
-        Page<GateAssignments> page = gateAssignmentsRepository.findByTerminal(terminal, pageable);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByTerminalIgnoreCaseContaining(terminal, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -82,7 +82,7 @@ public class GateAssignmentsResource {
     @GetMapping("/gate-assignments/airline/{airline}")
     public ResponseEntity<List<GateAssignments>> getGateAssignmentsByAirline(@PathVariable String airline, Pageable pageable) {
         log.debug("REST request to get a page of GateAssignments airline: {}", airline);
-        Page<GateAssignments> page = gateAssignmentsRepository.findByAirline(airline, pageable);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByAirlineIgnoreCaseContaining(airline, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -90,7 +90,7 @@ public class GateAssignmentsResource {
     @GetMapping("/gate-assignments/flight-number/{flightNumber}")
     public ResponseEntity<List<GateAssignments>> getGateAssignmentsByFlightNumber(@PathVariable String flightNumber, Pageable pageable) {
         log.debug("REST request to get a page of GateAssignments flightNumber: {}", flightNumber);
-        Page<GateAssignments> page = gateAssignmentsRepository.findByFlightNumber(flightNumber, pageable);
+        Page<GateAssignments> page = gateAssignmentsRepository.findByFlightNumberIgnoreCaseContaining(flightNumber, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

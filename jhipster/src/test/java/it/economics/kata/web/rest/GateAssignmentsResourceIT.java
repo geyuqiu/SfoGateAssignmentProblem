@@ -43,10 +43,12 @@ class GateAssignmentsResourceIT {
 
     private static final String DEFAULT_AIRLINE = "AAAAAAAAAA";
     private static final String SECOND_AIRLINE = "United Airlines";
+    private static final String PARTIAL_AIRLINE = "united a";
     private static final String UPDATED_AIRLINE = "BBBBBBBBBB";
 
     private static final String DEFAULT_FLIGHT_NUMBER = "AAAAAAAAAA";
-    private static final String SECOND_FLIGHT_NUMBER = "2";
+    private static final String SECOND_FLIGHT_NUMBER = "UA2011";
+    private static final String PARTIAL_FLIGHT_NUMBER = "ua20";
     private static final String UPDATED_FLIGHT_NUMBER = "BBBBBBBBBB";
 
     private static final Transaction DEFAULT_TRANSACTION = Transaction.DEP;
@@ -54,15 +56,18 @@ class GateAssignmentsResourceIT {
     private static final Transaction UPDATED_TRANSACTION = Transaction.ARR;
 
     private static final String DEFAULT_TERMINAL = "AAAAAAAAAA";
-    private static final String SECOND_TERMINAL = "2";
+    private static final String SECOND_TERMINAL = "2A";
+    private static final String PARTIAL_TERMINAL = "2";
     private static final String UPDATED_TERMINAL = "BBBBBBBBBB";
 
     private static final String DEFAULT_GATE = "AAAAAAAAAA";
-    private static final String SECOND_GATE = "2";
+    private static final String SECOND_GATE = "2A";
+    private static final String PARTIAL_GATE = "2";
     private static final String UPDATED_GATE = "BBBBBBBBBB";
 
     private static final String DEFAULT_REMARK = "AAAAAAAAAA";
     private static final String SECOND_REMARK = "Delayed";
+    private static final String PARTIAL_REMARK = "Dela";
     private static final String UPDATED_REMARK = "BBBBBBBBBB";
 
     @Autowired
@@ -135,7 +140,7 @@ class GateAssignmentsResourceIT {
     }
 
     @SuppressWarnings("unused")
-    private static Stream<Arguments> getAllGateAssignmentsByString() {
+    private static Stream<Arguments> getAllByFullAndPartialStringSearchSuccess() {
         return Stream.of(
             Arguments.of("airline/", SECOND_AIRLINE),
 //            Arguments.of("airline/", "") // #29
@@ -143,13 +148,20 @@ class GateAssignmentsResourceIT {
             Arguments.of("terminal/", SECOND_TERMINAL),
             Arguments.of("gate/", SECOND_GATE),
             Arguments.of("remark/", SECOND_REMARK),
+
+            Arguments.of("airline/", PARTIAL_AIRLINE),
+            Arguments.of("flight-number/", PARTIAL_FLIGHT_NUMBER),
+            Arguments.of("terminal/", PARTIAL_TERMINAL),
+            Arguments.of("gate/", PARTIAL_GATE),
+            Arguments.of("remark/", PARTIAL_REMARK),
+
             Arguments.of("transaction/", SECOND_TRANSACTION.name())
         );
     }
 
     @ParameterizedTest
     @MethodSource
-    void getAllGateAssignmentsByString(String path, String value) throws Exception {
+    void getAllByFullAndPartialStringSearchSuccess(String path, String value) throws Exception {
         // Initialize the database
         gateAssignmentsRepository.saveAndFlush(gateAssignments);
         gateAssignmentsRepository.saveAndFlush(secondGateAssignments);
