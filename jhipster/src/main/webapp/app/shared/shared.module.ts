@@ -8,10 +8,14 @@ import {HasAnyAuthorityDirective} from './auth/has-any-authority.directive';
 import {BarComponent} from './bar/bar.component';
 
 import {ChartModule} from 'primeng/chart';
+import {ProgressBarComponent} from './progress-bar/progress-bar.component';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
-	imports: [SfoGateAssignmentProblemSharedLibsModule, ChartModule],
-	declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginComponent, HasAnyAuthorityDirective, BarComponent],
+	imports: [SfoGateAssignmentProblemSharedLibsModule, ChartModule, ProgressBarModule, ToastModule],
+	declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginComponent, HasAnyAuthorityDirective, BarComponent,
+		ProgressBarComponent],
   exports: [
     SfoGateAssignmentProblemSharedLibsModule,
     FindLanguageFromKeyPipe,
@@ -20,7 +24,10 @@ import {ChartModule} from 'primeng/chart';
 	  LoginComponent,
     HasAnyAuthorityDirective,
 	  BarComponent,
-	  ChartModule
+	  ChartModule,
+	  ProgressBarComponent,
+	  ProgressBarModule,
+	  ToastModule
   ],
 })
 export class SfoGateAssignmentProblemSharedModule {}

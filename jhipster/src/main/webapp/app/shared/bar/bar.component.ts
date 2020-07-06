@@ -4,10 +4,12 @@ import {BarService} from 'app/shared/bar/bar.service';
 import {HttpResponse} from '@angular/common/http';
 import {IBar} from 'app/shared/model/bar.model';
 import {chartDataTemplate, chartOptions} from 'app/shared/constants/bar.constants';
+import {MessageService} from 'primeng/api';
 
 @Component({
 	selector: 'app-bar',
-	templateUrl: './bar.component.html'
+	templateUrl: './bar.component.html',
+	providers: [MessageService]
 })
 export class BarComponent implements OnInit {
 
@@ -15,17 +17,23 @@ export class BarComponent implements OnInit {
 	options = chartOptions;
 	depMinusArrOfEveryYear: Map<number, number[]> = new Map();
 	template = chartDataTemplate;
+	canShowBar = false;
 
-	constructor(private barService: BarService) {
+	constructor(private barService: BarService, private messageService: MessageService) {
 	}
 
 	ngOnInit(): void {
+		this.canShowBar = false;
 		this.barService
 			.query()
 			.subscribe(
 				(res: HttpResponse<IBar>) => this.onSuccess(res),
 				() => this.onError()
 			);
+	}
+
+	private displaySuccessToast(): void {
+		this.messageService.add({severity: 'info', summary: 'Success', detail: 'loaded: 2015 - 2019'});
 	}
 
 	private onSuccess(bar: HttpResponse<IBar>): void {
@@ -37,6 +45,9 @@ export class BarComponent implements OnInit {
 
 			this.template.datasets[0].data = this.depMinusArrOfEveryYear[2015];
 			this.data = this.template;
+
+			this.canShowBar = true;
+			this.displaySuccessToast();
 		}
 	}
 
