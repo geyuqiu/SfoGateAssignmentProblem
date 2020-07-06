@@ -19,3 +19,6 @@
 
     git clone git@github.com:geyuqiu/SfoGateAssignmentProblem.git
     
+# current status of the project
+
+![](arc42/issues.png)

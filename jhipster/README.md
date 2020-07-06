@@ -1,7 +1,3 @@
-# current status of the project
-
-![](./arc42/issues.png)
-
 # Run the application locally (tested on MacOS Catalina MacBook 2016 15')
 
     # install java > 8
