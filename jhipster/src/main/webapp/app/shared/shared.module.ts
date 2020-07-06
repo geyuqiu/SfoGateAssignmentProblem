@@ -11,11 +11,15 @@ import {ChartModule} from 'primeng/chart';
 import {ProgressBarComponent} from './progress-bar/progress-bar.component';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {ToastModule} from 'primeng/toast';
+import {SliderModule} from 'primeng/slider';
+import {SliderComponent} from './slider/slider.component';
 
 @NgModule({
-	imports: [SfoGateAssignmentProblemSharedLibsModule, ChartModule, ProgressBarModule, ToastModule],
+	imports: [SfoGateAssignmentProblemSharedLibsModule, ChartModule, ProgressBarModule, ToastModule,
+		SliderModule],
 	declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginComponent, HasAnyAuthorityDirective, BarComponent,
-		ProgressBarComponent],
+		ProgressBarComponent,
+		SliderComponent],
   exports: [
     SfoGateAssignmentProblemSharedLibsModule,
     FindLanguageFromKeyPipe,
@@ -27,7 +31,8 @@ import {ToastModule} from 'primeng/toast';
 	  ChartModule,
 	  ProgressBarComponent,
 	  ProgressBarModule,
-	  ToastModule
+	  ToastModule,
+	  SliderModule
   ],
 })
 export class SfoGateAssignmentProblemSharedModule {}
