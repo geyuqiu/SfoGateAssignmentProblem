@@ -51,10 +51,13 @@
     docker --version
     # Docker version 19.03.8, build afacb8b
 
+    # check dir: 
+    pwd
+    # right dir will be .../jhipster
     # run postgres DB (docker container) locally
     docker-compose -f src/main/docker/postgresql.yml up
 
-    # open another terminal !
+    # open another terminal tab !
     # fill postgres with sfo data via `\copy` (`insert` commands too slow for 1.7 million records)
     docker cp src/main/docker/sql/init.sql docker_sfogateassignmentproblem-postgresql_1://tmp/init.sql
     docker cp src/main/docker/sql/gate_assignments_init.csv docker_sfogateassignmentproblem-postgresql_1://tmp/gate_assignments_init.csv

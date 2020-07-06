@@ -19,6 +19,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"></th>
                     <th scope="col" jhiSortBy="time"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.time">Time</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col" jhiSortBy="airline"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.airline">Airline</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col" jhiSortBy="flightNumber"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.flightNumber">Flight Number</span> <fa-icon icon="sort"></fa-icon></th>
@@ -26,11 +27,24 @@
                     <th scope="col" jhiSortBy="terminal"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.terminal">Terminal</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col" jhiSortBy="gate"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.gate">Gate</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col" jhiSortBy="remark"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.remark">Remark</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let gateAssignments of gateAssignments ;trackBy: trackId">
+                    <td>
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/gate-assignments', gateAssignments.id, 'edit']"
+                                    class="btn btn-primary btn-lg mr-4">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                            </button>
+
+                            <button type="submit" (click)="delete(gateAssignments)"
+                                    class="btn btn-danger btn-lg">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                    </td>
                     <td>
                         <a [routerLink]="['/gate-assignments', gateAssignments.id, 'view']">{{ gateAssignments.time | date:'medium' }}</a>
                     </td>
@@ -40,26 +54,6 @@
                     <td>{{ gateAssignments.terminal }}</td>
                     <td>{{ gateAssignments.gate }}</td>
                     <td>{{ gateAssignments.remark }}</td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/gate-assignments', gateAssignments.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                            </button>
-
-                            <button type="submit"
-                                    [routerLink]="['/gate-assignments', gateAssignments.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                            </button>
-
-                            <button type="submit" (click)="delete(gateAssignments)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                            </button>
-                        </div>
-                    </td>
                 </tr>
             </tbody>
         </table>

@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <div *ngIf="canShowBar">
-    <p-chart type="horizontalBar" [data]="data" [options]="options"></p-chart>
+    <p-chart type="horizontalBar" [data]="data" [options]="options" height="400"></p-chart>
     <div class="row justify-content-center mt-5">
         <app-slider (yearChanged)="changechartDataDisplayed($event)"></app-slider>
     </div>

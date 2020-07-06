@@ -1,19 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {ActivatedRoute, Data, ParamMap, Router} from '@angular/router';
+import {combineLatest, Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { IGateAssignments } from 'app/shared/model/gate-assignments.model';
+import {IGateAssignments} from 'app/shared/model/gate-assignments.model';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { GateAssignmentsService } from './gate-assignments.service';
-import { GateAssignmentsDeleteDialogComponent } from './gate-assignments-delete-dialog.component';
+import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
+import {GateAssignmentsService} from './gate-assignments.service';
+import {GateAssignmentsDeleteDialogComponent} from './gate-assignments-delete-dialog.component';
 
 @Component({
   selector: 'app-gate-assignments',
-  templateUrl: './gate-assignments.component.html',
+	templateUrl: './gate-assignments.component.html'
 })
 export class GateAssignmentsComponent implements OnInit, OnDestroy {
   gateAssignments?: IGateAssignments[];
