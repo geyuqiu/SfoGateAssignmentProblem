@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ChartData} from "chart.js";
+import {ChartData, ChartOptions} from "chart.js";
 import {BarService} from 'app/shared/bar/bar.service';
 import {HttpResponse} from '@angular/common/http';
 import {IBar} from 'app/shared/model/bar.model';
@@ -14,16 +14,17 @@ import {MessageService} from 'primeng/api';
 export class BarComponent implements OnInit {
 
 	data: ChartData = {};
-	options = chartOptions;
 	depMinusArrOfEveryYear: Map<number, number[]> = new Map();
-	template = chartDataTemplate;
 	canShowBar = false;
+	options: ChartOptions;
+	template: ChartData;
 
 	constructor(private barService: BarService, private messageService: MessageService) {
+		this.options = chartOptions;
+		this.template = chartDataTemplate;
 	}
 
 	ngOnInit(): void {
-		this.canShowBar = false;
 		this.barService
 			.query()
 			.subscribe(
@@ -53,5 +54,12 @@ export class BarComponent implements OnInit {
 
 	private onError(): void {
 
+	}
+
+	changechartDataDisplayed($event: number): void {
+		if (this.template && this.template.datasets) {
+			this.template.datasets[0].data = this.depMinusArrOfEveryYear[$event];
+			this.data = {...this.template};
+		}
 	}
 }

@@ -1,7 +1,9 @@
 <div>
-    <h3>Year: {{val}}</h3>
+    <h3>Year: {{valWithStep}}</h3>
     <p-slider [(ngModel)]="val"
               [style]="{'width':'69vw'}"
-              [min]="2015" [max]="2019"
+              [min]="20150" [max]="20190"
+              [step]="10"
+              (onChange)="handleChange($event)"
     ></p-slider>
 </div>

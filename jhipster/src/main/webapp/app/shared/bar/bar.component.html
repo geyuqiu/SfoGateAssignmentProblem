@@ -1,10 +1,10 @@
 <p-toast></p-toast>
 <div *ngIf="canShowBar">
     <p-chart type="horizontalBar" [data]="data" [options]="options"></p-chart>
+    <div class="row justify-content-center mt-5">
+        <app-slider (yearChanged)="changechartDataDisplayed($event)"></app-slider>
+    </div>
 </div>
 <div *ngIf="!canShowBar">
     <app-progress-bar></app-progress-bar>
-</div>
-<div class="row justify-content-center mt-5">
-    <app-slider></app-slider>
 </div>

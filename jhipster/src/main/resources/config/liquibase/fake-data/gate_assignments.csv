@@ -12,4 +12,7 @@ time;airline;flight_number;transaction;terminal;gate;remark
 2015-01-01T06:36:00;Delta Airlines;DL2566;DEP;1;44;
 2015-01-01T07:01:00;Delta Airlines;DL854;DEP;1;40;
 2015-12-31T07:10:00;US Airways;US748;DEP;1;23;
-2016-01-01T07:34:00;Southwest;WN320;DEP;1;32A;Departed
+2016-01-01T07:34:00;Southwest;WN320;DEP;2;32A;Departed
+2017-01-01T07:34:00;Southwest;WN320;DEP;3;32A;Departed
+2018-01-01T07:34:00;Southwest;WN320;DEP;I;32A;Departed
+2019-01-01T07:34:00;Southwest;WN320;DEP;1;32A;Departed

@@ -28,7 +28,7 @@ describe('GateAssignments e2e test', () => {
 	});
 
 	it('should create and save GateAssignments', () => {
-		gateAssignmentsComponentsPage.getDeleteButtons().should('have.length', 14);
+		gateAssignmentsComponentsPage.getDeleteButtons().should('have.length', 17);
 
 		gateAssignmentsComponentsPage.clickOnCreateButton();
 
@@ -43,7 +43,7 @@ describe('GateAssignments e2e test', () => {
 		gateAssignmentsUpdatePage.save();
 		gateAssignmentsUpdatePage.getSaveButton().should('not.be.visible');
 
-		gateAssignmentsComponentsPage.getDeleteButtons().should('have.length', 15);
+		gateAssignmentsComponentsPage.getDeleteButtons().should('have.length', 18);
 	});
 
 	it('should delete last GateAssignments', () => {
@@ -54,7 +54,7 @@ describe('GateAssignments e2e test', () => {
 		gateAssignmentsDeleteDialog.clickOnConfirmButton();
 
 		gateAssignmentsComponentsPage.getDeleteButtons()
-			.should('have.length', 14);
+			.should('have.length', 17);
 	});
 
 	after(() => {
