@@ -2,18 +2,6 @@
 
 ![](./arc42/issues.png)
 
-- more please watch: https://github.com/geyuqiu/SfoGateAssignmentProblem/issues
-
-# Tech Stack
-
-- JHipster
-- Sprint Boot
-- Angular
-- Docker
-- Postgres
-- Github actions
-- Sonar
-
 # Run the application locally (tested on MacOS Catalina MacBook 2016 15')
 
     # install java > 8
