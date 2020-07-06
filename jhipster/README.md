@@ -5,18 +5,26 @@
     # install docker
 
     # run postgres DB (docker container) in background
-    docker-compose -f src/main/docker/postgresql.yml up -d
+    docker-compose -f src/main/docker/postgresql.yml up
 
+    # open another console
     # fill postgres with sfo data via `\copy` (`insert` commands too slow for 1.7 million records)
     docker cp src/main/docker/sql/init.sql docker_sfogateassignmentproblem-postgresql_1://tmp/init.sql
     docker cp src/main/docker/sql/gate_assignments_init.csv docker_sfogateassignmentproblem-postgresql_1://tmp/gate_assignments_init.csv
     docker exec docker_sfogateassignmentproblem-postgresql_1 psql SfoGateAssignmentProblem SfoGateAssignmentProblem -f /tmp/init.sql
 
     # waits about half a minute
-    # run the app
-    docker-compose -f src/main/docker/app.yml up -d
+    # important: ctrl c (exit db) for postgres DB!
+    
+    # run the app and db together via one docker compose file
+    # clean up old app images: 
+    docker stop docker_sfogateassignmentproblem-app_1
+    docker rm docker_sfogateassignmentproblem-app_1
+    docker rmi yuqiuge/sfo-gate-assignment-problem -f
+    
+    docker-compose -f src/main/docker/app.yml up
    
-    # go to http://localhost:8080 and login with admin (user) admin (password)
+    # find the url in console and login with admin (user) admin (password), if you see the server is ready (by displaying localhost... )
 
 # push app to docker hub
     
@@ -163,17 +171,6 @@ java -jar target/*.jar
 Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
 Refer to [Using JHipster in production][] for more details.
-
-### Packaging as war
-
-To package your application as a war in order to deploy it to an application server, run:
-
-```
-
-./mvnw -Pprod,war clean verify
-
-
-```
 
 ## Testing
 

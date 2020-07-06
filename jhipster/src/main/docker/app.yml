@@ -10,7 +10,7 @@ services:
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     ports:
       - 8080:8080
-#  sfogateassignmentproblem-postgresql:
-#    extends:
-#      file: postgresql.yml
-#      service: sfogateassignmentproblem-postgresql
+  sfogateassignmentproblem-postgresql:
+    extends:
+      file: postgresql.yml
+      service: sfogateassignmentproblem-postgresql
