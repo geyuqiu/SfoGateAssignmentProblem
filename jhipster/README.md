@@ -38,13 +38,23 @@
 # Run the application locally (tested on MacOS Catalina MacBook 2016 15')
 
     # install java > 8
+    java -version
+    # java version "1.8.0_212"
+    # Java(TM) SE Runtime Environment (build 1.8.0_212-b10)
+    # Java HotSpot(TM) 64-Bit Server VM (build 25.212-b10, mixed mode)
+    
     # install nodejs > 12
+    node -v
+    # v12.2.0
+    
     # install docker
+    docker --version
+    # Docker version 19.03.8, build afacb8b
 
-    # run postgres DB (docker container) in background
+    # run postgres DB (docker container) locally
     docker-compose -f src/main/docker/postgresql.yml up
 
-    # open another console
+    # open another terminal !
     # fill postgres with sfo data via `\copy` (`insert` commands too slow for 1.7 million records)
     docker cp src/main/docker/sql/init.sql docker_sfogateassignmentproblem-postgresql_1://tmp/init.sql
     docker cp src/main/docker/sql/gate_assignments_init.csv docker_sfogateassignmentproblem-postgresql_1://tmp/gate_assignments_init.csv
