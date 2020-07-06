@@ -3,8 +3,6 @@ package it.economics.kata.service;
 import it.economics.kata.domain.GateAssignments;
 import it.economics.kata.repository.GateAssignmentsRepository;
 import it.economics.kata.service.dto.BarDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +18,6 @@ import java.util.Map;
 @Service
 @Transactional
 public class GateAssignmentsService {
-
-    private final Logger log = LoggerFactory.getLogger(GateAssignmentsService.class);
 
     private final GateAssignmentsRepository gateAssignmentsRepository;
 

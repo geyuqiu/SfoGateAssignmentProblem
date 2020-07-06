@@ -16,8 +16,7 @@ export const chartDataTemplate: ChartData = {
 	datasets: [
 		{
 			label: '#DEP - #ARR',
-			backgroundColor: '#42A5F5',
-			borderColor: '#1E88E5',
+			backgroundColor: '#435565',
 			data: []
 		}
 	]
