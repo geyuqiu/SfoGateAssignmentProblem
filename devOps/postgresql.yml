@@ -1,0 +1,12 @@
+version: '2'
+services:
+  sfogateassignmentproblem-postgresql:
+    image: yuqiuge/sfo-postgres:1.2
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_USER=SfoGateAssignmentProblem
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 5432:5432

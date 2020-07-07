@@ -43,18 +43,30 @@ sorry I am not a data scientist, so I just tried to do this via excel...
     docker --version
     # Docker version 19.03.8, build afacb8b
 
-    # check dir: 
+    # clone the project
+    git clone git@github.com:geyuqiu/SfoGateAssignmentProblem.git
+    # switch dir
+    cd SfoGateAssignmentProblem/devOps
     pwd
-    # right dir will be SfoGateAssignmentProblem
     
-    # clean up old app images: 
+    # may want to clean up old app docker images: 
     docker stop docker_sfogateassignmentproblem-app_1
     docker rm docker_sfogateassignmentproblem-app_1
     docker rmi yuqiuge/sfo-gate-assignment-problem -f
     
+    # db will be loading with millions of entries
+    docker-compose -f postgresql.yml up
+    
+    # if you see 
+    # ...
+    # sfogateassignmentproblem-postgresql_1  | 2020-07-07 19:31:40.191 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+    # sfogateassignmentproblem-postgresql_1  | 2020-07-07 19:31:40.221 UTC [1] LOG:  database system is ready to accept connections
+    # then just type
+    ctrl+c
+    # to exit
     
     # run the app and db together via 1 line command 
-    docker-compose up
+    docker-compose -f sfo-app.yml up
    
     # find the url in console and login with admin (username) admin (password), if you see the server is ready (by displaying localhost... )
 
@@ -75,6 +87,3 @@ sorry I am not a data scientist, so I just tried to do this via excel...
 - Primeng responsive Table: https://www.primefaces.org/primeng/showcase/#/table
 - Primeng Slider: https://www.primefaces.org/primeng/showcase/#/slider
 
-# clone project
-
-    git clone git@github.com:geyuqiu/SfoGateAssignmentProblem.git
