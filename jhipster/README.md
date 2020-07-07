@@ -1,42 +1,4 @@
-# 1. Assignment
-
-## Insights got while exploring the data with excel:
-
-- In general:
-  - United Airlines flights makes up about 50% of all the flights overall, followed by other american based airlines
-  - most flights do not have remark \* number of ingoing vs outgoing flights is about 1:1
-  - remark field is optional, but gate and terminal can be null
-- Terminal:
-  - \#DEP vs #APP
-    - at Terminal I (International) #DEP are smaller than #ARR every year
-    - at Terminal 3, apart from 2017, #DEP are always bigger than #ARR every year
-  - terminal 1 mostly consists of gates that begin with a number
-  - Inside Terminal 1, only Flights of USA based airlines depart / arrive
-  - Terminal 3 is the most busiest terminal with the largest number of flights
-- Layover \* for certain airlines that flies to a far away destination, e.g. Air China there is certain routine
-  - there is a flight to a chinese and from a chinese destination every day
-  - CA985 is e.g. always the departing flight
-  - CA986 is e.g. always the arriving flight
-  - the layover time between CA986 and CA986 is around 2 hours for maintenance and refuelling (the layover time is different e.g. around 15 hours for Japan Airlines JL1 and JL2)
-- Remarks and transaction
-  _ Only a departing flight can have following remarks: Returning, See agent, Returned, Last Call, Departed, Closed, Boarding
-  _ Only a arriving flight can have following remarks: In range, Arrived
-
-## Gate Assignment
-
-- for a certain flight number (e.g. AA1009 from American Airlines), only departs at SFO and at gates: 56, 57 to 58 (gates always begin with number 5x)
-- flights of a certain airline (e.g. Air China), always departs / arrives e.g. at gates that start with Gx
-- certain gate number are used as "arrival gate" (more arrival than departure, e.g. RA18)
-
-## Advice to operation management team:
-
-- the layover time of a flight (after arrival) variies from time to time, so be fast and efficient as possible during the time period!
-
-
-# 2. Assignment
-
-# Run the application locally (tested on MacOS Catalina MacBook 2016 15')
-
+# Setup
     # install java > 8
     java -version
     # java version "1.8.0_212"
@@ -46,35 +8,6 @@
     # install nodejs > 12
     node -v
     # v12.2.0
-    
-    # install docker
-    docker --version
-    # Docker version 19.03.8, build afacb8b
-
-    # check dir: 
-    pwd
-    # right dir will be .../jhipster
-    # run postgres DB (docker container) locally
-    docker-compose -f src/main/docker/postgresql.yml up
-
-    # open another terminal tab !
-    # fill postgres with sfo data via `\copy` (`insert` commands too slow for 1.7 million records)
-    docker cp src/main/docker/sql/init.sql docker_sfogateassignmentproblem-postgresql_1://tmp/init.sql
-    docker cp src/main/docker/sql/gate_assignments_init.csv docker_sfogateassignmentproblem-postgresql_1://tmp/gate_assignments_init.csv
-    docker exec docker_sfogateassignmentproblem-postgresql_1 psql SfoGateAssignmentProblem SfoGateAssignmentProblem -f /tmp/init.sql
-
-    # waits about half a minute
-    # important: ctrl c (exit db) for postgres DB!
-    
-    # run the app and db together via one docker compose file
-    # clean up old app images: 
-    docker stop docker_sfogateassignmentproblem-app_1
-    docker rm docker_sfogateassignmentproblem-app_1
-    docker rmi yuqiuge/sfo-gate-assignment-problem -f
-    
-    docker-compose -f src/main/docker/app.yml up
-   
-    # find the url in console and login with admin (user) admin (password), if you see the server is ready (by displaying localhost... )
 
 # push app to docker hub
     

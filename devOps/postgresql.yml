@@ -1,9 +1,9 @@
 version: '2'
 services:
   sfogateassignmentproblem-postgresql:
-    image: postgres:12.3
-    # volumes:
-    #     - ~/volumes/jhipster/SfoGateAssignmentProblem/postgresql/:/var/lib/postgresql/data/
+    image: yuqiuge/sfo-postgres:1.2
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - POSTGRES_USER=SfoGateAssignmentProblem
       - POSTGRES_PASSWORD=

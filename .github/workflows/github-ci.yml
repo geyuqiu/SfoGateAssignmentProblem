@@ -1,5 +1,5 @@
 name: sfo gate assigment problem CI
-on: [push, pull_request]
+on: [push]
 jobs:
   pipeline:
     name: SfoGateAssignmentProblem pipeline

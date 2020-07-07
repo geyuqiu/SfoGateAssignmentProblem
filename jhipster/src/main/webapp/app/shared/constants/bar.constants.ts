@@ -1,6 +1,9 @@
 import {ChartData, ChartOptions} from 'chart.js';
 
 export const chartOptions: ChartOptions = {
+	legend: {
+		display: false
+	},
 	scales: {
 		yAxes: [{
 			scaleLabel: {
@@ -15,8 +18,11 @@ export const chartDataTemplate: ChartData = {
 	labels: ['1', '2', '3', 'I'], // static
 	datasets: [
 		{
-			label: '#DEP - #ARR',
-			backgroundColor: '#435565',
+			backgroundColor: ['blue',
+				'gray',
+				'green',
+				'orange'
+			],
 			data: []
 		}
 	]
