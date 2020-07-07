@@ -4,6 +4,11 @@
     "stage": "local",
     "local": {
       "baseUrl": "http://localhost:8080"
+    },
+    "cypress-plugin-snapshots": {
+      "imageConfig": {
+        "threshold": 0.01
+      }
     }
   },
   "numTestsKeptInMemory": 10,

@@ -1,7 +1,7 @@
 {
-  "name": "cbkop-gui",
+  "name": "sfo",
   "version": "0.0.1",
-  "description": "created for cypress independent cypress typing",
+  "description": "ui test",
   "scripts": {
     "e2e:open": "cypress open",
     "e2e": "cypress run --browser chrome"
@@ -15,5 +15,8 @@
     "ts-loader": "^6.2.1",
     "typescript": "^3.8.3",
     "webpack": "^4.42.0"
+  },
+  "dependencies": {
+    "cypress-plugin-snapshots": "^1.4.3"
   }
 }
