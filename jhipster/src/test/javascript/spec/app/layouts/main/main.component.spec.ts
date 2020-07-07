@@ -21,7 +21,12 @@ describe('Component Tests', () => {
 			TestBed.configureTestingModule({
 				imports: [SfoGateAssignmentProblemTestModule],
 				declarations: [MainComponent],
-				providers: [Title],
+				providers: [Title,
+					{
+						provide: Router,
+						useClass: MockRouter,
+					}
+				],
 			})
 				.compileComponents();
 		}));

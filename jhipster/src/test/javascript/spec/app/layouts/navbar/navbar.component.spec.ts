@@ -18,7 +18,6 @@ describe('Component Tests', () => {
         imports: [SfoGateAssignmentProblemTestModule],
         declarations: [NavbarComponent, ActiveMenuDirective],
       })
-        .overrideTemplate(NavbarComponent, '')
         .compileComponents();
     }));
 
