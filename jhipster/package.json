@@ -26,6 +26,7 @@
     "@ngx-translate/http-loader": "5.0.0",
     "bootstrap": "4.5.0",
     "chart.js": "^2.9.3",
+    "file-saver": "^2.0.2",
     "moment": "2.27.0",
     "ng-jhipster": "0.14.0",
     "ngx-cookie-service": "3.0.4",
@@ -35,6 +36,7 @@
     "rxjs": "6.5.5",
     "swagger-ui-dist": "3.25.1",
     "tslib": "2.0.0",
+    "xlsx": "^0.16.3",
     "zone.js": "0.10.3"
   },
   "devDependencies": {
@@ -43,8 +45,10 @@
     "@ngtools/webpack": "^10.0.0",
     "@openapitools/openapi-generator-cli": "1.0.13-4.3.1",
     "@types/chart.js": "^2.9.22",
+    "@types/file-saver": "^2.0.1",
     "@types/jest": "26.0.3",
     "@types/node": "13.13.4",
+    "@types/xlsx": "0.0.36",
     "@typescript-eslint/eslint-plugin": "2.30.0",
     "@typescript-eslint/eslint-plugin-tslint": "2.30.0",
     "@typescript-eslint/parser": "2.30.0",

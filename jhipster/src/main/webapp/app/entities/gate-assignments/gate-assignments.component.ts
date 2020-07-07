@@ -10,13 +10,14 @@ import {IGateAssignments} from 'app/shared/model/gate-assignments.model';
 import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
 import {GateAssignmentsService} from './gate-assignments.service';
 import {GateAssignmentsDeleteDialogComponent} from './gate-assignments-delete-dialog.component';
+import {ExcelService} from '../../shared/services/excel.service';
 
 @Component({
   selector: 'app-gate-assignments',
 	templateUrl: './gate-assignments.component.html'
 })
 export class GateAssignmentsComponent implements OnInit, OnDestroy {
-  gateAssignments?: IGateAssignments[];
+	gateAssignments: IGateAssignments[] = [];
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -26,11 +27,12 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   ngbPaginationPage = 1;
 
   constructor(
-    protected gateAssignmentsService: GateAssignmentsService,
-    protected activatedRoute: ActivatedRoute,
-    protected router: Router,
-    protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+	  protected gateAssignmentsService: GateAssignmentsService,
+	  protected activatedRoute: ActivatedRoute,
+	  protected router: Router,
+	  protected eventManager: JhiEventManager,
+	  protected modalService: NgbModal,
+	  private excelService: ExcelService
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
@@ -115,4 +117,8 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   protected onError(): void {
     this.ngbPaginationPage = this.page ?? 1; // https://medium.com/@rd1982rd/double-question-marks-over-typescript-3-7-nullish-coalescing-40cbe0404c45
   }
+
+	exportAsXlsx(): void {
+		this.excelService.exportGateAssignmentsInExcel(this.gateAssignments, 'filtered');
+	}
 }
