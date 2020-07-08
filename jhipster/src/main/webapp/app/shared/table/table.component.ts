@@ -11,8 +11,6 @@ import {data} from 'app/shared/table/customers-large';
 export class TableComponent implements OnInit {
 	customers: Customer[] = [];
 
-	selectedCustomers: Customer[] = [];
-
 	statuses: any[] = [];
 
 	@ViewChild('dt')
@@ -34,25 +32,6 @@ export class TableComponent implements OnInit {
 		]
 	}
 
-	onDateSelect(value: any): void {
-		this.table.filter(this.formatDate(value), 'date', 'equals')
-	}
-
-	formatDate(date: any): string {
-		let month = date.getMonth() + 1;
-		let day = date.getDate();
-
-		if (month < 10) {
-			month = '0' + month;
-		}
-
-		if (day < 10) {
-			day = '0' + day;
-		}
-
-		return date.getFullYear() + '-' + month + '-' + day;
-	}
-
 	filterName($event: any): void {
 		this.table.filter($event.target.value, 'name', 'startsWith')
 	}
@@ -68,10 +47,6 @@ export class TableComponent implements OnInit {
 
 	getCustomersLarge(): any {
 		return data.data;
-	}
-
-	filterDate($event: any): any {
-		return this.table.filter('', 'date', 'equals');
 	}
 }
 
