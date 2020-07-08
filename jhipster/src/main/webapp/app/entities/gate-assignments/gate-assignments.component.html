@@ -1,5 +1,4 @@
 <div>
-
     <app-alert-error></app-alert-error>
     <app-alert></app-alert>
 
@@ -95,7 +94,7 @@
 
             <div class="row justify-content-center">
                 <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
-                                [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                                [maxSize]="2" [rotate]="true" [boundaryLinks]="true"
                                 (pageChange)="loadPage($event)"></ngb-pagination>
             </div>
         </div>

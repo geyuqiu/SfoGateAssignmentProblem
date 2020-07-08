@@ -20,6 +20,7 @@ import {TableComponent} from './table/table.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {CalendarModule} from 'primeng/calendar';
+import {FilterComponent} from './filter/filter.component';
 
 @NgModule({
 	imports: [SfoGateAssignmentProblemSharedLibsModule, ChartModule, ProgressBarModule, ToastModule,
@@ -28,7 +29,8 @@ import {CalendarModule} from 'primeng/calendar';
 	declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginComponent, HasAnyAuthorityDirective, BarComponent,
 		ProgressBarComponent,
 		SliderComponent,
-		TableComponent],
+		TableComponent,
+		FilterComponent],
 	exports: [
 		SfoGateAssignmentProblemSharedLibsModule,
 		FindLanguageFromKeyPipe,

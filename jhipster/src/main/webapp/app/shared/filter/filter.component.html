@@ -1,0 +1,3 @@
+<input [ngClass]="(searchText==='')?'form-control-filter':'form-control-filter-with-background-color'"
+       type="text" name="search" [(ngModel)]="searchText" (ngModelChange)="onChange($event)"
+       autocomplete="off" placeholder="{{placeholder}}">
