@@ -15,10 +15,11 @@ export class FilterComponent implements OnDestroy {
 	placeholder = '';
 	private debouncer: Subject<string> = new Subject<string>();
 	readonly subscription: Subscription;
+	time = 1000;
 
 	constructor() {
 		this.subscription = this.debouncer
-			.pipe(debounceTime(330), distinctUntilChanged())
+			.pipe(debounceTime(this.time), distinctUntilChanged())
 			.subscribe((debouncedValue: string) => this.updateFilter.emit(debouncedValue));
 	}
 

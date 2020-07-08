@@ -27,6 +27,7 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   ngbPaginationPage = 1;
 
   loading = true;
+  searchTerm = '';
 
   constructor(
     protected gateAssignmentsService: GateAssignmentsService,
@@ -38,6 +39,7 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
+    if (this.searchTerm) return;
     const pageToLoad: number = page || this.page || 1;
     this.loading = true;
 
@@ -48,7 +50,9 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
         sort: this.sort(),
       })
       .subscribe(
-        (res: HttpResponse<IGateAssignments[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+        (res: HttpResponse<IGateAssignments[]>) => {
+          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate)
+        },
         () => this.onError()
       );
   }
@@ -85,7 +89,9 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInGateAssignments(): void {
-    this.eventSubscriber = this.eventManager.subscribe('gateAssignmentsListModification', () => this.loadPage());
+    this.eventSubscriber = this.eventManager.subscribe('gateAssignmentsListModification', () => {
+      this.loadPage();
+    });
   }
 
   delete(gateAssignments: IGateAssignments): void {
@@ -101,11 +107,11 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  protected onSuccess(data: IGateAssignments[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+  protected onSuccess(data: IGateAssignments[] | null, headers: HttpHeaders, page: number, refresh: boolean): void {
     this.loading = false;
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    if (navigate) {
+    if (refresh) {
       this.router.navigate(['/gate-assignments'], {
         queryParams: {
           page: this.page,
@@ -124,5 +130,28 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
 
   exportAsXlsx(): void {
     this.excelService.exportGateAssignmentsInExcel(this.gateAssignments, 'filtered');
+  }
+
+  searchByAirline(airline: string): void {
+    this.loading = true;
+    this.searchTerm = airline;
+
+    this.gateAssignmentsService
+      .searchBy('airline', airline, {
+        page: 0,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe(
+        (res: HttpResponse<IGateAssignments[]>) => {
+          this.onSuccess(res.body, res.headers, 0, false)
+        },
+        () => this.onError()
+      );
+  }
+
+  reset(): void {
+    this.searchTerm = '';
+    this.loadPage();
   }
 }

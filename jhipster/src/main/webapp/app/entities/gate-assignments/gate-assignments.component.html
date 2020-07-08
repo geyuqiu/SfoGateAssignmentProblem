@@ -8,15 +8,21 @@
     <ng-container *ngIf="!loading">
         <h2 id="cy-page-heading">
             <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.title"
-                  id="cy-title">Gate Assignments</span>
+                  id="cy-title">Gates: </span>
         </h2>
         <div>
             <button class="btn btn-secondary" (click)="exportAsXlsx()">
                 <fa-icon icon="download"></fa-icon>
             </button>
-            <button id="cy-create" class="btn btn-primary ml-5" [routerLink]="['/gate-assignments/new']">
+            <button id="cy-create" class="btn btn-primary mx-5" [routerLink]="['/gate-assignments/new']">
                 <fa-icon icon="plus"></fa-icon>
             </button>
+            <ng-container *ngIf="searchTerm">
+                <b>{{searchTerm}}</b>
+                <button class="btn btn-secondary" (click)="reset()">
+                    <fa-icon icon="trash-alt"></fa-icon>
+                </button>
+            </ng-container>
         </div>
         <div class="alert alert-warning" id="no-result" *ngIf="gateAssignments?.length === 0">
             <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.notFound">No gateAssignments found</span>
@@ -54,6 +60,15 @@
                     <th scope="col" jhiSortBy="remark"><span
                             jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.remark">Remark</span>
                         <fa-icon icon="sort"></fa-icon>
+                    </th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        <app-filter (updateFilter)="searchByAirline($event)"
+                                    [placeholder]="'search airline'">
+                        </app-filter>
                     </th>
                 </tr>
                 </thead>

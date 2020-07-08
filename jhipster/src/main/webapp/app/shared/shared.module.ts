@@ -13,13 +13,15 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {ToastModule} from 'primeng/toast';
 import {SliderModule} from 'primeng/slider';
 import {SliderComponent} from './slider/slider.component';
+import {FilterComponent} from 'app/shared/filter/filter.component';
 
 @NgModule({
 	imports: [SfoGateAssignmentProblemSharedLibsModule, ChartModule, ProgressBarModule, ToastModule,
 		SliderModule],
 	declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginComponent, HasAnyAuthorityDirective, BarComponent,
 		ProgressBarComponent,
-		SliderComponent],
+		SliderComponent,
+		FilterComponent],
   exports: [
     SfoGateAssignmentProblemSharedLibsModule,
     FindLanguageFromKeyPipe,
@@ -32,7 +34,8 @@ import {SliderComponent} from './slider/slider.component';
 	  ProgressBarComponent,
 	  ProgressBarModule,
 	  ToastModule,
-	  SliderModule
+	  SliderModule,
+	  FilterComponent
   ],
 })
 export class SfoGateAssignmentProblemSharedModule {}

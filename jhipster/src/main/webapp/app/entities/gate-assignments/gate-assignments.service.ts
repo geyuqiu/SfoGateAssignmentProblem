@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import * as moment from 'moment';
 
-import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption } from 'app/shared/util/request-util';
-import { IGateAssignments } from 'app/shared/model/gate-assignments.model';
+import {SERVER_API_URL} from 'app/app.constants';
+import {createRequestOption} from 'app/shared/util/request-util';
+import {IGateAssignments} from 'app/shared/model/gate-assignments.model';
 
 type EntityResponseType = HttpResponse<IGateAssignments>;
 type EntityArrayResponseType = HttpResponse<IGateAssignments[]>;
@@ -35,6 +35,13 @@ export class GateAssignmentsService {
     return this.http
       .get<IGateAssignments>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  searchBy(param: string, value: string, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IGateAssignments[]>(`${this.resourceUrl}/${param}/${value}`, {params: options, observe: 'response'})
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
