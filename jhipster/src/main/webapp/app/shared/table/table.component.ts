@@ -64,10 +64,6 @@ export class TableComponent implements OnInit {
 		return date.getFullYear() + '-' + month + '-' + day;
 	}
 
-	filterGlobal($event: any): void {
-		this.table.filterGlobal($event.target.value, 'contains');
-	}
-
 	filterName($event: any): void {
 		this.table.filter($event.target.value, 'name', 'startsWith')
 	}

@@ -1,15 +1,9 @@
 <p-table #dt [value]="customers" [(selection)]="selectedCustomers" dataKey="id" styleClass="ui-table-customers"
          [rowHover]="true"
-         [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+         [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[20]"
          [paginator]="true"
          currentPageReportTemplate="Showing &#123;first&#125; to &#123;last&#125; of &#123;totalRecords&#125; entries"
          [filterDelay]="0" [globalFilterFields]="['name','country.name','status']">
-    <ng-template pTemplate="caption">
-        List of Cars
-        <div class="ui-table-globalfilter-container">
-            <input pInputText type="text" (input)="filterGlobal($event)" placeholder="Global Search"/>
-        </div>
-    </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th></th>
