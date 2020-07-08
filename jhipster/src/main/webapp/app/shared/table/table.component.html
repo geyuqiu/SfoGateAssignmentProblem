@@ -1,4 +1,4 @@
-<p-table #dt [value]="customers" [(selection)]="selectedCustomers" dataKey="id" styleClass="ui-table-customers"
+<p-table #dt [value]="customers" dataKey="id" styleClass="ui-table-customers"
          [rowHover]="true"
          [rows]="20" [showCurrentPageReport]="true" [rowsPerPageOptions]="[20]"
          [paginator]="true"
@@ -6,7 +6,6 @@
          [filterDelay]="0">
     <ng-template pTemplate="header">
         <tr>
-            <th></th>
             <th pSortableColumn="name">Name
                 <p-sortIcon field="name"></p-sortIcon>
             </th>
@@ -25,9 +24,6 @@
             <th></th>
         </tr>
         <tr>
-            <th>
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
             <th>
                 <input pInputText type="text" (input)="filterName($event)" placeholder="Search by Name"
                        class="ui-column-filter">
@@ -58,9 +54,6 @@
     </ng-template>
     <ng-template pTemplate="body" let-customer>
         <tr class="ui-selectable-row">
-            <td>
-                <p-tableCheckbox [value]="customer"></p-tableCheckbox>
-            </td>
             <td>
                 <span class="ui-column-title">Name</span>
                 &#123;&#123;customer.name&#125;&#125;

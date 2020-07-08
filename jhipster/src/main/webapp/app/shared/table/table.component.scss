@@ -117,11 +117,6 @@
       border-top: 1px solid #c8c8c8;
     }
 
-    &:first-child {
-      width: 5em;
-      text-align: center;
-    }
-
     &:last-child {
       width: 8em;
       text-align: center;
@@ -131,11 +126,6 @@
   .ui-table-tbody > tr > td {
     border: 0 none;
     cursor: auto;
-
-    &:first-child {
-      width: 3em;
-      text-align: center;
-    }
 
     &:last-child {
       width: 8em;
