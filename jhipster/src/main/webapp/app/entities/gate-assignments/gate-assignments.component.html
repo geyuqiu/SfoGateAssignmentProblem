@@ -1,40 +1,64 @@
 <div>
-    <h2 id="cy-page-heading">
-        <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.title" id="cy-title">Gate Assignments</span>
-
-    </h2>
-    <div>
-        <button class="btn btn-secondary" (click)="exportAsXlsx()">
-            <fa-icon icon="download"></fa-icon>
-        </button>
-        <button id="cy-create" class="btn btn-primary ml-5" [routerLink]="['/gate-assignments/new']">
-            <fa-icon icon="plus"></fa-icon>
-        </button>
-    </div>
 
     <app-alert-error></app-alert-error>
-
     <app-alert></app-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="gateAssignments?.length === 0">
-        <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.notFound">No gateAssignments found</span>
+    <div *ngIf="loading">
+        <app-progress-bar></app-progress-bar>
     </div>
+    <ng-container *ngIf="!loading">
+        <h2 id="cy-page-heading">
+            <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.title"
+                  id="cy-title">Gate Assignments</span>
+        </h2>
+        <div>
+            <button class="btn btn-secondary" (click)="exportAsXlsx()">
+                <fa-icon icon="download"></fa-icon>
+            </button>
+            <button id="cy-create" class="btn btn-primary ml-5" [routerLink]="['/gate-assignments/new']">
+                <fa-icon icon="plus"></fa-icon>
+            </button>
+        </div>
+        <div class="alert alert-warning" id="no-result" *ngIf="gateAssignments?.length === 0">
+            <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.notFound">No gateAssignments found</span>
+        </div>
 
-    <div class="table-responsive" id="entities" *ngIf="gateAssignments && gateAssignments.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
+        <div class="table-responsive" id="entities" *ngIf="gateAssignments?.length">
+            <table class="table table-striped" aria-describedby="page-heading">
+                <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"></th>
-                    <th scope="col" jhiSortBy="time"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.time">Time</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col" jhiSortBy="airline"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.airline">Airline</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col" jhiSortBy="flightNumber"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.flightNumber">Flight Number</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col" jhiSortBy="transaction"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.transaction">Transaction</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col" jhiSortBy="terminal"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.terminal">Terminal</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col" jhiSortBy="gate"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.gate">Gate</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col" jhiSortBy="remark"><span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.remark">Remark</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="time"><span
+                            jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.time">Time</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="airline"><span
+                            jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.airline">Airline</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="flightNumber"><span
+                            jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.flightNumber">Flight Number</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="transaction"><span
+                            jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.transaction">Transaction</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="terminal"><span
+                            jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.terminal">Terminal</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="gate"><span
+                            jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.gate">Gate</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="remark"><span
+                            jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.remark">Remark</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr *ngFor="let gateAssignments of gateAssignments ;trackBy: trackId">
                     <td>
                         <div class="btn-group">
@@ -60,17 +84,20 @@
                     <td>{{ gateAssignments.gate }}</td>
                     <td>{{ gateAssignments.remark }}</td>
                 </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div *ngIf="gateAssignments && gateAssignments.length > 0">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </tbody>
+            </table>
         </div>
 
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        <div *ngIf="gateAssignments && gateAssignments.length > 0">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
+                                [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                                (pageChange)="loadPage($event)"></ngb-pagination>
+            </div>
         </div>
-    </div>
+    </ng-container>
 </div>

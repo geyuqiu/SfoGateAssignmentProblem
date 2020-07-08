@@ -26,6 +26,8 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   ascending!: boolean;
   ngbPaginationPage = 1;
 
+  loading = true;
+
   constructor(
 	  protected gateAssignmentsService: GateAssignmentsService,
 	  protected activatedRoute: ActivatedRoute,
@@ -37,6 +39,7 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;
+    this.loading = true;
 
     this.gateAssignmentsService
       .query({
@@ -99,6 +102,7 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   }
 
   protected onSuccess(data: IGateAssignments[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+    this.loading = false;
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
