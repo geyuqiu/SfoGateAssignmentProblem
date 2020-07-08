@@ -49,12 +49,16 @@ sorry I am not a data scientist, so I just tried to do this via excel...
     cd SfoGateAssignmentProblem/devOps
     pwd
     
-    # may want to clean up old app docker images: 
-    docker stop docker_sfogateassignmentproblem-app_1
-    docker rm docker_sfogateassignmentproblem-app_1
-    docker rmi yuqiuge/sfo-gate-assignment-problem -f
+    # following commands stops and delete all docker containers and images! 
+    docker system prune --volumes
+    # Stop all containers
+    docker stop $(docker ps -a -q)
+    # Delete all containers
+    docker rm $(docker ps -a -q)
+    # Delete all images
+    docker rmi $(docker images -q)
     
-    # db will be loading with millions of entries
+    # db will be loading millions of entries
     docker-compose -f postgresql.yml up
     
     # if you see 
@@ -80,7 +84,8 @@ sorry I am not a data scientist, so I just tried to do this via excel...
 - Postgres
 - Github actions: https://github.com/geyuqiu/SfoGateAssignmentProblem/actions
 - Cypress
-    - https://youtu.be/gRv1o3m5lR0 (may need VPN)
+    - crud: https://youtu.be/gRv1o3m5lR0 (may need VPN)
+    - barchart: https://youtu.be/wXQk33RPQ1w
     - https://dashboard.cypress.io/projects/kzyhqj/runs/6/test-results/b1e6ce92-a7ec-4482-ae7b-be2396a166b3 (may not be accessible)
 - Sonar: https://sonarcloud.io/dashboard?id=geyuqiu_SfoGateAssignmentProblem
 - Primeng Chart: https://www.primefaces.org/primeng/showcase/#/chart
