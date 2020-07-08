@@ -12,6 +12,7 @@ import {GateAssignmentsComponent} from './gate-assignments.component';
 import {GateAssignmentsDetailComponent} from './gate-assignments-detail.component';
 import {GateAssignmentsUpdateComponent} from './gate-assignments-update.component';
 import {BarComponent} from '../../shared/bar/bar.component';
+import {TableComponent} from '../../shared/table/table.component';
 
 @Injectable({ providedIn: 'root' })
 export class GateAssignmentsResolve implements Resolve<IGateAssignments> {
@@ -86,5 +87,10 @@ export const gateAssignmentsRoute: Routes = [
 		path: 'bar',
 		component: BarComponent,
 		canActivate: [UserRouteAccessService]
-	}
+  },
+  {
+    path: 'table',
+    component: TableComponent,
+    canActivate: [UserRouteAccessService]
+  }
 ];
