@@ -1,11 +1,9 @@
-<p-toast></p-toast>
 <p-table #dt [value]="customers" dataKey="id" styleClass="ui-table-customers"
          [rowHover]="true"
          [rows]="20" [showCurrentPageReport]="true" [rowsPerPageOptions]="[20]"
          [paginator]="true"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-         [filterDelay]="0"
-         [lazy]="true" (onLazyLoad)="load($event)">
+         [filterDelay]="0">
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="name">Name
