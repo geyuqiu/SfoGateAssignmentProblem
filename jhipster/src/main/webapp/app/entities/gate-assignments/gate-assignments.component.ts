@@ -132,12 +132,12 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
     this.excelService.exportGateAssignmentsInExcel(this.gateAssignments, 'filtered');
   }
 
-  searchByAirline(airline: string): void {
+	searchBy(param: string, value: string): void {
     this.loading = true;
-    this.searchTerm = airline;
+		this.searchTerm = value;
 
     this.gateAssignmentsService
-      .searchBy('airline', airline, {
+	    .searchBy(param, value, {
         page: 0,
         size: this.itemsPerPage,
         sort: this.sort(),
