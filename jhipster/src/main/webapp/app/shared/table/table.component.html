@@ -1,9 +1,9 @@
 <p-table #dt [value]="customers" [(selection)]="selectedCustomers" dataKey="id" styleClass="ui-table-customers"
          [rowHover]="true"
-         [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[20]"
+         [rows]="20" [showCurrentPageReport]="true" [rowsPerPageOptions]="[20]"
          [paginator]="true"
          currentPageReportTemplate="Showing &#123;first&#125; to &#123;last&#125; of &#123;totalRecords&#125; entries"
-         [filterDelay]="0" [globalFilterFields]="['name','country.name','status']">
+         [filterDelay]="0">
     <ng-template pTemplate="header">
         <tr>
             <th></th>
