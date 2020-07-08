@@ -2,11 +2,13 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Table} from 'primeng/table';
 import {data} from 'app/shared/table/customers-large';
+import {LazyLoadEvent, MessageService} from 'primeng/api';
 
 @Component({
 	selector: 'app-table',
 	templateUrl: './table.component.html',
-	styleUrls: ['./table.component.scss']
+	styleUrls: ['./table.component.scss'],
+	providers: [MessageService]
 })
 export class TableComponent implements OnInit {
 	customers: Customer[] = [];
@@ -16,7 +18,8 @@ export class TableComponent implements OnInit {
 	@ViewChild('dt')
 	table!: Table;
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient,
+	            private messageService: MessageService) {
 	}
 
 	ngOnInit(): void {
@@ -47,6 +50,13 @@ export class TableComponent implements OnInit {
 
 	getCustomersLarge(): any {
 		return data.data;
+	}
+
+	load(event: LazyLoadEvent): void {
+		this.messageService.add({
+			severity: 'info', summary: 'Success',
+			detail: JSON.stringify(event)
+		});
 	}
 }
 
