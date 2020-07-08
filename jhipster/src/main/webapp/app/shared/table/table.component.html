@@ -2,7 +2,7 @@
          [rowHover]="true"
          [rows]="20" [showCurrentPageReport]="true" [rowsPerPageOptions]="[20]"
          [paginator]="true"
-         currentPageReportTemplate="Showing &#123;first&#125; to &#123;last&#125; of &#123;totalRecords&#125; entries"
+         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
          [filterDelay]="0">
     <ng-template pTemplate="header">
         <tr>
@@ -41,7 +41,7 @@
                 <p-dropdown [options]="statuses" (onChange)="filterStatus($event)" styleClass="ui-column-filter"
                             placeholder="Select a Status" [showClear]="true">
                     <ng-template let-option pTemplate="item">
-                        <span [class]="'customer-badge status-' + option.value">&#123;&#123;option.label&#125;&#125;</span>
+                        <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
                     </ng-template>
                 </p-dropdown>
             </th>
@@ -56,20 +56,20 @@
         <tr class="ui-selectable-row">
             <td>
                 <span class="ui-column-title">Name</span>
-                &#123;&#123;customer.name&#125;&#125;
+                {{customer.name}}
             </td>
             <td>
                 <span class="ui-column-title">Country</span>
                 <span [class]="'flag flag-' + customer.country.code"></span>
-                <span style="vertical-align: middle; margin-left: .5em">&#123;&#123;customer.country.name&#125;&#125;</span>
+                <span style="vertical-align: middle; margin-left: .5em">{{customer.country.name}}</span>
             </td>
             <td>
                 <span class="ui-column-title">Country</span>
-                &#123;&#123;customer.date&#125;&#125;
+                {{customer.date}}
             </td>
             <td>
                 <span class="ui-column-title">Status</span>
-                <span [class]="'customer-badge status-' + customer.status">&#123;&#123;customer.status&#125;&#125;</span>
+                <span [class]="'customer-badge status-' + customer.status">{{customer.status}}</span>
             </td>
             <td>
                 <span class="ui-column-title">Activity</span>
