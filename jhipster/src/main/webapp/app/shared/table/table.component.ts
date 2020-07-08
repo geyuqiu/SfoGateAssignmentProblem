@@ -34,17 +34,6 @@ export class TableComponent implements OnInit {
 		]
 	}
 
-	onActivityChange(event: any): void {
-		const value = event.target.value;
-		if (value && value.trim().length) {
-			const activity = parseInt(value, 2);
-
-			if (!isNaN(activity)) {
-				this.table.filter(activity, 'activity', 'gte');
-			}
-		}
-	}
-
 	onDateSelect(value: any): void {
 		this.table.filter(this.formatDate(value), 'date', 'equals')
 	}
