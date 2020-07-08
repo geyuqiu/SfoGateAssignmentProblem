@@ -70,6 +70,27 @@
                                     [placeholder]="'search airline'">
                         </app-filter>
                     </th>
+                    <th>
+                        <app-filter (updateFilter)="searchBy('flight-number', $event)"
+                                    [placeholder]="'search flight number'">
+                        </app-filter>
+                    </th>
+                    <th></th>
+                    <th>
+                        <app-filter (updateFilter)="searchBy('terminal', $event)"
+                                    [placeholder]="'search terminal'">
+                        </app-filter>
+                    </th>
+                    <th>
+                        <app-filter (updateFilter)="searchBy('gate', $event)"
+                                    [placeholder]="'search gate'">
+                        </app-filter>
+                    </th>
+                    <th>
+                        <app-filter (updateFilter)="searchBy('remark', $event)"
+                                    [placeholder]="'search remark'">
+                        </app-filter>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
