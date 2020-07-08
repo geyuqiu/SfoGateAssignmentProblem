@@ -14,10 +14,10 @@ import {ExcelService} from '../../shared/services/excel.service';
 
 @Component({
   selector: 'app-gate-assignments',
-	templateUrl: './gate-assignments.component.html'
+  templateUrl: './gate-assignments.component.html'
 })
 export class GateAssignmentsComponent implements OnInit, OnDestroy {
-	gateAssignments: IGateAssignments[] = [];
+  gateAssignments: IGateAssignments[] = [];
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -26,17 +26,20 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   ascending!: boolean;
   ngbPaginationPage = 1;
 
+  loading = true;
+
   constructor(
-	  protected gateAssignmentsService: GateAssignmentsService,
-	  protected activatedRoute: ActivatedRoute,
-	  protected router: Router,
-	  protected eventManager: JhiEventManager,
-	  protected modalService: NgbModal,
-	  private excelService: ExcelService
+    protected gateAssignmentsService: GateAssignmentsService,
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal,
+    private excelService: ExcelService
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;
+    this.loading = true;
 
     this.gateAssignmentsService
       .query({
@@ -99,6 +102,7 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   }
 
   protected onSuccess(data: IGateAssignments[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+    this.loading = false;
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
@@ -118,7 +122,7 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
     this.ngbPaginationPage = this.page ?? 1; // https://medium.com/@rd1982rd/double-question-marks-over-typescript-3-7-nullish-coalescing-40cbe0404c45
   }
 
-	exportAsXlsx(): void {
-		this.excelService.exportGateAssignmentsInExcel(this.gateAssignments, 'filtered');
-	}
+  exportAsXlsx(): void {
+    this.excelService.exportGateAssignmentsInExcel(this.gateAssignments, 'filtered');
+  }
 }
