@@ -1,28 +1,23 @@
 import {Moment} from 'moment';
 import {Transaction} from 'app/shared/model/enumerations/transaction.model';
 
-export interface IGateAssignments {
+export interface IGateAssignmentsBase {
   id?: number;
+  airline?: string;
+  flightNumber?: string;
+  transaction?: Transaction;
+  terminal?: string;
+  gate?: string;
+  remark?: string;
+}
+
+export interface IGateAssignments extends IGateAssignmentsBase {
   time?: Moment;
-  airline?: string;
-  flightNumber?: string;
-  transaction?: Transaction;
-  terminal?: string;
-  gate?: string;
-  remark?: string;
 }
 
-export interface IGateA {
-  id?: number;
+export interface IGateA extends IGateAssignmentsBase {
   time?: string;
-  airline?: string;
-  flightNumber?: string;
-  transaction?: Transaction;
-  terminal?: string;
-  gate?: string;
-  remark?: string;
 }
-
 
 export class GateAssignments implements IGateAssignments {
   constructor(

@@ -129,6 +129,7 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
 
   protected onError(): void {
     this.ngbPaginationPage = this.page ?? 1; // https://medium.com/@rd1982rd/double-question-marks-over-typescript-3-7-nullish-coalescing-40cbe0404c45
+    this.loading = false;
   }
 
   exportAsXlsx(): void {
@@ -139,7 +140,19 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   private getAllBy(): void {
     switch (this.gateAssignmentsColumn) {
       case GateAssignmentsColumn.AIRLINE:
-        this.searchAllBy('airline', this.searchTerm);
+        this.searchAllBy(GateAssignmentsColumn.AIRLINE.toLowerCase(), this.searchTerm);
+        break;
+      case GateAssignmentsColumn.FLIGHTNUMBER:
+        this.searchAllBy(GateAssignmentsColumn.FLIGHTNUMBER.toLowerCase(), this.searchTerm);
+        break;
+      case GateAssignmentsColumn.GATE:
+        this.searchAllBy(GateAssignmentsColumn.GATE.toLowerCase(), this.searchTerm);
+        break;
+      case GateAssignmentsColumn.TERMINAL:
+        this.searchAllBy(GateAssignmentsColumn.TERMINAL.toLowerCase(), this.searchTerm);
+        break;
+      case GateAssignmentsColumn.REMARK:
+        this.searchAllBy(GateAssignmentsColumn.REMARK.toLowerCase(), this.searchTerm);
         break;
       default:
         break;
@@ -166,7 +179,7 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   searchBy(param: string, value: string): void {
     this.loading = true;
     this.searchTerm = value;
-    this.gateAssignmentsColumn = GateAssignmentsColumn[param.toUpperCase()];
+    this.gateAssignmentsColumn = GateAssignmentsColumn[param.replace('-', '').toUpperCase()];
 
     this.gateAssignmentsService
       .searchBy(param, value, {
