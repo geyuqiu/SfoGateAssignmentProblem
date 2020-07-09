@@ -63,8 +63,8 @@
                     </th>
                 </tr>
                 <tr>
-                    <th></th>
-                    <th></th>
+                    <th id="action"></th>
+                    <th id="time"></th>
                     <th>
                         <app-filter (updateFilter)="searchBy('airline', $event)"
                                     [placeholder]="'search airline'">
@@ -75,7 +75,7 @@
                                     [placeholder]="'search flight number'">
                         </app-filter>
                     </th>
-                    <th></th>
+                    <th id="transaction"></th>
                     <th>
                         <app-filter (updateFilter)="searchBy('terminal', $event)"
                                     [placeholder]="'search terminal'">
