@@ -65,28 +65,28 @@
                 <tr>
                     <th id="action"></th>
                     <th id="time"></th>
-                    <th>
+                    <th id="airline">
                         <app-filter (updateFilter)="searchBy('airline', $event)"
                                     [placeholder]="'search airline'">
                         </app-filter>
                     </th>
-                    <th>
+                    <th id="flight-number">
                         <app-filter (updateFilter)="searchBy('flight-number', $event)"
                                     [placeholder]="'search flight number'">
                         </app-filter>
                     </th>
                     <th id="transaction"></th>
-                    <th>
+                    <th id="terminal">
                         <app-filter (updateFilter)="searchBy('terminal', $event)"
                                     [placeholder]="'search terminal'">
                         </app-filter>
                     </th>
-                    <th>
+                    <th id="gate">
                         <app-filter (updateFilter)="searchBy('gate', $event)"
                                     [placeholder]="'search gate'">
                         </app-filter>
                     </th>
-                    <th>
+                    <th id="remark">
                         <app-filter (updateFilter)="searchBy('remark', $event)"
                                     [placeholder]="'search remark'">
                         </app-filter>
