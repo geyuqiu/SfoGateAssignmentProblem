@@ -1,5 +1,5 @@
-import { Moment } from 'moment';
-import { Transaction } from 'app/shared/model/enumerations/transaction.model';
+import {Moment} from 'moment';
+import {Transaction} from 'app/shared/model/enumerations/transaction.model';
 
 export interface IGateAssignments {
   id?: number;
@@ -11,6 +11,18 @@ export interface IGateAssignments {
   gate?: string;
   remark?: string;
 }
+
+export interface IGateA {
+  id?: number;
+  time?: string;
+  airline?: string;
+  flightNumber?: string;
+  transaction?: Transaction;
+  terminal?: string;
+  gate?: string;
+  remark?: string;
+}
+
 
 export class GateAssignments implements IGateAssignments {
   constructor(

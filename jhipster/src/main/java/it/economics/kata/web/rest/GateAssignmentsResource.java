@@ -96,6 +96,45 @@ public class GateAssignmentsResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+
+    // -----
+
+    @GetMapping("/gate-assignments/remark/all/{remark}")
+    public ResponseEntity<List<GateAssignments>> getAllGateAssignmentsByRemark(@PathVariable String remark) {
+        log.debug("REST request to get all GateAssignments remark: {}", remark);
+        List<GateAssignments> gateAssignments = gateAssignmentsRepository.findByRemarkIgnoreCaseContaining(remark);
+        return ResponseEntity.ok().body(gateAssignments);
+    }
+
+    @GetMapping("/gate-assignments/gate/all/{gate}")
+    public ResponseEntity<List<GateAssignments>> getAllGateAssignmentsByGate(@PathVariable String gate) {
+        log.debug("REST request to get all GateAssignments gate: {}", gate);
+        List<GateAssignments> gateAssignments = gateAssignmentsRepository.findByGateIgnoreCaseContaining(gate);
+        return ResponseEntity.ok().body(gateAssignments);
+    }
+
+    @GetMapping("/gate-assignments/terminal/all/{terminal}")
+    public ResponseEntity<List<GateAssignments>> getAllGateAssignmentsByTerminal(@PathVariable String terminal) {
+        log.debug("REST request to get all GateAssignments terminal: {}", terminal);
+        List<GateAssignments> gateAssignments = gateAssignmentsRepository.findByTerminalIgnoreCaseContaining(terminal);
+        return ResponseEntity.ok().body(gateAssignments);
+    }
+
+    @GetMapping("/gate-assignments/airline/all/{airline}")
+    public ResponseEntity<List<GateAssignments>> getAllGateAssignmentsByAirline(@PathVariable String airline) {
+        log.debug("REST request to get all GateAssignments airline: {}", airline);
+        List<GateAssignments> gateAssignments = gateAssignmentsRepository.findByAirlineIgnoreCaseContaining(airline);
+        return ResponseEntity.ok().body(gateAssignments);
+    }
+
+    @GetMapping("/gate-assignments/flight-number/all/{flightNumber}")
+    public ResponseEntity<List<GateAssignments>> getAllGateAssignmentsByFlightNumber(@PathVariable String flightNumber) {
+        log.debug("REST request to get all GateAssignments flightNumber: {}", flightNumber);
+        List<GateAssignments> gateAssignments = gateAssignmentsRepository.findByFlightNumberIgnoreCaseContaining(flightNumber);
+        return ResponseEntity.ok().body(gateAssignments);
+    }
+
+
     /**
      * {@code POST  /gate-assignments} : Create a new gateAssignments.
      *

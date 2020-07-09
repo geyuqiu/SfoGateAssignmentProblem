@@ -11,18 +11,18 @@
                   id="cy-title">Gates: </span>
         </h2>
         <div>
-            <button class="btn btn-secondary" (click)="exportAsXlsx()">
-                <fa-icon icon="download"></fa-icon>
-            </button>
-            <button id="cy-create" class="btn btn-primary mx-5" [routerLink]="['/gate-assignments/new']">
-                <fa-icon icon="plus"></fa-icon>
-            </button>
             <ng-container *ngIf="searchTerm">
+                <button class="btn btn-secondary mx-5" (click)="exportAsXlsx()">
+                    <fa-icon icon="download"></fa-icon>
+                </button>
                 <b>{{searchTerm}}</b>
-                <button class="btn btn-secondary" (click)="reset()">
+                <button class="btn btn-secondary mr-5" (click)="reset()">
                     <fa-icon icon="trash-alt"></fa-icon>
                 </button>
             </ng-container>
+            <button id="cy-create" class="btn btn-primary mx-5" [routerLink]="['/gate-assignments/new']">
+                <fa-icon icon="plus"></fa-icon>
+            </button>
         </div>
         <div class="alert alert-warning" id="no-result" *ngIf="gateAssignments?.length === 0">
             <span jhiTranslate="sfoGateAssignmentProblemApp.gateAssignments.home.notFound">No gateAssignments found</span>

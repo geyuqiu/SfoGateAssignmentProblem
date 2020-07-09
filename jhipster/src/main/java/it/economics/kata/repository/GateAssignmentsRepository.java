@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Spring Data  repository for the GateAssignments entity.
@@ -37,4 +38,14 @@ public interface GateAssignmentsRepository extends JpaRepository<GateAssignments
                        @Param("firstDayOfThisYear") LocalDate firstDayOfThisYear,
                        @Param("firstDayOfNextYear") LocalDate firstDayOfNextYear
     );
+
+    List<GateAssignments> findByAirlineIgnoreCaseContaining(String airline);
+
+    List<GateAssignments> findByFlightNumberIgnoreCaseContaining(String flightNumber);
+
+    List<GateAssignments> findByTerminalIgnoreCaseContaining(String terminal);
+
+    List<GateAssignments> findByGateIgnoreCaseContaining(String gate);
+
+    List<GateAssignments> findByRemarkIgnoreCaseContaining(String remark);
 }

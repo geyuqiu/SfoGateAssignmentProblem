@@ -5,12 +5,13 @@ import {combineLatest, Subscription} from 'rxjs';
 import {JhiEventManager} from 'ng-jhipster';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {IGateAssignments} from 'app/shared/model/gate-assignments.model';
+import {IGateA, IGateAssignments} from 'app/shared/model/gate-assignments.model';
 
 import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
 import {GateAssignmentsService} from './gate-assignments.service';
 import {GateAssignmentsDeleteDialogComponent} from './gate-assignments-delete-dialog.component';
 import {ExcelService} from '../../shared/services/excel.service';
+import {GateAssignmentsColumn} from '../../shared/model/enumerations/gate-assignments-column.model';
 
 @Component({
   selector: 'app-gate-assignments',
@@ -28,6 +29,8 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
 
   loading = true;
   searchTerm = '';
+  gAExport: IGateA[] = [];
+  gateAssignmentsColumn!: GateAssignmentsColumn;
 
   constructor(
     protected gateAssignmentsService: GateAssignmentsService,
@@ -129,15 +132,44 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   }
 
   exportAsXlsx(): void {
-    this.excelService.exportGateAssignmentsInExcel(this.gateAssignments, 'filtered');
+    this.loading = true;
+    this.getAllBy();
   }
 
-	searchBy(param: string, value: string): void {
+  private getAllBy(): void {
+    switch (this.gateAssignmentsColumn) {
+      case GateAssignmentsColumn.AIRLINE:
+        this.searchAllBy('airline', this.searchTerm);
+        break;
+      default:
+        break;
+    }
+  }
+
+  searchAllBy(param: string, value: string): void {
     this.loading = true;
-		this.searchTerm = value;
 
     this.gateAssignmentsService
-	    .searchBy(param, value, {
+      .searchAllBy(param, value, {
+        page: 0,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe(
+        (res: HttpResponse<IGateA[]>) => {
+          this.onSuccessBulk(res)
+        },
+        () => this.onError()
+      );
+  }
+
+  searchBy(param: string, value: string): void {
+    this.loading = true;
+    this.searchTerm = value;
+    this.gateAssignmentsColumn = GateAssignmentsColumn[param.toUpperCase()];
+
+    this.gateAssignmentsService
+      .searchBy(param, value, {
         page: 0,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -153,5 +185,11 @@ export class GateAssignmentsComponent implements OnInit, OnDestroy {
   reset(): void {
     this.searchTerm = '';
     this.loadPage();
+  }
+
+  private onSuccessBulk(res: HttpResponse<IGateA[]>): void {
+    this.gAExport = res.body ? res.body : [];
+    this.excelService.exportGateAssignmentsInExcel(this.gAExport, 'filtered');
+    this.loading = false;
   }
 }

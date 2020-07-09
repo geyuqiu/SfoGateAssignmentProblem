@@ -6,10 +6,11 @@ import * as moment from 'moment';
 
 import {SERVER_API_URL} from 'app/app.constants';
 import {createRequestOption} from 'app/shared/util/request-util';
-import {IGateAssignments} from 'app/shared/model/gate-assignments.model';
+import {IGateA, IGateAssignments} from 'app/shared/model/gate-assignments.model';
 
 type EntityResponseType = HttpResponse<IGateAssignments>;
 type EntityArrayResponseType = HttpResponse<IGateAssignments[]>;
+type EntityArrayExportResponseType = HttpResponse<IGateA[]>;
 
 @Injectable({ providedIn: 'root' })
 export class GateAssignmentsService {
@@ -42,6 +43,13 @@ export class GateAssignmentsService {
     return this.http
       .get<IGateAssignments[]>(`${this.resourceUrl}/${param}/${value}`, {params: options, observe: 'response'})
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  searchAllBy(param: string, value: string, req?: any): Observable<EntityArrayExportResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IGateA[]>(`${this.resourceUrl}/${param}/all/${value}`, {params: options, observe: 'response'})
+      .pipe(map((res: EntityArrayExportResponseType) => res));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
