@@ -1,4 +1,4 @@
-name: sfo gate assigment problem CI
+name: sfo gate assigment problem CI # test
 on: [push]
 jobs:
   pipeline:
